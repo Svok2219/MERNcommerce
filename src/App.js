@@ -12,6 +12,10 @@ import Gallery from './Gallery/Gallery';
 import Contackt from './Contact/Contact';
 import Cart from './Cart/Cart';
 import Checkout from './Checkout/Checkout';
+import MyAcount from './MyAcount/MyAcount';
+import ShopDetail from './ShopDetail/ShopDetail';
+import Shop from './Shop/Shop';
+import Wishlist from './Wishlist/Wishlist';
 function App() {
   return (
     <Router>
@@ -28,18 +32,27 @@ function App() {
       <Route path="/gallery">
         <Gallery/>
       </Route>
-      <Route path="/contackt">
+      <Route path="/contact">
         <Contackt/>
       </Route>
       <Route path="/Cart">
         <Cart/>
       </Route>
-      <Route path="/Checkout">
+      <Route path="/checkOut">
         <Checkout/>
       </Route>
-      {/* <Route path="/contact-us">
-        <Record/>
-      </Route> */}
+      <Route path="/myAcount">
+        <MyAcount/>
+      </Route>
+      <Route path="/shopDetail">
+        <ShopDetail/>
+      </Route>
+      <Route path="/shop">
+        <Shop/>
+      </Route>
+      <Route path="/wishList">
+        <Wishlist/>
+      </Route>
     </Switch>
   </Router>
    
