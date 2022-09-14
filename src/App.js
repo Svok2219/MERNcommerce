@@ -4,7 +4,8 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
+    Link,
+    BrowserRouter
   } from "react-router-dom";
 import Homepage from './Homepage/Homepage';
 import About from './About/About';
@@ -18,7 +19,7 @@ import Shop from './Shop/Shop';
 import Wishlist from './Wishlist/Wishlist';
 function App() {
   return (
-    <Router>
+    <BrowserRouter>
     <Switch>
       <Route exact path="/">
        <Homepage/>
@@ -54,7 +55,7 @@ function App() {
         <Wishlist/>
       </Route>
     </Switch>
-  </Router>
+  </BrowserRouter>
    
   );
 }

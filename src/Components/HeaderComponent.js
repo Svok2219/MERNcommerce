@@ -44,8 +44,21 @@ function HeaderComp(params) {
                                 <li>
                                     <i class="fab fa-opencart"></i> Off 10%! Shop Vegetables
                                 </li>
-
-                              
+                                <li>
+                                    <i class="fab fa-opencart"></i> Off 50%! Shop Now
+                                </li>
+                                <li>
+                                    <i class="fab fa-opencart"></i> Off 10%! Shop Vegetables
+                                </li>
+                                <li>
+                                    <i class="fab fa-opencart"></i> 50% - 80% off on Vegetables
+                                </li>
+                                <li>
+                                    <i class="fab fa-opencart"></i> 20% off Entire Purchase Promo code: offT30
+                                </li>
+                                <li>
+                                    <i class="fab fa-opencart"></i> Off 50%! Shop Now 
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -62,7 +75,7 @@ function HeaderComp(params) {
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                    <a class="navbar-brand" href="index.html"><img src="images/logo.png" class="logo" alt=""/></a>
+                    <a class="navbar-brand img-fluid" href="index.html"><img src="https://technext.github.io/freshshop/images/logo.png" class="logo" alt=""/></a>
                 </div>
                 {/* End Header Navigation */}
 
@@ -72,7 +85,7 @@ function HeaderComp(params) {
                         <li class="nav-item"><Link class="nav-link" to="/">Home</Link></li>
                         <li class="nav-item"><Link class="nav-link" to="/about">About Us</Link></li>
                         <li class="dropdown active">
-                            <a  href='#' class="nav-link dropdown-toggle arrow" data-toggle="dropdown">SHOP</a>
+                            <a  href='#' class="nav-link  arrow" data-toggle="dropdown">SHOP</a>
                             <ul class="dropdown-menu">
 								<li><Link to="/shop">Sidebar Shop</Link></li>
 								<li><Link to="/shopDetail">Shop Detail</Link></li>

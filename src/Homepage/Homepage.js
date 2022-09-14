@@ -8,76 +8,58 @@ import {
   } from "react-router-dom";
 import HeaderComp from "../Components/HeaderComponent";
 import FooterComp from "../Components/FooterComponents";
+// import '../../public/js'
 
-
+<><script src="../../public/js/jquery-3.2.1.min.js"></script><script src="../../public/js/popper.min.js"></script><script src="../../public/js/bootstrap.min.js"></script><script src="../../public/js/jquery.superslides.min.js"></script><script src="../../public/js/bootstrap-select.js"></script><script src="../../public/js/inewsticker.js"></script><script src="../../public/js/bootsnav.js."></script><script src="../../public/js/images-loded.min.js"></script><script src="../../public/js/isotope.min.js"></script><script src="../../public/js/owl.carousel.min.js"></script><script src="../../public/js/baguetteBox.min.js"></script><script src="../../public/js/form-validator.min.js"></script><script src="../../public/js/contact-form-script.js"></script><script src="../../public/js/custom.js"></script></>
 function Homepage() {
   return (
     <div >
        <HeaderComp/>
-    <div id="slides-shop" class="cover-slides">
-        <ul class="slides-container">
-            <li class="text-center">
-                <img src="images/banner-01.jpg" alt=""/>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h1 class="m-b-20"><strong>Welcome To <br/> Freshshop</strong></h1>
-                            <p class="m-b-40">See how your users experience your website in realtime or view <br/> trends to see any changes in performance over time.</p>
-                            <p><a class="btn hvr-hover" href="#">Shop New</a></p>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="text-center">
-                <img src="images/banner-02.jpg" alt=""/>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h1 class="m-b-20"><strong>Welcome To <br/> Freshshop</strong></h1>
-                            <p class="m-b-40">See how your users experience your website in realtime or view <br/> trends to see any changes in performance over time.</p>
-                            <p><a class="btn hvr-hover" href="#">Shop New</a></p>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="text-center">
-                <img src="images/banner-03.jpg" alt=""/>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h1 class="m-b-20"><strong>Welcome To <br/> Freshshop</strong></h1>
-                            <p class="m-b-40">See how your users experience your website in realtime or view <br/> trends to see any changes in performance over time.</p>
-                            <p><a class="btn hvr-hover" href="#">Shop New</a></p>
-                        </div>
-                    </div>
-                </div>
-            </li>
-        </ul>
-        <div class="slides-navigation">
-            <a href="#" class="next"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
-            <a href="#" class="prev"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
-        </div>
+       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="d-block img-fluid" src="https://user-images.githubusercontent.com/113424072/190114296-b09ee076-2d5c-4893-8a38-277731bb4463.jpg" alt="First slide"/>
     </div>
-
+    <div class="carousel-item">
+      <img class="d-block img-fluid" src="https://user-images.githubusercontent.com/113424072/190114408-08500cb1-c46b-4e47-a5e4-9b70a0baee03.jpg" alt="Second slide"/>
+    </div>
+    <div class="carousel-item">
+      <img class="d-block img-fluid" src="https://user-images.githubusercontent.com/113424072/190114296-b09ee076-2d5c-4893-8a38-277731bb4463.jpg" alt="Third slide"/>
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
     <div class="categories-shop">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <div class="shop-cat-box">
-                        <img class="img-fluid" src="images/categories_img_01.jpg" alt="" />
-                        <a class="btn hvr-hover" href="#">Lorem ipsum dolor</a>
+                        <img class="img-fluid" src="https://technext.github.io/freshshop/images/categories_img_01.jpg" alt="" />
+                        <a class="btn text-decoration-none text-white hvr-hover" href="#">Lorem ipsum dolor</a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <div class="shop-cat-box">
-                        <img class="img-fluid" src="images/categories_img_02.jpg" alt="" />
-                        <a class="btn hvr-hover" href="#">Lorem ipsum dolor</a>
+                        <img class="img-fluid" src="https://technext.github.io/freshshop/images/categories_img_02.jpg" alt="" />
+                        <a class="btn text-decoration-none text-white hvr-hover" href="#">Lorem ipsum dolor</a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <div class="shop-cat-box">
-                        <img class="img-fluid" src="images/categories_img_03.jpg" alt="" />
-                        <a class="btn hvr-hover" href="#">Lorem ipsum dolor</a>
+                        <img class="img-fluid" src="https://technext.github.io/freshshop/images/categories_img_03.jpg" alt="" />
+                        <a class="btn text-decoration-none text-white hvr-hover" href="#">Lorem ipsum dolor</a>
                     </div>
                 </div>
             </div>
@@ -90,12 +72,12 @@ function Homepage() {
 			<div class="row">
 				<div class="col-lg-6 col-md-6 col-sm-12">
 					<div class="offer-box-products">
-						<img class="img-fluid" src="images/add-img-01.jpg" alt="" />
+						<img class="img-fluid" src="https://technext.github.io/freshshop/images/add-img-01.jpg" alt="" />
 					</div>
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-12">
 					<div class="offer-box-products">
-						<img class="img-fluid" src="images/add-img-02.jpg" alt="" />
+						<img class="img-fluid" src="https://technext.github.io/freshshop/images/add-img-02.jpg" alt="" />
 					</div>
 				</div>
 			</div>
@@ -132,14 +114,14 @@ function Homepage() {
                             <div class="type-lb">
                                 <p class="sale">Sale</p>
                             </div>
-                            <img src="images/img-pro-01.jpg" class="img-fluid" alt="Image"/>
+                            <img src="https://technext.github.io/freshshop/images/img-pro-01.jpg" class="img-fluid" alt="Image"/>
                             <div class="mask-icon">
                                 <ul>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
                                 </ul>
-                                <Link to="/cart" href="#">Add to Cart</Link>
+                                <a class="cart" href="#">Add to Cart</a>
                             </div>
                         </div>
                         <div class="why-text">
@@ -155,7 +137,7 @@ function Homepage() {
                             <div class="type-lb">
                                 <p class="new">New</p>
                             </div>
-                            <img src="images/img-pro-02.jpg" class="img-fluid" alt="Image"/>
+                            <img src="https://technext.github.io/freshshop/images/img-pro-02.jpg" class="img-fluid" alt="Image"/>
                             <div class="mask-icon">
                                 <ul>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
@@ -178,7 +160,7 @@ function Homepage() {
                             <div class="type-lb">
                                 <p class="sale">Sale</p>
                             </div>
-                            <img src="images/img-pro-03.jpg" class="img-fluid" alt="Image"/>
+                            <img src="https://technext.github.io/freshshop/images/img-pro-03.jpg" class="img-fluid" alt="Image"/>
                             <div class="mask-icon">
                                 <ul>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
@@ -201,7 +183,7 @@ function Homepage() {
                             <div class="type-lb">
                                 <p class="sale">Sale</p>
                             </div>
-                            <img src="images/img-pro-04.jpg" class="img-fluid" alt="Image"/>
+                            <img src="https://technext.github.io/freshshop/images/img-pro-04.jpg" class="img-fluid" alt="Image"/>
                             <div class="mask-icon">
                                 <ul>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
@@ -293,7 +275,7 @@ function Homepage() {
         <div class="main-instagram owl-carousel owl-theme">
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="images/instagram-img-01.jpg" alt="" />
+                    <img src="https://technext.github.io/freshshop/images/instagram-img-01.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -301,7 +283,7 @@ function Homepage() {
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="images/instagram-img-02.jpg" alt="" />
+                    <img src="https://technext.github.io/freshshop/images/instagram-img-02.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -309,7 +291,7 @@ function Homepage() {
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="images/instagram-img-03.jpg" alt="" />
+                    <img src="https://technext.github.io/freshshop/images/instagram-img-03.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -317,7 +299,7 @@ function Homepage() {
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="images/instagram-img-04.jpg" alt="" />
+                    <img src="https://technext.github.io/freshshop/images/instagram-img-04.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -325,7 +307,7 @@ function Homepage() {
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="images/instagram-img-05.jpg" alt="" />
+                    <img src="https://technext.github.io/freshshop/images/instagram-img-05.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -333,7 +315,7 @@ function Homepage() {
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="images/instagram-img-06.jpg" alt="" />
+                    <img src="https://technext.github.io/freshshop/images/instagram-img-06.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -341,7 +323,7 @@ function Homepage() {
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="images/instagram-img-07.jpg" alt="" />
+                    <img src="https://technext.github.io/freshshop/images/instagram-img-07.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -349,7 +331,7 @@ function Homepage() {
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="images/instagram-img-08.jpg" alt="" />
+                    <img src="https://technext.github.io/freshshop/images/instagram-img-08.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -357,7 +339,7 @@ function Homepage() {
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="images/instagram-img-09.jpg" alt="" />
+                    <img src="https://technext.github.io/freshshop/images/instagram-img-09.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -365,7 +347,7 @@ function Homepage() {
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="images/instagram-img-05.jpg" alt="" />
+                    <img src="https://technext.github.io/freshshop/images/instagram-img-05.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
