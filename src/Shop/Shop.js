@@ -1,4 +1,5 @@
 import HeaderComp from "../Components/HeaderComponent";
+import FooterComp from "../Components/FooterComponents";
 
     {/* ALL JS FILES */}
     <><script src="js/jquery-3.2.1.min.js"></script><script src="js/popper.min.js"></script><script src="js/bootstrap.min.js"></script></>
@@ -513,9 +514,9 @@ function Shop (){
     </div>
     {/* End Instagram Feed  */}
 
-
+<FooterComp/>
     {/* Start Footer  */}
-    <footer>
+    {/* <footer>
         <div class="footer-main">
             <div class="container">
 				<div class="row">
@@ -596,7 +597,7 @@ function Shop (){
                 </div>
             </div>
         </div>
-    </footer>
+    </footer> */}
     {/* End Footer  */}
 
     {/* Start copyright  */}
@@ -606,7 +607,7 @@ function Shop (){
     </div>
     {/* End copyright  */}
 
-    <a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
+    <a href="#" id="back-to-top" title="Back to top" class="d-none">&uarr;</a>
 
 </body>
 
