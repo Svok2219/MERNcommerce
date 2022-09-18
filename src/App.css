@@ -3,5 +3,77 @@
 .badge{color: rgb(44, 25, 25);font-size: larger;}
 /* .posticy{position: static} */
 .main-header{position:-webkit-sticky;}
-/* .Headcontainer{position: absolute;top: 500px;left: 455px;} */
 
+
+code,
+pre {
+  display: block;
+  width: 100%;
+  border: 1px dashed #333;
+  background-color: #ced9ee;
+  padding: 15px;
+}
+
+
+
+
+#swiper-color .swiper-button-next {
+  color: red;
+}
+
+#swiper-replace .swiper-button-next {
+  /* background-image: url(./next.svg); */
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center;
+}
+
+#swiper-replace .swiper-button-next::after {
+  display: none;
+}.Headcontainer{position: absolute;top: 500px;left: 455px;} 
+
+
+
+/* .swiper-pagination-bullets{background-color: black ;height: 20 px;width: 10px; border: #ced9ee 3px ;clip-path: circle();color:red} */
+.swiper-pagination-bullet-active {
+    /* opacity: var(--swiper-pagination-bullet-opacity, 1); */
+    background: rgba(176, 180, 53, 0.99);
+  }
+
+  .swiper-pagination-bullet-active {
+    opacity: var(--swiper-pagination-bullet-opacity, 1);
+    background: var(rgba(176, 180, 53, 0.99),var(rgba(176, 180, 53, 0.99)));
+  }
+
+  .HeadContainer {
+    position: relative;
+    text-align: center;
+    color: white;
+  }
+  .centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index:1;
+    color: whitesmoke;
+  }
+  .HeadContainer img {
+    filter: brightness(50%);
+  }
+
+ 
+.btnHeader {
+
+    font-size: 24px;
+    color: #ffffff;
+    border: none;
+    text-transform: uppercase;
+    padding: 10px 20px;
+
+}
+@media only screen and (min-width: 280px) and (max-width: 599px) {
+.covSlide {
+	font-size: 28px;
+}
+}

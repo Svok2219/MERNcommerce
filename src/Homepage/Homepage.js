@@ -46,8 +46,8 @@ import 'swiper/css/autoplay';
 
 
 // import required modules
-import { Pagination, Navigation ,Autoplay} from "swiper";
-
+import SwiperCore,{ Pagination, Navigation ,Autoplay } from "swiper";
+SwiperCore.use([Navigation]);
 
 function Homepage() {
 
@@ -71,7 +71,9 @@ function Homepage() {
     return (
     <div >
        <HeaderComp/>
+       <div  class="HeadContainer" >
        <Swiper
+      
       modules={[Navigation, Pagination, Autoplay]}
       slidesPerView={1}
       navigation
@@ -79,31 +81,43 @@ function Homepage() {
       pagination={{ clickable: true }}
     >
           <SwiperSlide>
-            <img className="img img-fluid" style={{zIndex:'1',opacity:'.6',backgroundColor:"#333"}} src='https://technext.github.io/freshshop/images/banner-03.jpg' alt="" />
+            <img className="img img-fluid" style={{zIndex:'1',opacity:'1',backgroundColor:"#333"}} src='https://technext.github.io/freshshop/images/banner-03.jpg' alt="" />
           </SwiperSlide>
           <SwiperSlide>
-            <img className="img img-fluid" style={{zIndex:'1',opacity:'.6',backgroundColor:"#333"}} src='https://technext.github.io/freshshop/images/banner-02.jpg' alt="" />
+            <img className="img img-fluid" style={{zIndex:'1',opacity:'1',backgroundColor:"#333"}} src='https://technext.github.io/freshshop/images/banner-02.jpg' alt="" />
           </SwiperSlide>
          
           <SwiperSlide>
-            <img className="img img-fluid" style={{zIndex:'1',opacity:'.6',backgroundColor:"#333"}} src=' https://technext.github.io/freshshop/images/banner-01.jpg' alt="" />
+            <img className="img img-fluid" style={{zIndex:'1',opacity:'1',backgroundColor:"#333"}} src=' https://technext.github.io/freshshop/images/banner-01.jpg' alt="" />
           </SwiperSlide>
     </Swiper>
 
-{/* 
-    <div class=" text-center absolute " style={{zIndex:"999"}}>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h1 class="m-b-20 text-light cov" style={{fontSize:"64px",fontWeight:"bolder"}}><strong>Welcome To <br/> Freshshop</strong></h1>
-                            <p class="m-b-40" style={{fontSize: "18px",
-color: "#fff",
-paddingBottom: "30px"}}>See how your users experience your website in realtime or view <br/> trends to see any changes in performance over time.</p>
+    
+
+    <div class="  absolute centered text-dark d-md-none " >
+                    <div class="row ">
+                        <div class="col-md-12 covSlide">
+                            <h1 class="m-b-20 text-light cov" style={{fontSize:"28px",fontWeight:"bolder",letterSpacing:"1px"}}><strong>Welcome To <br/> Freshshop</strong></h1>
+                            <p class="" style={{fontSize: "10px",color:"whitesmoke"}}>See how your users experience your website in realtime or view <br/> trends to see any changes in performance over time.</p>
                             <p style={{fontSize: "18px",
-color: "#fff",
-paddingBottom: "30px"}}><a class="btn hvr-hover text-white" href="#">Shop New</a></p>
+}}><a class="btn hvr-hover btnHeader text-white" href="#">Shop New</a></p>
                         </div>
                     </div>
-                </div> */}
+                </div> 
+
+    <div class=" text-center absolute centered text-dark  d-none d-sm-block" >
+                    <div class="row ">
+                        <div class="col-md-12 ">
+                            <h1 class="m-b-20 text-light cov" style={{fontSize:"64px",fontWeight:"bolder",letterSpacing:"4px"}}><strong>Welcome To <br/> Freshshop</strong></h1>
+                            <p class="m-b-40" style={{fontSize: "18px",color:"whitesmoke"}}>See how your users experience your website in realtime or view <br/> trends to see any changes in performance over time.</p>
+                            <p style={{fontSize: "18px",
+}}><a class="btn hvr-hover btnHeader text-white" href="#">Shop New</a></p>
+                        </div>
+                    </div>
+                </div> 
+
+    </div>
+
 
        {/* <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
@@ -367,34 +381,32 @@ paddingBottom: "30px"}}><a class="btn hvr-hover text-white" href="#">Shop New</a
     
     <div class="instagram-box">
         {/* <div > */}
+        <code className="code">
+        {`
+          .swiper-button-next { color: red; }
+        `}
+      </code>
         <Swiper class="main-instagram "
         slidesPerView={4}
         spaceBetween={0}
-        slidesPerGroup={2}
+        slidesPerGroup={3}
         loop={true}
         
         loopFillGroupWithBlank={true}
         // pagination={{
         //   clickable: true
         // }}
-        autoplay={{ delay: 3000 }}
+        autoplay={{ delay: 6000 }}
         navigation={true}
         modules={[ Navigation,Autoplay]}
         className="mySwiper"
       >
         
-          
-           
-          
-           
-          
-         
-          
 
         <SwiperSlide>
         <div class="item">
                 <div class="ins-inner-box">
-                    <img className="insimg" src="https://technext.github.io/freshshop/images/instagram-img-09.jpg" alt="" />
+                    <img className="insimg img-fluid" src="https://technext.github.io/freshshop/images/instagram-img-09.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -403,7 +415,7 @@ paddingBottom: "30px"}}><a class="btn hvr-hover text-white" href="#">Shop New</a
         </SwiperSlide>
         <SwiperSlide>  <div class="item">
                 <div class="ins-inner-box">
-                    <img className="insimg" src="https://technext.github.io/freshshop/images/instagram-img-08.jpg" alt="" />
+                    <img className="insimg img-fluid" src="https://technext.github.io/freshshop/images/instagram-img-08.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -411,7 +423,7 @@ paddingBottom: "30px"}}><a class="btn hvr-hover text-white" href="#">Shop New</a
             </div></SwiperSlide>
         <SwiperSlide>   <div class="item">
                 <div class="ins-inner-box">
-                    <img  className="insimg" src="https://technext.github.io/freshshop/images/instagram-img-07.jpg" alt="" />
+                    <img  className="insimg img-fluid" src="https://technext.github.io/freshshop/images/instagram-img-07.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -419,7 +431,7 @@ paddingBottom: "30px"}}><a class="btn hvr-hover text-white" href="#">Shop New</a
             </div></SwiperSlide>
         <SwiperSlide>  <div class="item">
                 <div class="ins-inner-box">
-                    <img className="insimg" src="https://technext.github.io/freshshop/images/instagram-img-06.jpg" alt="" />
+                    <img className="insimg img-fluid" src="https://technext.github.io/freshshop/images/instagram-img-06.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -427,7 +439,7 @@ paddingBottom: "30px"}}><a class="btn hvr-hover text-white" href="#">Shop New</a
             </div></SwiperSlide>
         <SwiperSlide> <div class="item">
                 <div class="ins-inner-box">
-                    <img  className="insimg" src="https://technext.github.io/freshshop/images/instagram-img-05.jpg" alt="" />
+                    <img  className="insimg img-fluid" src="https://technext.github.io/freshshop/images/instagram-img-05.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -435,7 +447,7 @@ paddingBottom: "30px"}}><a class="btn hvr-hover text-white" href="#">Shop New</a
             </div></SwiperSlide>
         <SwiperSlide>  <div class="item">
                 <div class="ins-inner-box">
-                    <img className="insimg" src="https://technext.github.io/freshshop/images/instagram-img-04.jpg" alt="" />
+                    <img className="insimg img-fluid" src="https://technext.github.io/freshshop/images/instagram-img-04.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -443,7 +455,7 @@ paddingBottom: "30px"}}><a class="btn hvr-hover text-white" href="#">Shop New</a
             </div></SwiperSlide>
         <SwiperSlide> <div class="item">
                 <div class="ins-inner-box">
-                    <img className="insimg" src="https://technext.github.io/freshshop/images/instagram-img-03.jpg" alt="" />
+                    <img className="insimg img-fluid" src="https://technext.github.io/freshshop/images/instagram-img-03.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -451,7 +463,7 @@ paddingBottom: "30px"}}><a class="btn hvr-hover text-white" href="#">Shop New</a
             </div></SwiperSlide>
         <SwiperSlide>  <div class="item">
                 <div class="ins-inner-box">
-                    <img className="insimg" src="https://technext.github.io/freshshop/images/instagram-img-02.jpg" alt="" />
+                    <img className="insimg img-fluid" src="https://technext.github.io/freshshop/images/instagram-img-02.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -460,15 +472,57 @@ paddingBottom: "30px"}}><a class="btn hvr-hover text-white" href="#">Shop New</a
         <SwiperSlide>
              <div class="item">
                 <div class="ins-inner-box">
-                    <img className="insimg" src="https://technext.github.io/freshshop/images/instagram-img-01.jpg" alt="" />
+                    <img className="insimg img-fluid" src="https://technext.github.io/freshshop/images/instagram-img-01.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
             </div>
             </SwiperSlide>
+            <SwiperSlide>
+             <div class="item">
+                <div class="ins-inner-box">
+                    <img className="insimg img-fluid" src="https://technext.github.io/freshshop/images/instagram-img-10.jpg" alt="" />
+                    <div class="hov-in">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            </SwiperSlide>
+            <SwiperSlide>
+             <div class="item">
+                <div class="ins-inner-box">
+                    <img className="insimg img-fluid" src="https://technext.github.io/freshshop/images/instagram-img-11.jpg" alt="" />
+                    <div class="hov-in">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            </SwiperSlide>
+            <SwiperSlide>
+             <div class="item">
+                <div class="ins-inner-box">
+                    <img className="insimg img-fluid" src="https://technext.github.io/freshshop/images/instagram-img-12.jpg" alt="" />
+                    <div class="hov-in">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            </SwiperSlide>
+            
       </Swiper>
         
+      {/* <pre className="code">
+        {`.swiper-button-next {
+  background-color: red;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center;
+}
+.swiper-button-next::after {
+  display: none;
+}`}
+      </pre> */}
         {/* </div> */}
     </div>
 
