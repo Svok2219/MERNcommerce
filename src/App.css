@@ -1,0 +1,7 @@
+.owl-item {width: 128.906px; margin-right: 10px; background:powderblue; }
+.owl-stage{transform: translate3d(-1527px, 0px, 0px); transition: all 0.25s ease 0s; width: 3334px;}
+.badge{color: rgb(44, 25, 25);font-size: larger;}
+/* .posticy{position: static} */
+.main-header{position:-webkit-sticky;}
+/* .Headcontainer{position: absolute;top: 500px;left: 455px;} */
+

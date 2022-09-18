@@ -1,3 +1,4 @@
+// import '../js/'
 function FooterComp(params) {
   return (
     <footer>

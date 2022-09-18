@@ -1,5 +1,19 @@
 import {Link} from 'react-router-dom'
 function HeaderComp(params) {
+    // document.addEventListener("DOMContentLoaded", function(){
+    //     window.addEventListener('scroll', function() {
+    //         if (window.scrollY > 50) {
+    //           document.getElementById('navbar_top').classList.add('fixed-top');
+    //           // add padding top to show content behind navbar
+    //         const  navbarHeight = document.querySelector('.navbar').offsetHeight;
+    //           document.body.style.paddingTop = navbarHeight + 'px';
+    //         } else {
+    //           document.getElementById('navbar_top').classList.remove('fixed-top');
+    //            // remove padding top from body
+    //           document.body.style.paddingTop = '0';
+    //         } 
+    //     });
+    //   }); 
     return (
         <div>
                 {/* Start Main Top */}
@@ -7,13 +21,10 @@ function HeaderComp(params) {
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-					<div class="custom-select-box">
-                        <select id="basic" class="selectpicker show-tick form-control" data-placeholder="$ USD">
-							<option>¥ JPY</option>
-							<option>$ USD</option>
-							<option>€ EUR</option>
-						</select>
-                    </div>
+					{/* <div class="custom-select-box"> */}
+                      
+                    {/* </div> */}
+                    
                     <div class="right-phone-box">
                         <p>Call US :- <a href="#"> +11 900 800 100</a></p>
                     </div>
@@ -25,13 +36,8 @@ function HeaderComp(params) {
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-					<div class="login-box">
-						<select id="basic" class="selectpicker show-tick form-control" data-placeholder="Sign In">
-							<option>Register Here</option>
-							<option>Sign In</option>
-						</select>
-					</div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 d-flex">
+
                     <div class="text-slid-box">
                         <div id="offer-box" class="carouselTicker">
                             <ul class="offer-box">
@@ -42,6 +48,9 @@ function HeaderComp(params) {
                                     <i class="fab fa-opencart"></i> 50% - 80% off on Vegetables
                                 </li>
                                 <li>
+                                    <i class="fab fa-opencart"></i> 51% - 82% off on Vegetables
+                                </li>
+                                {/* <li>
                                     <i class="fab fa-opencart"></i> Off 10%! Shop Vegetables
                                 </li>
                                 <li>
@@ -58,24 +67,40 @@ function HeaderComp(params) {
                                 </li>
                                 <li>
                                     <i class="fab fa-opencart"></i> Off 50%! Shop Now 
-                                </li>
+                                </li> */}
                             </ul>
                         </div>
+                    </div>
+                    <div class="btn ">
+						<select id="basic" class="  show-tick form-control" data-placeholder="Sign In">
+							<option>Register Here</option>
+							<option>Sign In</option>
+						</select>
+       
+
+					</div>
+                    <div class="btn nav-item">
+                   <Link to="/myAcount">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="#ffffff" class=" bi bi-person-circle" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                    </svg>
+</Link> 
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <header class="main-header">
+    <header class="main-header ">
         {/* Start Navigation */}
-        <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav ">
             <div class="container">
                 {/* Start Header Navigation */}
                 <div class="navbar-header">
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                    <a class="navbar-brand img-fluid" href="index.html"><img src="https://technext.github.io/freshshop/images/logo.png" class="logo" alt=""/></a>
+                    <a class="navbar-brand img-fluid " href="index.html"><img src="https://technext.github.io/freshshop/images/logo.png" class="logo w-5" alt=""/></a>
                 </div>
                 {/* End Header Navigation */}
 
@@ -97,6 +122,15 @@ function HeaderComp(params) {
                         </li>
                         <li class="nav-item"><Link class="nav-link" to="/gallery">Gallery</Link></li>
                         <li class="nav-item"><Link class="nav-link" to="/contact">Contact Us</Link></li>
+                        <li class="search nav-item"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+</svg></a></li>	
+<li class="search nav-item"><a href="#">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class=" bi bi-cart" viewBox="0 0 16 16">
+  <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+</svg>
+   <span class="badge font-weight-bold text-dark">3</span>
+   </a></li>	
                     </ul>
                 </div>
                 {/* /.navbar-collapse */}
@@ -104,13 +138,16 @@ function HeaderComp(params) {
                 {/* Start Atribute Navigation */}
                 <div class="attr-nav">
                     <ul>
-                        <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
-                        <li class="side-menu"><Link to="/cart">
-						<i class="fa fa-shopping-bag"></i>
-                            <span class="badge">3</span>
-							<p>My Cart</p>
-					</Link></li>
+          
+                     <li class="nav-item">
+      
+                    	{/* <i class="fa fa-shopping-bag"></i> */}
+                         
+                           {/* <p>My Cart</p> */}
+		
+                    </li>
                     </ul>
+                    
                 </div>
                 {/* End Atribute Navigation */}
             </div>

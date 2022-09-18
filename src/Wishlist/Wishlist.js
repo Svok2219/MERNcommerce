@@ -72,7 +72,7 @@ function Wishlist(params) {
                         <a href="#">
                           <img
                             class="img-fluid"
-                            src="images/img-pro-01.jpg"
+                            src="https://technext.github.io/freshshop/images/img-pro-01.jpg"
                             alt=""
                           />
                         </a>
@@ -85,7 +85,7 @@ function Wishlist(params) {
                       </td>
                       <td class="quantity-box">In Stock</td>
                       <td class="add-pr">
-                        <a class="btn hvr-hover" href="#">
+                        <a class="btn hvr-hover text-ehite" href="#">
                           Add to Cart
                         </a>
                       </td>
@@ -100,7 +100,7 @@ function Wishlist(params) {
                         <a href="#">
                           <img
                             class="img-fluid"
-                            src="images/img-pro-02.jpg"
+                            src="https://technext.github.io/freshshop/images/img-pro-02.jpg"
                             alt=""
                           />
                         </a>
@@ -113,7 +113,7 @@ function Wishlist(params) {
                       </td>
                       <td class="quantity-box">In Stock</td>
                       <td class="add-pr">
-                        <a class="btn hvr-hover" href="#">
+                        <a class="btn hvr-hover text-white" href="#">
                           Add to Cart
                         </a>
                       </td>
@@ -128,7 +128,7 @@ function Wishlist(params) {
                         <a href="#">
                           <img
                             class="img-fluid"
-                            src="images/img-pro-03.jpg"
+                            src="https://technext.github.io/freshshop/images/img-pro-03.jpg"
                             alt=""
                           />
                         </a>
@@ -141,7 +141,7 @@ function Wishlist(params) {
                       </td>
                       <td class="quantity-box">In Stock</td>
                       <td class="add-pr">
-                        <a class="btn hvr-hover" href="#">
+                        <a class="btn hvr-hover text-white" href="#">
                           Add to Cart
                         </a>
                       </td>
@@ -165,7 +165,7 @@ function Wishlist(params) {
         <div class="main-instagram owl-carousel owl-theme">
           <div class="item">
             <div class="ins-inner-box">
-              <img src="images/instagram-img-01.jpg" alt="" />
+              <img src="https://technext.github.io/freshshop/imagesinstagram-img-01.jpg" alt="" />
               <div class="hov-in">
                 <a href="#">
                   <i class="fab fa-instagram"></i>
@@ -175,7 +175,7 @@ function Wishlist(params) {
           </div>
           <div class="item">
             <div class="ins-inner-box">
-              <img src="images/instagram-img-02.jpg" alt="" />
+              <img src="https://technext.github.io/freshshop/imagesinstagram-img-02.jpg" alt="" />
               <div class="hov-in">
                 <a href="#">
                   <i class="fab fa-instagram"></i>
@@ -185,7 +185,7 @@ function Wishlist(params) {
           </div>
           <div class="item">
             <div class="ins-inner-box">
-              <img src="images/instagram-img-03.jpg" alt="" />
+              <img src="https://technext.github.io/freshshop/imagesinstagram-img-03.jpg" alt="" />
               <div class="hov-in">
                 <a href="#">
                   <i class="fab fa-instagram"></i>
@@ -195,7 +195,7 @@ function Wishlist(params) {
           </div>
           <div class="item">
             <div class="ins-inner-box">
-              <img src="images/instagram-img-04.jpg" alt="" />
+              <img src="https://technext.github.io/freshshop/imagesinstagram-img-04.jpg" alt="" />
               <div class="hov-in">
                 <a href="#">
                   <i class="fab fa-instagram"></i>
@@ -205,7 +205,7 @@ function Wishlist(params) {
           </div>
           <div class="item">
             <div class="ins-inner-box">
-              <img src="images/instagram-img-05.jpg" alt="" />
+              <img src="https://technext.github.io/freshshop/imagesinstagram-img-05.jpg" alt="" />
               <div class="hov-in">
                 <a href="#">
                   <i class="fab fa-instagram"></i>
@@ -215,7 +215,7 @@ function Wishlist(params) {
           </div>
           <div class="item">
             <div class="ins-inner-box">
-              <img src="images/instagram-img-06.jpg" alt="" />
+              <img src="https://technext.github.io/freshshop/imagesinstagram-img-06.jpg" alt="" />
               <div class="hov-in">
                 <a href="#">
                   <i class="fab fa-instagram"></i>
@@ -225,7 +225,7 @@ function Wishlist(params) {
           </div>
           <div class="item">
             <div class="ins-inner-box">
-              <img src="images/instagram-img-07.jpg" alt="" />
+              <img src="https://technext.github.io/freshshop/imagesinstagram-img-07.jpg" alt="" />
               <div class="hov-in">
                 <a href="#">
                   <i class="fab fa-instagram"></i>
@@ -235,7 +235,7 @@ function Wishlist(params) {
           </div>
           <div class="item">
             <div class="ins-inner-box">
-              <img src="images/instagram-img-08.jpg" alt="" />
+              <img src="https://technext.github.io/freshshop/imagesinstagram-img-08.jpg" alt="" />
               <div class="hov-in">
                 <a href="#">
                   <i class="fab fa-instagram"></i>
@@ -245,7 +245,7 @@ function Wishlist(params) {
           </div>
           <div class="item">
             <div class="ins-inner-box">
-              <img src="images/instagram-img-09.jpg" alt="" />
+              <img src="https://technext.github.io/freshshop/imagesinstagram-img-09.jpg" alt="" />
               <div class="hov-in">
                 <a href="#">
                   <i class="fab fa-instagram"></i>
@@ -255,7 +255,7 @@ function Wishlist(params) {
           </div>
           <div class="item">
             <div class="ins-inner-box">
-              <img src="images/instagram-img-05.jpg" alt="" />
+              <img src="https://technext.github.io/freshshop/imagesinstagram-img-05.jpg" alt="" />
               <div class="hov-in">
                 <a href="#">
                   <i class="fab fa-instagram"></i>

@@ -8,6 +8,7 @@ import {
 
 import Headercomp from '../Components/HeaderComponent'
 import FooterComp from "../Components/FooterComponents";
+import NavScrollExample from "../Components/Nav";
 
     {/* ALL JS FILES */}
     <><script src=" ../../public/jsjquery-3.2.1.min.js"></script><script src="../../public/jspopper.min.js"></script><script src="../../public/jsbootstrap.min.js"></script></>
@@ -18,6 +19,7 @@ function About() {
     return(
 <div>
     {/* Start Main Top */}
+    {/* <NavScrollExample/> */}
    <Headercomp/>
     {/* Start All Title Box */}
     <div class="all-title-box">
@@ -40,7 +42,7 @@ function About() {
         <div class="container">
             <div class="row">
 				<div class="col-lg-6">
-                    <div class="banner-frame"> <img class="img-fluid" src="images/about-img.jpg" alt="" />
+                    <div class="banner-frame"> <img class="img-fluid" src="https://technext.github.io/freshshop/images/about-img.jpg" alt="" />
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -50,7 +52,7 @@ function About() {
                         sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
                         Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.</p>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-					<a class="btn hvr-hover" href="#">Read More</a>
+					<a class="btn hvr-hover text-white" href="#">Read More</a>
                 </div>
             </div>
             <div class="row my-5">
@@ -79,7 +81,7 @@ function About() {
                 </div>
                 <div class="col-sm-6 col-lg-3">
                     <div class="hover-team">
-                        <div class="our-team"> <img src="images/img-1.jpg" alt="" />
+                        <div class="our-team"> <img src="https://technext.github.io/freshshop/images/img-1.jpg" alt="" />
                             <div class="team-content">
                                 <h3 class="title">Williamson</h3> <span class="post">Web Developer</span> </div>
                             <ul class="social">
@@ -105,7 +107,7 @@ function About() {
                 </div>
                 <div class="col-sm-6 col-lg-3">
                     <div class="hover-team">
-                        <div class="our-team"> <img src="images/img-2.jpg" alt="" />
+                        <div class="our-team"> <img src="https://technext.github.io/freshshop/images/img-2.jpg" alt="" />
                             <div class="team-content">
                                 <h3 class="title">Kristiana</h3> <span class="post">Web Developer</span> </div>
                             <ul class="social">
@@ -131,7 +133,7 @@ function About() {
                 </div>
                 <div class="col-sm-6 col-lg-3">
                     <div class="hover-team">
-                        <div class="our-team"> <img src="images/img-3.jpg" alt="" />
+                        <div class="our-team"> <img src="https://technext.github.io/freshshop/images/img-3.jpg" alt="" />
                             <div class="team-content">
                                 <h3 class="title">Steve Thomas</h3> <span class="post">Web Developer</span> </div>
                             <ul class="social">
@@ -157,7 +159,7 @@ function About() {
                 </div>
                 <div class="col-sm-6 col-lg-3">
                     <div class="hover-team">
-                        <div class="our-team"> <img src="images/img-1.jpg" alt="" />
+                        <div class="our-team"> <img src="https://technext.github.io/freshshop/images/img-1.jpg" alt="" />
                             <div class="team-content">
                                 <h3 class="title">Williamson</h3> <span class="post">Web Developer</span> </div>
                             <ul class="social">

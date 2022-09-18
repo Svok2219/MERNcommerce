@@ -17,6 +17,8 @@ import MyAcount from './MyAcount/MyAcount';
 import ShopDetail from './ShopDetail/ShopDetail';
 import Shop from './Shop/Shop';
 import Wishlist from './Wishlist/Wishlist';
+// import 'bootstrap/dist/css/bootstrap.min.css'
+
 function App() {
   return (
     <BrowserRouter>

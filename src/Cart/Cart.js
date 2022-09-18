@@ -72,7 +72,7 @@ function Cart(params) {
                         <a href="#">
                           <img
                             class="img-fluid"
-                            src="images/img-pro-01.jpg"
+                            src="https://technext.github.io/freshshop/images/img-pro-01.jpg"
                             alt=""
                           />
                         </a>
@@ -107,7 +107,7 @@ function Cart(params) {
                         <a href="#">
                           <img
                             class="img-fluid"
-                            src="images/img-pro-02.jpg"
+                            src="https://technext.github.io/freshshop/images/img-pro-02.jpg"
                             alt=""
                           />
                         </a>
@@ -142,7 +142,7 @@ function Cart(params) {
                         <a href="#">
                           <img
                             class="img-fluid"
-                            src="images/img-pro-03.jpg"
+                            src="https://technext.github.io/freshshop/images/img-pro-03.jpg"
                             alt=""
                           />
                         </a>

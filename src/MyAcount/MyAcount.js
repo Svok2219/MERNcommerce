@@ -368,7 +368,7 @@ function MyAcount(params) {
             <a href="https://html.design/">html design</a></p>
     </div>
   
-    <a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
+    <a href="#" id="back-to-top" title="Back to top" >&uarr;</a>
 
 </div>
 
