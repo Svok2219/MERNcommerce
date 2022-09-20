@@ -1,11 +1,5 @@
 
-// import './App.css';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-  } from "react-router-dom";
+ import React, { useRef, useState } from "react";
 import HeaderComp from "../Components/HeaderComponent";
 import FooterComp from "../Components/FooterComponents";
 
@@ -29,7 +23,7 @@ import 'owl.carousel';
 // import "../js/custom.js";
 
 
-import React, { useRef, useState } from "react";
+
 // Import Swiper React components
 // import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -99,8 +93,7 @@ function Homepage() {
                         <div class="col-md-12 covSlide">
                             <h1 class="m-b-20 text-light cov" style={{fontSize:"28px",fontWeight:"bolder",letterSpacing:"1px"}}><strong>Welcome To <br/> Freshshop</strong></h1>
                             <p class="" style={{fontSize: "10px",color:"whitesmoke"}}>See how your users experience your website in realtime or view <br/> trends to see any changes in performance over time.</p>
-                            <p style={{fontSize: "18px",
-}}><a class="btn hvr-hover btnHeader text-white" href="#">Shop New</a></p>
+                            <p ><a  class="btn hvr-hover btnHeaderSmall text-white" href="#">Shop New</a></p>
                         </div>
                     </div>
                 </div> 

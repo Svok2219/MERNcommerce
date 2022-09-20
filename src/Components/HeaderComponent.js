@@ -100,7 +100,7 @@ function HeaderComp(params) {
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                    <a class="navbar-brand img-fluid " href="index.html"><img src="https://technext.github.io/freshshop/images/logo.png" class="logo w-5" alt=""/></a>
+                    <Link to='/' class="navbar-brand img-fluid " ><img src="https://technext.github.io/freshshop/images/logo.png" class="logo w-5" alt=""/></Link>
                 </div>
                 {/* End Header Navigation */}
 

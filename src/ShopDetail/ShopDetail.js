@@ -1,3 +1,4 @@
+import * as React from 'react';
 import HeaderComp from "../Components/HeaderComponent"
 import FooterComp from "../Components/FooterComponents"
 

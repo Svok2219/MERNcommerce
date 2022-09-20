@@ -1,12 +1,6 @@
-import logo from './logo.svg';
+import * as React from 'react';
 import './App.css';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    BrowserRouter
-  } from "react-router-dom";
+import { Routes, Route, Link, BrowserRouter } from "react-router-dom";
 import Homepage from './Homepage/Homepage';
 import About from './About/About';
 import Gallery from './Gallery/Gallery';
@@ -17,47 +11,38 @@ import MyAcount from './MyAcount/MyAcount';
 import ShopDetail from './ShopDetail/ShopDetail';
 import Shop from './Shop/Shop';
 import Wishlist from './Wishlist/Wishlist';
+import Authentication from './Authentication/Authentication';
+// import ProtectedRoutes from './ProtectedRoutes/ProtectedRoutes';
+// import privateRoute from './PrivateRoute/PrivateRoutes';
+import PrivateRoutes from './PrivateRoute/PrivateRoutes';
 // import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App() {
+  
   return (
-    <BrowserRouter>
-    <Switch>
-      <Route exact path="/">
-       <Homepage/>
-      </Route>
-      <Route path="/Homepage">
-        <Homepage/>
-      </Route>
-      <Route path="/about">
-        <About/>
-      </Route>
-      <Route path="/gallery">
-        <Gallery/>
-      </Route>
-      <Route path="/contact">
-        <Contackt/>
-      </Route>
-      <Route path="/Cart">
-        <Cart/>
-      </Route>
-      <Route path="/checkOut">
-        <Checkout/>
-      </Route>
-      <Route path="/myAcount">
-        <MyAcount/>
-      </Route>
-      <Route path="/shopDetail">
-        <ShopDetail/>
-      </Route>
-      <Route path="/shop">
-        <Shop/>
-      </Route>
-      <Route path="/wishList">
-        <Wishlist/>
-      </Route>
-    </Switch>
-  </BrowserRouter>
+
+      <Routes>
+
+        <Route path="/" element={<Homepage />} />
+        <Route path="about" element={<About />} />
+        <Route path="gallery" element={<Gallery />} />
+        <Route path="contact" element={<Contackt />} />
+        <Route path="shopDetail" element={<ShopDetail />} />
+        <Route path="shop" element={<Shop />} />
+        <Route path="wishList" element={<Wishlist />} />
+        
+
+        <Route element={<PrivateRoutes />}>
+                <Route element={<Cart/>} path="/cart" />
+                <Route element={<Checkout/>} path="/checkOut"/>
+                <Route element={<MyAcount/>} path="myAcount"/>
+        </Route>
+        
+        <Route path="login" element={<Authentication />} />
+
+       
+      </Routes>
+    
    
   );
 }

@@ -1,3 +1,4 @@
+import * as React from 'react';
 import HeaderComp from "../Components/HeaderComponent"
 import FooterComp from "../Components/FooterComponents"
 
@@ -472,7 +473,7 @@ function Checkout(params) {
     </div>
     {/* End copyright  */}
 
-    <a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
+    <a href="#" id="back-to-top" title="Back to top" >&uarr;</a>
 
 
 </div>

@@ -1,14 +1,7 @@
-// import './App.css';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-  } from "react-router-dom";
-
+import * as React from 'react';
 import Headercomp from '../Components/HeaderComponent'
 import FooterComp from "../Components/FooterComponents";
-import NavScrollExample from "../Components/Nav";
+
 
     {/* ALL JS FILES */}
     <><script src=" ../../public/jsjquery-3.2.1.min.js"></script><script src="../../public/jspopper.min.js"></script><script src="../../public/jsbootstrap.min.js"></script></>
