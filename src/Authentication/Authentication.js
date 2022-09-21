@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -7,8 +7,9 @@ import {
 } from "firebase/auth";
 
 import { auth } from "./firebase-config";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FooterComp from "../Components/FooterComponents";
+import { UserContext } from "../App";
 
 
 function Authentication(params) {
@@ -23,10 +24,12 @@ function Authentication(params) {
         // setopenLogin(true)
     }
 
+    const [Loggedin,setLoggedin,cartItems] = useContext(UserContext);
+
     const [registerEmail, setRegisterEmail] = useState("");
-  const [registerPassword, setRegisterPassword] = useState("");
-  const [loginEmail, setLoginEmail] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
+    const [registerPassword, setRegisterPassword] = useState("");
+    const [loginEmail, setLoginEmail] = useState("");
+    const [loginPassword, setLoginPassword] = useState("");
 
   const [user, setUser] = useState({
     realName:"",
@@ -35,13 +38,17 @@ function Authentication(params) {
     password:"",
     Address:""
   });
-  console.log(user)
+  // console.log(user)
+  
 let name,value;  
 const changeFunc=(event)=>{
 name=event.target.name;
 value=event.target.value;
 setUser({...user,[name]:value});
 }
+
+
+
 
 const postData= async (e ) =>{
   e.preventDefault();
@@ -59,16 +66,7 @@ const postData= async (e ) =>{
       Address
     })
   })
-  try {
-    const user = await createUserWithEmailAndPassword(
-      auth,
-      Email,
-      password
-    );
-    console.log(user);
-  } catch (error) {
-    console.log(error.message);
-  }
+  
   if (res) {
  setUser({
   realName:"",
@@ -79,9 +77,22 @@ const postData= async (e ) =>{
  })   
   }
 
+
+  try {
+    const user = await createUserWithEmailAndPassword(
+      auth,
+      Email,
+      password
+    );
+    setLoggedin(user.user.email);
+    console.log(user);
+    localStorage.setItem('User',`${user.user.email}`);
+  } catch (error) {
+    console.log(error.message);
+  }
 }
 
-  
+const navigate = useNavigate();
   const login = async (e) => {
     const{realName,Email,password,Address,userName}=user;
     e.preventDefault();
@@ -91,7 +102,11 @@ const postData= async (e ) =>{
         Email,
         password
       );
-      console.log(user);
+      setLoggedin(user.user.email);
+      navigate(-1);
+      // alert('Congratulations! You are logged in...Please refresh or Go back to the preveious page ') 
+      // localStorage.setItem("User",`${user.user.email}`)
+      console.log(user.user.email);
     } catch (error) {
       console.log(error.message);
     }
@@ -114,7 +129,7 @@ const postData= async (e ) =>{
                     <button  class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button >
-                    <a class="navbar-brand img-fluid " href="index.html"><img src="https://technext.github.io/freshshop/images/logo.png" class="logo w-5" alt=""/></a>
+                    <Link  class="navbar-brand img-fluid " to="/"><img src="https://technext.github.io/freshshop/images/logo.png" class="logo w-5" alt=""/></Link>
                 </div>
                 {/* End Header Navigation */}
 

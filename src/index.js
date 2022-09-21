@@ -6,8 +6,9 @@ import App from "./App";
 // import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
-  <BrowserRouter>
+  // <BrowserRouter>
     <App />
-  </BrowserRouter>,
+  // </BrowserRouter>
+  ,
   document.getElementById("root")
 );

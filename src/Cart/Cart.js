@@ -1,7 +1,8 @@
 import * as React from 'react';
 import HeaderComp from "../Components/HeaderComponent";
 import FooterComp from "../Components/FooterComponents";
-
+import { useContext, useState } from 'react';
+import { UserContext } from '../App';
 {
   /* ALL JS FILES */
 }
@@ -27,7 +28,17 @@ import FooterComp from "../Components/FooterComponents";
   <script src="js/custom.js"></script>
 </>;
 
+
 function Cart(params) {
+  // console.log(params);
+  const {addToCart,removeFromCart}=params;
+  const[Loggedin,setLoggedin,cartItems]=useContext(UserContext)
+  // console.log(cartItems);
+
+  const itemsPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
+  const taxPrice = itemsPrice * 0.14;
+  const shippingPrice = itemsPrice > 2000 ? 0 : 20;
+  const totalPrice = itemsPrice + taxPrice + shippingPrice;
   return (
     <div>
       {/* Start Main Top */}
@@ -63,12 +74,16 @@ function Cart(params) {
                       <th>Product Name</th>
                       <th>Price</th>
                       <th>Quantity</th>
+                      <th>Add</th>
                       <th>Total</th>
                       <th>Remove</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                  
+                  {cartItems.length === 0 && <div className='text-center text-dark font-weight-bold'>Cart is empty</div>}
+        {cartItems.map((item) => (
+                  <tr key={item.id}>
                       <td class="thumbnail-img">
                         <a href="#">
                           <img
@@ -79,100 +94,31 @@ function Cart(params) {
                         </a>
                       </td>
                       <td class="name-pr">
-                        <a href="#">Lorem ipsum dolor sit amet</a>
+                        <a href="#">{item.name}</a>
                       </td>
                       <td class="price-pr">
-                        <p>$ 80.0</p>
+                        <p>$ {item.price}</p>
                       </td>
-                      <td class="quantity-box">
-                        <input
-                          type="number"
-                          size="4"
-                          value="1"
-                          min="0"
-                          step="1"
-                          class="c-input-text qty text"
-                        />
-                      </td>
-                      <td class="total-pr">
-                        <p>$ 80.0</p>
+                      <td class="price-pr ">
+                      <p>{item.qty}</p>
                       </td>
                       <td class="remove-pr">
-                        <a href="#">
-                          <i class="fas fa-times"></i>
+                        <a>
+                        <i onClick={()=>addToCart(item)} class="fas fa-plus "></i>
+                        </a>
+                      </td>
+                      <td class="total-pr">
+                        <p>$ {item.price * item.qty}</p>
+                      </td>
+                      <td class="remove-pr">
+                        <a >
+                          <i onClick={() => removeFromCart(item)} class="fas fa-minus "></i>
                         </a>
                       </td>
                     </tr>
-                    <tr>
-                      <td class="thumbnail-img">
-                        <a href="#">
-                          <img
-                            class="img-fluid"
-                            src="https://technext.github.io/freshshop/images/img-pro-02.jpg"
-                            alt=""
-                          />
-                        </a>
-                      </td>
-                      <td class="name-pr">
-                        <a href="#">Lorem ipsum dolor sit amet</a>
-                      </td>
-                      <td class="price-pr">
-                        <p>$ 60.0</p>
-                      </td>
-                      <td class="quantity-box">
-                        <input
-                          type="number"
-                          size="4"
-                          value="1"
-                          min="0"
-                          step="1"
-                          class="c-input-text qty text"
-                        />
-                      </td>
-                      <td class="total-pr">
-                        <p>$ 80.0</p>
-                      </td>
-                      <td class="remove-pr">
-                        <a href="#">
-                          <i class="fas fa-times"></i>
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="thumbnail-img">
-                        <a href="#">
-                          <img
-                            class="img-fluid"
-                            src="https://technext.github.io/freshshop/images/img-pro-03.jpg"
-                            alt=""
-                          />
-                        </a>
-                      </td>
-                      <td class="name-pr">
-                        <a href="#">Lorem ipsum dolor sit amet</a>
-                      </td>
-                      <td class="price-pr">
-                        <p>$ 30.0</p>
-                      </td>
-                      <td class="quantity-box">
-                        <input
-                          type="number"
-                          size="4"
-                          value="1"
-                          min="0"
-                          step="1"
-                          class="c-input-text qty text"
-                        />
-                      </td>
-                      <td class="total-pr">
-                        <p>$ 80.0</p>
-                      </td>
-                      <td class="remove-pr">
-                        <a href="#">
-                          <i class="fas fa-times"></i>
-                        </a>
-                      </td>
-                    </tr>
+        ))}
+
+         
                   </tbody>
                 </table>
               </div>
@@ -203,7 +149,7 @@ function Cart(params) {
               </div>
             </div>
           </div>
-
+          {cartItems.length !== 0 && (
           <div class="row my-5">
             <div class="col-lg-8 col-sm-12"></div>
             <div class="col-lg-4 col-sm-12">
@@ -211,41 +157,42 @@ function Cart(params) {
                 <h3>Order summary</h3>
                 <div class="d-flex">
                   <h4>Sub Total</h4>
-                  <div class="ml-auto font-weight-bold"> $ 130 </div>
+                  <div class="ml-auto font-weight-bold"> $ {itemsPrice} </div>
                 </div>
-                <div class="d-flex">
+                {/* <div class="d-flex">
                   <h4>Discount</h4>
                   <div class="ml-auto font-weight-bold"> $ 40 </div>
-                </div>
+                </div> */}
                 <hr class="my-1" />
-                <div class="d-flex">
+                {/* <div class="d-flex">
                   <h4>Coupon Discount</h4>
                   <div class="ml-auto font-weight-bold"> $ 10 </div>
-                </div>
+                </div> */}
                 <div class="d-flex">
                   <h4>Tax</h4>
-                  <div class="ml-auto font-weight-bold"> $ 2 </div>
+                  <div class="ml-auto font-weight-bold"> $ {taxPrice.toFixed(2)} </div>
                 </div>
                 <div class="d-flex">
-                  <h4>Shipping Cost</h4>
-                  <div class="ml-auto font-weight-bold"> Free </div>
+                  <h4>shipping Price</h4>
+                  <div class="ml-auto font-weight-bold"> $ {shippingPrice.toFixed(2)} </div>
                 </div>
                 <hr />
                 <div class="d-flex gr-total">
                   <h5>Grand Total</h5>
-                  <div class="ml-auto h5"> $ 388 </div>
+                  <div class="ml-auto h5"> {totalPrice.toFixed(2)} </div>
                 </div>
                 <hr />{" "}
               </div>
             </div>
             <div class="col-12 d-flex shopping-box">
-              <a href="checkout.html" class="ml-auto btn hvr-hover">
+              <a href="checkout.html" class="ml-auto btn hvr-hover text-white">
                 Checkout
               </a>{" "}
             </div>
-          </div>
+          </div>    )}
         </div>
       </div>
+      
       {/* End Cart */}
 
       {/* Start Instagram Feed  */}

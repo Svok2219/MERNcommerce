@@ -43,24 +43,27 @@ import 'swiper/css/autoplay';
 import SwiperCore,{ Pagination, Navigation ,Autoplay } from "swiper";
 SwiperCore.use([Navigation]);
 
-function Homepage() {
+function Homepage(params) {
+  
+  const {products,addToCart}=params;
+//   console.log(products);
 
-    function rand(min, max) {
+  function rand(min, max) {
         return Math.floor(Math.random() * (max - min + 1) + min);
       }
       
-      function imgUrl() {
-        const id = rand(1, 200);
-        return `https://picsum.photos/id/${id}/1920/1080`;
-      }
+    //   function imgUrl() {
+    //     const id = rand(1, 200);
+    //     return `https://picsum.photos/id/${id}/1920/1080`;
+    //   }
       
-      function createSlide() {
-        return (
-          <SwiperSlide>
-            <img className="img" src={imgUrl()} alt="" />
-          </SwiperSlide>
-        );
-      }
+    //   function createSlide() {
+    //     return (
+    //       <SwiperSlide>
+    //         <img className="img" src={imgUrl()} alt="" />
+    //       </SwiperSlide>
+    //     );
+    //   }
       
     return (
     <div >
@@ -205,7 +208,31 @@ function Homepage() {
             </div>
 
             <div class="row special-list">
-                <div class="col-lg-3 col-md-6 special-grid best-seller">
+            {products.map((pwd)=>                <div key={pwd.id} class="col-lg-3 col-md-6 special-grid best-seller">
+                    <div class="products-single fix">
+                        <div class="box-img-hover">
+                            <div class="type-lb">
+                                <p class="sale">Sale</p>
+                            </div>
+                            <img src={pwd.image} class="img-fluid" alt="Image"/>
+                            <div class="mask-icon">
+                                <ul>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                </ul>
+                                <a class="cart" href="#" onClick={() => addToCart(pwd)}>Add to Cart</a>
+                            </div>
+                        </div>
+                        <div class="why-text">
+                            <h4>{pwd.name}</h4>
+                            <h5> $ {pwd.price}</h5>
+                        </div>
+                    </div>
+                </div>
+                
+)}
+                {/* <div class="col-lg-3 col-md-6 special-grid best-seller">
                     <div class="products-single fix">
                         <div class="box-img-hover">
                             <div class="type-lb">
@@ -295,7 +322,7 @@ function Homepage() {
                             <h5> $15.79</h5>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     </div>

@@ -1,19 +1,10 @@
+import { useContext } from 'react';
 import {Link} from 'react-router-dom'
-function HeaderComp(params) {
-    // document.addEventListener("DOMContentLoaded", function(){
-    //     window.addEventListener('scroll', function() {
-    //         if (window.scrollY > 50) {
-    //           document.getElementById('navbar_top').classList.add('fixed-top');
-    //           // add padding top to show content behind navbar
-    //         const  navbarHeight = document.querySelector('.navbar').offsetHeight;
-    //           document.body.style.paddingTop = navbarHeight + 'px';
-    //         } else {
-    //           document.getElementById('navbar_top').classList.remove('fixed-top');
-    //            // remove padding top from body
-    //           document.body.style.paddingTop = '0';
-    //         } 
-    //     });
-    //   }); 
+import { UserContext } from '../App';
+
+export default function HeaderComp(props) {
+    const[Loggedin,setLoggedin,cartItems]=useContext(UserContext)
+    // console.log(cartItems.length);
     return (
         <div>
                 {/* Start Main Top */}
@@ -129,7 +120,7 @@ function HeaderComp(params) {
 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class=" bi bi-cart" viewBox="0 0 16 16">
   <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
 </svg>
-   <span class="badge font-weight-bold text-dark">3</span>
+   <span class="badge font-weight-bold text-dark">{cartItems.length}</span>
    </a></li>	
                     </ul>
                 </div>
@@ -199,4 +190,3 @@ function HeaderComp(params) {
         </div>
     )
 }
-export default  HeaderComp;
