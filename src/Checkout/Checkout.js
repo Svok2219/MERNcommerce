@@ -1,17 +1,102 @@
 import * as React from 'react';
 import HeaderComp from "../Components/HeaderComponent"
 import FooterComp from "../Components/FooterComponents"
-
-    {/* ALL JS FILES */}
+import { UserContext } from '../App';
+import GooglePayButton from '@google-pay/button-react';
+import { useBkash } from 'react-bkash';    
+import Swal from 'sweetalert2'
+{/* ALL JS FILES */}
     <><script src="js/jquery-3.2.1.min.js"></script><script src="js/popper.min.js"></script><script src="js/bootstrap.min.js"></script></>
     {/* ALL PLUGINS */}
     <><script src="js/jquery.superslides.min.js"></script><script src="js/bootstrap-select.js"></script><script src="js/inewsticker.js"></script><script src="js/bootsnav.js."></script><script src="js/images-loded.min.js"></script><script src="js/isotope.min.js"></script><script src="js/owl.carousel.min.js"></script><script src="js/baguetteBox.min.js"></script><script src="js/form-validator.min.js"></script><script src="js/contact-form-script.js"></script><script src="js/custom.js"></script></>
-function Checkout(params) {
+
+    
+
+    function Checkout(params) {
+    const[Loggedin,setLoggedin,cartItems] =React.useContext(UserContext);
+    console.log(cartItems)
+    const itemsPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
+    const taxPrice = itemsPrice * 0.14;
+    const shippingPrice = itemsPrice > 2000 ? 0 : 20;
+    const discount = itemsPrice * 0.14;
+    const CouponDiscount = itemsPrice * .06
+    const totalPrice = itemsPrice + taxPrice + shippingPrice + discount + CouponDiscount;
+
+    const { error, loading, triggerBkash } = useBkash({
+		onSuccess: (data) => {
+			console.log(data); // this contains data from api response from onExecutePayment
+		},
+		onClose: () => {
+			console.log('Bkash iFrame closed');
+		},
+		bkashScriptURL: '<BKASH SCRIPT URL PROVIDED TO MERCHANT BY BKASH>', // https://scripts.sandbox.bka.sh/versions/1.2.0-beta/checkout/bKash-checkout-sandbox.js
+		amount: 1000,
+		onCreatePayment: async (paymentRequest) => {
+			// call your API with the payment request here
+			return await fetch('<your backend api>/create/', {
+				method: 'POST',
+				body: JSON.stringify(paymentRequest),
+			}).then((res) => res.json());
+
+			// must return the following object:
+			// {
+			// 	paymentID: string;
+			// 	createTime: string;
+			// 	orgLogo: string;
+			// 	orgName: string;
+			// 	transactionStatus: string;
+			// 	amount: string;
+			// 	currency: string;
+			// 	intent: string;
+			// 	merchantInvoiceNumber: string;
+			// }
+		},
+		onExecutePayment: async (paymentID) => {
+			// call your executePayment API here
+			return await fetch('<your backend api>/execute/${paymentID}', {
+				method: 'POST',
+			}).then((res) => res.json());
+
+			// it doesn't matter what you return here, any errors thrown here will be available on error return value of the useBkash hook
+		},
+	});
+
+
+    const[openOP,setopenOP]=React.useState(false)
+    const OnlinePaymentOpen=()=>{
+        setopenOP(true)
+        // setopenLogin(false)
+    }
+    const OnlinePaymentClose=()=>{
+        setopenOP(false)
+        // setopenLogin(true)
+    }
+    console.log(openOP)
+
+    const Swallo =(x)=>{
+        Swal.fire({
+            title: '<h2>Order Successful</h2><strong>Order ID : <u>11312325498*7975</u></strong>',
+            icon: 'success',
+            html:
+              'You can still <b>cancel your order</b>, <br/>' +
+              '<a href="//sweetalert2.github.io">Chat with Customer Care</a> ' +
+              'or call us before the approvement process',
+            showCloseButton: true,
+            showCancelButton: true,
+            focusConfirm: false,
+            confirmButtonText:
+              '<i class="fas fa-search"></i> Track my order! ',
+            confirmButtonAriaLabel: 'Thumbs up, great!',
+            cancelButtonText:
+              '<i class="fa fa-times"></i> cancel the Order!',
+            cancelButtonAriaLabel: 'Thumbs down ,cancel the Order!'
+          })
+    }
     return (
         <div>
-    {/* Start Main Top */}
+
     <HeaderComp/>
-    {/* End Top Search */}
+  
 
     {/* Start All Title Box */}
     <div class="all-title-box">
@@ -27,9 +112,7 @@ function Checkout(params) {
             </div>
         </div>
     </div>
-    {/* End All Title Box */}
 
-    {/* Start Cart  */}
     <div class="cart-box-main">
         <div class="container">
             <div class="row new-account-login">
@@ -80,124 +163,7 @@ function Checkout(params) {
                         <div class="title-left">
                             <h3>Billing address</h3>
                         </div>
-                        {/* <form class="needs-validation" novalidate>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="firstName">First name *</label>
-                                    <input type="text" class="form-control" id="firstName" placeholder="" value="" required/>
-                                    <div class="invalid-feedback"> Valid first name is required. </div>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="lastName">Last name *</label>
-                                    <input type="text" class="form-control" id="lastName" placeholder="" value="" required/>
-                                    <div class="invalid-feedback"> Valid last name is required. </div>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="username">Username *</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="username" placeholder="" required/>
-                                    <div class="invalid-feedback" style="width: 100%;"> Your username is required. </div>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="email">Email Address *</label>
-                                <input type="email" class="form-control" id="email" placeholder=""/>
-                                <div class="invalid-feedback"> Please enter a valid email address for shipping updates. </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="address">Address *</label>
-                                <input type="text" class="form-control" id="address" placeholder="" required/>
-                                <div class="invalid-feedback"> Please enter your shipping address. </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="address2">Address 2 *</label>
-                                <input type="text" class="form-control" id="address2" placeholder=""/> </div>
-                            <div class="row">
-                                <div class="col-md-5 mb-3">
-                                    <label for="country">Country *</label>
-                                    <select class="wide w-100" id="country">
-									<option value="Choose..." data-display="Select">Choose...</option>
-									<option value="United States">United States</option>
-								</select>
-                                    <div class="invalid-feedback"> Please select a valid country. </div>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <label for="state">State *</label>
-                                    <select class="wide w-100" id="state">
-									<option data-display="Select">Choose...</option>
-									<option>California</option>
-								</select>
-                                    <div class="invalid-feedback"> Please provide a valid state. </div>
-                                </div>
-                                <div class="col-md-3 mb-3">
-                                    <label for="zip">Zip *</label>
-                                    <input type="text" class="form-control" id="zip" placeholder="" required/>
-                                    <div class="invalid-feedback"> Zip code required. </div>
-                                </div>
-                            </div>
-                            <hr class="mb-4">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="same-address"/>
-                                <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
-                            </div>
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="save-info"/>
-                                <label class="custom-control-label" for="save-info">Save this information for next time</label>
-                            </div>
-                            <hr class="mb-4">
-                            <div class="title"> <span>Payment</span> </div>
-                            <div class="d-block my-3">
-                                <div class="custom-control custom-radio">
-                                    <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required/>
-                                    <label class="custom-control-label" for="credit">Credit card</label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required/>
-                                    <label class="custom-control-label" for="debit">Debit card</label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required/>
-                                    <label class="custom-control-label" for="paypal">Paypal</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="cc-name">Name on card</label>
-                                    <input type="text" class="form-control" id="cc-name" placeholder="" required/> <small class="text-muted">Full name as displayed on card</small>
-                                    <div class="invalid-feedback"> Name on card is required </div>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="cc-number">Credit card number</label>
-                                    <input type="text" class="form-control" id="cc-number" placeholder="" required/>
-                                    <div class="invalid-feedback"> Credit card number is required </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3 mb-3">
-                                    <label for="cc-expiration">Expiration</label>
-                                    <input type="text" class="form-control" id="cc-expiration" placeholder="" required/>
-                                    <div class="invalid-feedback"> Expiration date required </div>
-                                </div>
-                                <div class="col-md-3 mb-3">
-                                    <label for="cc-expiration">CVV</label>
-                                    <input type="text" class="form-control" id="cc-cvv" placeholder="" required/>
-                                    <div class="invalid-feedback"> Security code required </div>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <div class="payment-icon">
-                                        <ul>
-                                            <li><img class="img-fluid" src="images/payment-icon/1.png" alt=""/></li>
-                                            <li><img class="img-fluid" src="images/payment-icon/2.png" alt=""/></li>
-                                            <li><img class="img-fluid" src="images/payment-icon/3.png" alt=""/></li>
-                                            <li><img class="img-fluid" src="images/payment-icon/5.png" alt=""/></li>
-                                            <li><img class="img-fluid" src="images/payment-icon/7.png" alt=""/></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr class="mb-1"/> 
-                            </form> */}
+                 
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-6 mb-3">
@@ -208,17 +174,18 @@ function Checkout(params) {
                                     <h3>Shipping Method</h3>
                                 </div>
                                 <div class="mb-4">
-                                    <div class="custom-control custom-radio">
-                                        <input id="shippingOption1" name="shipping-option" class="custom-control-input" checked="checked" type="radio"/>
-                                        <label class="custom-control-label" for="shippingOption1">Standard Delivery</label> <span class="float-right font-weight-bold">FREE</span> </div>
-                                    <div class="ml-4 mb-2 small">(3-7 business days)</div>
-                                    <div class="custom-control custom-radio">
-                                        <input id="shippingOption2" name="shipping-option" class="custom-control-input" type="radio"/>
-                                        <label class="custom-control-label" for="shippingOption2">Express Delivery</label> <span class="float-right font-weight-bold">$10.00</span> </div>
-                                    <div class="ml-4 mb-2 small">(2-4 business days)</div>
-                                    <div class="custom-control custom-radio">
-                                        <input id="shippingOption3" name="shipping-option" class="custom-control-input" type="radio"/>
-                                        <label class="custom-control-label" for="shippingOption3">Next Business day</label> <span class="float-right font-weight-bold">$20.00</span> </div>
+                                <div class="form-check">
+  <input onChange={OnlinePaymentClose} class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
+  <label class="form-check-label" for="flexRadioDefault1">
+    CASH ON DELIVERY
+  </label>
+</div>
+<div class="form-check">
+  <input onChange={OnlinePaymentOpen} class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" />
+  <label class="form-check-label" for="flexRadioDefault2">
+    ONLINE PAYMENT (advance) <br/><span class="float-right small">10% discount available on Gpay!</span>
+  </label>
+</div>
                                 </div>
                             </div>
                         </div>
@@ -228,21 +195,14 @@ function Checkout(params) {
                                     <h3>Shopping cart</h3>
                                 </div>
                                 <div class="rounded p-2 bg-light">
-                                    <div class="media mb-2 border-bottom">
-                                        <div class="media-body"> <a href="detail.html"> Lorem ipsum dolor sit amet</a>
-                                            <div class="small text-muted">Price: $80.00 <span class="mx-2">|</span> Qty: 1 <span class="mx-2">|</span> Subtotal: $80.00</div>
-                                        </div>
+                                    {cartItems.map((x)=>
+                                    <div class="media mb-2 border-bottom" key={x.id}>
+                                    <div class="media-body"> <a >{x.name}</a>
+                                        <div class="small text-muted">Price: ${x.price} <span class="mx-2">|</span> Qty: {x.qty} <span class="mx-2">|</span> Subtotal: ${x.price*x.qty}</div>
                                     </div>
-                                    <div class="media mb-2 border-bottom">
-                                        <div class="media-body"> <a href="detail.html"> Lorem ipsum dolor sit amet</a>
-                                            <div class="small text-muted">Price: $60.00 <span class="mx-2">|</span> Qty: 1 <span class="mx-2">|</span> Subtotal: $60.00</div>
-                                        </div>
                                     </div>
-                                    <div class="media mb-2">
-                                        <div class="media-body"> <a href="detail.html"> Lorem ipsum dolor sit amet</a>
-                                            <div class="small text-muted">Price: $40.00 <span class="mx-2">|</span> Qty: 1 <span class="mx-2">|</span> Subtotal: $40.00</div>
-                                        </div>
-                                    </div>
+                                    )}
+                                   
                                 </div>
                             </div>
                         </div>
@@ -258,33 +218,94 @@ function Checkout(params) {
                                 <hr class="my-1"/>
                                 <div class="d-flex">
                                     <h4>Sub Total</h4>
-                                    <div class="ml-auto font-weight-bold"> $ 440 </div>
+                                    <div class="ml-auto font-weight-bold"> $ {itemsPrice} </div>
                                 </div>
                                 <div class="d-flex">
                                     <h4>Discount</h4>
-                                    <div class="ml-auto font-weight-bold"> $ 40 </div>
+                                    <div class="ml-auto font-weight-bold"> $ {discount.toFixed(2)} </div>
                                 </div>
                                 <hr class="my-1"/>
                                 <div class="d-flex">
                                     <h4>Coupon Discount</h4>
-                                    <div class="ml-auto font-weight-bold"> $ 10 </div>
+                                    <div class="ml-auto font-weight-bold"> $ {CouponDiscount.toFixed(2)} </div>
                                 </div>
                                 <div class="d-flex">
                                     <h4>Tax</h4>
-                                    <div class="ml-auto font-weight-bold"> $ 2 </div>
+                                    <div class="ml-auto font-weight-bold"> $ {taxPrice.toFixed(2)} </div>
                                 </div>
                                 <div class="d-flex">
                                     <h4>Shipping Cost</h4>
-                                    <div class="ml-auto font-weight-bold"> Free </div>
+                                    <div class="ml-auto font-weight-bold">$ {shippingPrice.toFixed(2)} </div>
                                 </div>
                                 <hr/>
                                 <div class="d-flex gr-total">
                                     <h5>Grand Total</h5>
-                                    <div class="ml-auto h5"> $ 388 </div>
+                                    <div class="ml-auto h5"> $ {totalPrice.toFixed(2)} </div>
                                 </div>
                                 <hr/> </div>
                         </div>
-                        <div class="col-12 d-flex shopping-box"> <a href="checkout.html" class="ml-auto btn hvr-hover">Place Order</a> </div>
+                        {!openOP ? 
+                        <div onClick={Swallo} class="col-12 d-flex shopping-box"> <a class="ml-auto btn hvr-hover text-white">Place Order</a> </div>
+                       :
+                        <div className='col-12 d-flex shopping-box mt-2 ml-auto '>
+                        <GooglePayButton
+                    
+ environment="TEST"
+ paymentRequest={{
+   apiVersion: 2,
+   apiVersionMinor: 0,
+   allowedPaymentMethods: [
+     {
+       type: 'CARD',
+       parameters: {
+         allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+         allowedCardNetworks: ['MASTERCARD', 'VISA'],
+       },
+       tokenizationSpecification: {
+         type: 'PAYMENT_GATEWAY',
+         parameters: {
+           gateway: 'example',
+           gatewayMerchantId: 'exampleGatewayMerchantId',
+         },
+       },
+     },
+   ],
+   merchantInfo: {
+     merchantId: '12345678901234567890',
+     merchantName: 'Demo Merchant',
+   },
+   transactionInfo: {
+     totalPriceStatus: 'FINAL',
+     totalPriceLabel: 'Total',
+     totalPrice: totalPrice,
+     currencyCode: 'USD',
+     countryCode: 'US',
+   },
+   shippingAddressRequired: false,
+   callbackIntents: ['SHIPPING_ADDRESS', 'PAYMENT_AUTHORIZATION'],
+ }}
+ onLoadPaymentData={paymentRequest => {
+   console.log('Success', paymentRequest);
+ }}
+ onPaymentAuthorized={paymentData => {
+     console.log('Payment Authorised Success', paymentData)
+     return { transactionState: 'SUCCESS'}
+   }
+ }
+ onPaymentDataChanged={paymentData => {
+     console.log('On Payment Data Changed', paymentData)
+     return { }
+   }
+ }
+ existingPaymentMethodRequired='false'
+ buttonColor='checkout'
+ buttonType='checkout'
+/>
+</div>
+    }
+{/* <div className='col-12 d-flex shopping-box mt-2 ml-auto'>      */}
+{/* <button onClick={triggerBkash}>Pay with bKash</button> */}
+{/* </div>     */}
                     </div>
                 </div>
             </div>
@@ -381,90 +402,7 @@ function Checkout(params) {
     {/* End Instagram Feed  */}
 
 <FooterComp/>
-    {/* Start Footer  */}
-    {/* <footer>
-        <div class="footer-main">
-            <div class="container">
-				<div class="row">
-					<div class="col-lg-4 col-md-12 col-sm-12">
-						<div class="footer-top-box">
-							<h3>Business Time</h3>
-							<ul class="list-time">
-								<li>Monday - Friday: 08.00am to 05.00pm</li> <li>Saturday: 10.00am to 08.00pm</li> <li>Sunday: <span>Closed</span></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-12 col-sm-12">
-						<div class="footer-top-box">
-							<h3>Newsletter</h3>
-							<form class="newsletter-box">
-								<div class="form-group">
-									<input class="" type="email" name="Email" placeholder="Email Address*" />
-									<i class="fa fa-envelope"></i>
-								</div>
-								<button class="btn hvr-hover" type="submit">Submit</button>
-							</form>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-12 col-sm-12">
-						<div class="footer-top-box">
-							<h3>Social Media</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-							<ul>
-                                <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fab fa-google-plus" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fab fa-pinterest-p" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fab fa-whatsapp" aria-hidden="true"></i></a></li>
-                            </ul>
-						</div>
-					</div>
-				</div>
-				<hr/>
-                <div class="row">
-                    <div class="col-lg-4 col-md-12 col-sm-12">
-                        <div class="footer-widget">
-                            <h4>About Freshshop</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> 
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p> 							
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12 col-sm-12">
-                        <div class="footer-link">
-                            <h4>Information</h4>
-                            <ul>
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Customer Service</a></li>
-                                <li><a href="#">Our Sitemap</a></li>
-                                <li><a href="#">Terms &amp; Conditions</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Delivery Information</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12 col-sm-12">
-                        <div class="footer-link-contact">
-                            <h4>Contact Us</h4>
-                            <ul>
-                                <li>
-                                    <p><i class="fas fa-map-marker-alt"></i>Address: Michael I. Days 3756 <br/>Preston Street Wichita,<br/> KS 67213 </p>
-                                </li>
-                                <li>
-                                    <p><i class="fas fa-phone-square"></i>Phone: <a href="tel:+1-888705770">+1-888 705 770</a></p>
-                                </li>
-                                <li>
-                                    <p><i class="fas fa-envelope"></i>Email: <a href="mailto:contactinfo@gmail.com">contactinfo@gmail.com</a></p>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer> */}
-    {/* End Footer  */}
+
 
     {/* Start copyright  */}
     <div class="footer-copyright">

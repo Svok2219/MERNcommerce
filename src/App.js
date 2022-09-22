@@ -24,6 +24,7 @@ function App() {
   const { products } = data;
   const [cartItems, setCartItems] = useState([]);
 
+  console.log(Loggedin);
   const addToCart = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
     if (exist) {

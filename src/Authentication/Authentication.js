@@ -39,7 +39,10 @@ function Authentication(params) {
     Address:""
   });
   // console.log(user)
-  
+  onAuthStateChanged(auth, (currentUser) => {
+    console.log(currentUser);
+    setLoggedin(currentUser);
+  });
 let name,value;  
 const changeFunc=(event)=>{
 name=event.target.name;

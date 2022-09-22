@@ -3,6 +3,7 @@ import HeaderComp from "../Components/HeaderComponent";
 import FooterComp from "../Components/FooterComponents";
 import { useContext, useState } from 'react';
 import { UserContext } from '../App';
+import { Link } from 'react-router-dom';
 {
   /* ALL JS FILES */
 }
@@ -185,9 +186,9 @@ function Cart(params) {
               </div>
             </div>
             <div class="col-12 d-flex shopping-box">
-              <a href="checkout.html" class="ml-auto btn hvr-hover text-white">
+              <Link to="/checkOut" class="ml-auto btn hvr-hover text-white">
                 Checkout
-              </a>{" "}
+              </Link>{" "}
             </div>
           </div>    )}
         </div>
