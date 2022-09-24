@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React, { useRef } from 'react';
+import emailjs from '@emailjs/browser';
 import HeaderComp from "../Components/HeaderComponent"
 import FooterComp from "../Components/FooterComponents"
 import { UserContext } from '../App';
@@ -72,26 +73,89 @@ import Swal from 'sweetalert2'
         // setopenLogin(true)
     }
     console.log(openOP)
+    // (function(){
+    //  })()
+
+    const form = useRef();
+
+    // const sendEmail = (e) => {
+    //   e.preventDefault();
+    //   var templateParams = {
+    //     name: 'James',
+    //     notes: 'Check this out!'
+    // };
+    //   emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', form.current, 'YOUR_PUBLIC_KEY')
+    //     .then((result) => {
+    //         console.log(result.text);
+    //     }, (error) => {
+    //         console.log(error.text);
+    //     });
+
+
+    // };
+    // const formData = new FormData();
+    // formData.append('from_name', 'Testing Purpose');
+    // formData.append('to_email', 'koirishuvo@gmail.com');
+    // formData.append('from_name', 'Shri. ThanosAcharya');
+    // formData.append('to_name', 'Shri. Shuvo Kumar');
+    // formData.append('message', 'CartItems will be here');
+    // formData.append('reply_to', 'koirishuvo@gmail.com');
 
     const Swallo =(x)=>{
-        Swal.fire({
-            title: '<h2>Order Successful</h2><strong>Order ID : <u>11312325498*7975</u></strong>',
-            icon: 'success',
-            html:
-              'You can still <b>cancel your order</b>, <br/>' +
-              '<a href="//sweetalert2.github.io">Chat with Customer Care</a> ' +
-              'or call us before the approvement process',
-            showCloseButton: true,
-            showCancelButton: true,
-            focusConfirm: false,
-            confirmButtonText:
-              '<i class="fas fa-search"></i> Track my order! ',
-            confirmButtonAriaLabel: 'Thumbs up, great!',
-            cancelButtonText:
-              '<i class="fa fa-times"></i> cancel the Order!',
-            cancelButtonAriaLabel: 'Thumbs down ,cancel the Order!'
-          })
+        // var templateParams = {
+        //     from_name:"Testing Purpose",
+        //     to_email:"koirishuvo@gmail.com",
+        //     from_name: 'Shri. ThanosAcharya',
+        //     to_name: 'Shri. Shuvo Kumar',
+        //     message:cartItems,
+        //     reply_to:'koirishuvo@gmail.com'
+        // };
+          emailjs.sendForm('service_ezi7z9f', 'template_obzck5d', form.current, 'NxPNigVdSm6c6IGkN')
+            .then((result) => {
+                console.log(result.text);
+                Swal.fire({
+                    title: '<h2>Order Successful</h2><strong>Order ID : <u>11312325498*7975</u></strong>',
+                    icon: 'success',
+                    html:
+                      'You can still <b>cancel your order</b>, <br/>' +
+                      '<a href="//sweetalert2.github.io">Chat with Customer Care</a> ' +
+                      'or call us before the approvement process',
+                    showCloseButton: true,
+                    showCancelButton: true,
+                    focusConfirm: false,
+                    confirmButtonText:
+                      '<Link to="/"><i class="fas fa-search"></i> Track my order!</Link>',
+                    confirmButtonAriaLabel: 'Thumbs up, great!',
+                    cancelButtonText:
+                      '<i class="fa fa-times"></i> cancel the Order!',
+                    cancelButtonAriaLabel: 'Thumbs down ,cancel the Order!'
+                  })
+            }, (error) => {
+                console.log(error.text);
+            });
+        
+        // function sendEmail() {
+            // Email.send({
+            //   Host: "smtp.gmail.com",
+            //   Username: "sender@email_address.com",
+            //   Password: "Enter your password",
+            //   To: 'receiver@email_address.com',
+            //   From: "sender@email_address.com",
+            //   Subject: "Sending Email using javascript",
+            //   Body: "Well that was easy!!",
+            //   Attachments: [
+            //     {
+            //       name: "File_Name_with_Extension",
+            //       path: "Full Path of the file"
+            //     }]
+            // })
+            //   .then(function (message) {
+            //     alert("Mail has been sent successfully")
+            //   });
+        //   }
+
     }
+    // console.log(Loggedin.displayName);
     return (
         <div>
 
@@ -163,7 +227,30 @@ import Swal from 'sweetalert2'
                         <div class="title-left">
                             <h3>Billing address</h3>
                         </div>
-                 
+                <form ref={form} >
+                <div class="form-group">
+                <label >Enter Reciver's phone Number</label>
+                <input type="text" name="Reciver_Phone" class="form-control"  />
+                </div>
+                <div class="form-group">
+                    <label >Enter the delivery Address</label>
+                    <textarea name="Address" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+                {/* <label>enter Your Billing Address</label>
+                <textarea name="Address" className='' /> */}
+                <input type="text" name="Subtotal" className='d-none' value={totalPrice.toFixed(2)} />
+                <label className='d-none'>Subtotal</label>
+                <input type="text" name="from_name" className='d-none' value={'Koiri Shop'} />
+                <label className='d-none'>Sender Name</label>
+                <input type="text" name="to_name" className='d-none' value={Loggedin.displayName || Loggedin.email}/>
+                <label className='d-none'>sending to  customer</label>
+                <input type="text" name="reply_to" className='d-none' value='shuvokoiri0@gmail.com'/>
+                <label className='d-none'>reply to  customer</label>
+                <input type="text" name="customer_email" className='d-none' value={Loggedin.email}/>
+                <label className='d-none'>Message</label>
+                <textarea name="message" className='d-none' value={`hey george we got your messege`}/>
+                <input type="submit" value="Send" className='invisible'/>
+                </form>
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-6 mb-3">

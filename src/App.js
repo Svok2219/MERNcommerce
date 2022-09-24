@@ -49,7 +49,7 @@ function App() {
       );
     }
   };
-  console.log(Loggedin)
+  // console.log(Loggedin)
   return (
     <UserContext.Provider  value={[Loggedin,setLoggedin,cartItems]}>
      
@@ -65,7 +65,7 @@ function App() {
         <Route path="shop" element={<Shop/> } />
         <Route path="wishList" element={<Wishlist />} />
 
-        <Route element={<PrivateRoutes />}>
+        <Route element={<PrivateRoutes User={Loggedin} />}>
         <Route element={<Cart addToCart={addToCart} removeFromCart={removeFromCart}  cartItems={cartItems} />} path="/cart" />
                 <Route element={<Checkout/>} path="/checkOut"/>
                 <Route element={<MyAcount/>} path="myAcount"/>
