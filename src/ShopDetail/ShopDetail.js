@@ -19,13 +19,14 @@ function ShopDetail(params){
     // console.log(pwd)
     // const IDValue = document.getElementById('qty').value;
     // console.log(IDValue);
-    const [value,setValue]=useState()
-const functionQTY =(e)=> {
+    // const [value,setValue]=useState()
+// const functionQTY =(e)=> {
     // console.log(e.target.value)
-    
-    setValue(e.target.value)
+    //     const IDValue = document.getElementById('qty').value;
+
+    // setValue(IDValue)
     // console.log(BuyNowQty)
-}
+// }
  
     return(
 <div>
@@ -92,14 +93,16 @@ const functionQTY =(e)=> {
 							<li>
 								<div class="form-group quantity-box">
 									<label class="control-label">Enter the Quantity</label>
-									<input onChange={functionQTY} id='qty' class="form-control text-black" defaultValue='0'  type="number"/>
+									<input 
+                                    // onChange={functionQTY}
+                                     id='qty' class="form-control text-black" defaultValue='1'  type="number" required/>
 								</div>
 							</li>
 						</ul>
 
 						<div class="price-box-bar">
 							<div class="cart-and-bay-btn ">
-								<Link to="/checkOut"class="btn hvr-hover text-white mr-1" data-fancybox-close="" onClick={()=>BuyNowFunction({...pwd,qty:value})} >Buy New</Link> 
+								<Link to="/checkOut"class="btn hvr-hover text-white mr-1" data-fancybox-close="" onClick={()=>BuyNowFunction(pwd)} >Buy New</Link> 
 								<a class="btn hvr-hover text-white ml-1" data-fancybox-close="" onClick={()=>addToCart(pwd)}>Add to cart</a>
 							</div>
 						</div>

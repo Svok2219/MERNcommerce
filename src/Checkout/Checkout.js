@@ -14,7 +14,7 @@ import Swal from 'sweetalert2'
     
 
     function Checkout(params) {
-        const {BuyQty,setBuyQty}=params;
+        // const {BuyQty,setBuyQty}=params;
     const[Loggedin,setLoggedin,cartItems,BuyNow,cartBool] =React.useContext(UserContext);
     console.log(cartBool)
     // if (!BuyNow) {
@@ -147,7 +147,7 @@ import Swal from 'sweetalert2'
     <div class="cart-box-main">
         <div class="container">
             <div class="row new-account-login">
-                <div class="col-sm-6 col-lg-6 mb-3">
+                {/* <div class="col-sm-6 col-lg-6 mb-3">
                     <div class="title-left">
                         <h3>Account Login</h3>
                     </div>
@@ -163,8 +163,8 @@ import Swal from 'sweetalert2'
                         </div>
                         <button type="submit" class="btn hvr-hover">Login</button>
                     </form>
-                </div>
-                <div class="col-sm-6 col-lg-6 mb-3">
+                </div> */}
+                {/* <div class="col-sm-6 col-lg-6 mb-3">
                     <div class="title-left">
                         <h3>Create New Account</h3>
                     </div>
@@ -186,7 +186,7 @@ import Swal from 'sweetalert2'
                         </div>
                         <button type="submit" class="btn hvr-hover">Register</button>
                     </form>
-                </div>
+                </div> */}
             </div>
             <div class="row">
                 <div class="col-sm-6 col-lg-6 mb-3">
@@ -196,11 +196,16 @@ import Swal from 'sweetalert2'
                         </div>
                 <form ref={form} >
                 <div class="form-group">
-                <label >Enter Reciver's phone Number</label>
+                <label className=''>Reciever's Name:</label>
+                <input type="text" name="to_name" class="form-control" defaultValue={Loggedin.displayName || Loggedin.email}/>
+                
+                </div>
+                <div class="form-group">
+                <label >Enter Reciver's <b>phone Number</b></label>
                 <input type="text" name="Reciver_Phone" class="form-control"  />
                 </div>
                 <div class="form-group">
-                    <label >Enter the delivery Address</label>
+                    <label >Enter the <b>delivery Address</b></label>
                     <textarea name="Address" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                 </div>
                 {/* <label>enter Your Billing Address</label>
@@ -209,8 +214,7 @@ import Swal from 'sweetalert2'
                 <label className='d-none'>Subtotal</label>
                 <input type="text" name="from_name" className='d-none' value={'Koiri Shop'} />
                 <label className='d-none'>Sender Name</label>
-                <input type="text" name="to_name" className='d-none' value={Loggedin.displayName || Loggedin.email}/>
-                <label className='d-none'>sending to  customer</label>
+                
                 <input type="text" name="reply_to" className='d-none' value='shuvokoiri0@gmail.com'/>
                 <label className='d-none'>reply to  customer</label>
                 <input type="text" name="customer_email" className='d-none' value={Loggedin.email}/>
@@ -248,7 +252,7 @@ import Swal from 'sweetalert2'
                                 <div class="title-left">
                                     <h3>Shopping cart</h3>
                                 </div>
-                                {cartBool==true ?
+                                {cartBool?
                                    <div class="rounded p-2 bg-light">
                                     
                                    <div class="media mb-2 border-bottom" key={BuyNow.id}>
@@ -288,29 +292,29 @@ import Swal from 'sweetalert2'
                                 <hr class="my-1"/>
                                 <div class="d-flex">
                                     <h4>Sub Total</h4>
-                                    <div class="ml-auto font-weight-bold"> $ {cartBool==true ?itemsPriceBuy:itemsPrice} </div>
+                                    <div class="ml-auto font-weight-bold"> $ {cartBool?itemsPriceBuy:itemsPrice} </div>
                                 </div>
                                 <div class="d-flex">
                                     <h4>Discount</h4>
-                                    <div class="ml-auto font-weight-bold"> $ {cartBool==true ?discountBuy.toFixed(2):discount} </div>
+                                    <div class="ml-auto font-weight-bold"> $ {cartBool?discountBuy.toFixed(2):discount} </div>
                                 </div>
                                 <hr class="my-1"/>
                                 <div class="d-flex">
                                     <h4>Coupon Discount</h4>
-                                    <div class="ml-auto font-weight-bold"> $ {cartBool==true ?CouponDiscountBuy.toFixed(2):CouponDiscount} </div>
+                                    <div class="ml-auto font-weight-bold"> $ {cartBool?CouponDiscountBuy.toFixed(2):CouponDiscount} </div>
                                 </div>
                                 <div class="d-flex">
                                     <h4>Tax</h4>
-                                    <div class="ml-auto font-weight-bold"> $ {cartBool==true ?taxPriceBuy.toFixed(2):taxPrice} </div>
+                                    <div class="ml-auto font-weight-bold"> $ {cartBool?taxPriceBuy.toFixed(2):taxPrice} </div>
                                 </div>
                                 <div class="d-flex">
                                     <h4>Shipping Cost</h4>
-                                    <div class="ml-auto font-weight-bold">$ {cartBool==true ?shippingPriceBuy.toFixed(2):shippingPrice} </div>
+                                    <div class="ml-auto font-weight-bold">$ {cartBool?shippingPriceBuy.toFixed(2):shippingPrice} </div>
                                 </div>
                                 <hr/>
                                 <div class="d-flex gr-total">
                                     <h5>Grand Total</h5>
-                                    <div class="ml-auto h5"> $ {cartBool==true ? totalPriceBuy : totalPrice.toFixed(2)} </div>
+                                    <div class="ml-auto h5"> $ {cartBool? totalPriceBuy : totalPrice.toFixed(2)} </div>
                                 </div>
                                 <hr/> </div>
                         </div>

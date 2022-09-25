@@ -57,11 +57,12 @@ function App() {
   const [BuyQty,setBuyQty] = useState();
   const [cartBool,setCartBool] = useState(false);
   const BuyNowFunction=(productDetail)=>{
-    //  const navigate =useNavigate()
-    setBuyNow(productDetail);
+
+    
     setCartBool(true);
-  const IDValue = document.getElementById('qty').value;
-    console.log(IDValue);
+    const IDValue = document.getElementById('qty').value;
+    // console.log(IDValue);
+    setBuyNow({...productDetail,qty:IDValue});
  
   }
   const CartBoolFunction =()=>{
@@ -69,13 +70,8 @@ function App() {
   }
   const [WListItems, setWListItems] = useState([]);
 
-  const addWishList= async (pwd)=>{
-  // const exist= WListItems.find(x=>x.id===pwd.id);
-  // const res = await
+  const addWishList=  (pwd)=>{
    setWListItems([...WListItems,{...pwd,Wqty:1}])
-  // .then((res)=>{
-    
-  // })
   }
 
   const removeWishList=(pwd)=>{
@@ -97,9 +93,10 @@ function App() {
         <Route path=":id" element={<ShopDetail products={products} addToCart={addToCart} setBuyQty={setBuyQty} BuyNowFunction={BuyNowFunction}/>} />
         <Route path="shop" element={<Shop/> } />
         <Route path="wishList" element={<Wishlist WListItems={WListItems} addToCart={addToCart} removeWishList={removeWishList}/>} />
+        <Route element={<Cart addToCart={addToCart} removeFromCart={removeFromCart}  cartItems={cartItems} CartBoolFunction={CartBoolFunction}/>} path="/cart" />
 
         <Route element={<PrivateRoutes User={Loggedin} />}>
-        <Route element={<Cart addToCart={addToCart} removeFromCart={removeFromCart}  cartItems={cartItems} CartBoolFunction={CartBoolFunction}/>} path="/cart" />
+
                 <Route element={<Checkout BuyQty={BuyQty} setBuyQty={setBuyQty}/>} path="checkOut"/>
                 <Route element={<MyAcount/>} path="myAcount"/>
         </Route>
