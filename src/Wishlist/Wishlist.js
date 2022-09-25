@@ -1,6 +1,7 @@
 import * as React from 'react';
 import HeaderComp from "../Components/HeaderComponent";
 import FooterComp from "../Components/FooterComponents";
+import { UserContext } from '../App';
 
 {
   /* ALL JS FILES */
@@ -28,6 +29,8 @@ import FooterComp from "../Components/FooterComponents";
 </>;
 
 function Wishlist(params) {
+  const {WListItems,addToCart,removeWishList} =params;
+  // const [addWishList,removeWishList] = React.useContext(UserContext);
   return (
     <div>
       <HeaderComp />
@@ -68,35 +71,37 @@ function Wishlist(params) {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                    {WListItems.map((x)=>
+                    <tr key={x.id}>
                       <td class="thumbnail-img">
-                        <a href="#">
+                        <a >
                           <img
                             class="img-fluid"
-                            src="https://technext.github.io/freshshop/images/img-pro-01.jpg"
+                            src={x.image}
                             alt=""
                           />
                         </a>
                       </td>
                       <td class="name-pr">
-                        <a href="#">Lorem ipsum dolor sit amet</a>
+                        <a>{x.name}</a>
                       </td>
                       <td class="price-pr">
-                        <p>$ 80.0</p>
+                        <p>$ {x.price}</p>
                       </td>
                       <td class="quantity-box">In Stock</td>
                       <td class="add-pr">
-                        <a class="btn hvr-hover text-ehite" href="#">
+                        <a class="btn hvr-hover text-white" onClick={()=>addToCart(x)}>
                           Add to Cart
                         </a>
                       </td>
                       <td class="remove-pr">
-                        <a href="#">
+                        <a onClick={()=>removeWishList(x)} >
                           <i class="fas fa-times"></i>
                         </a>
                       </td>
                     </tr>
-                    <tr>
+                    )}
+                    {/* <tr>
                       <td class="thumbnail-img">
                         <a href="#">
                           <img
@@ -151,7 +156,7 @@ function Wishlist(params) {
                           <i class="fas fa-times"></i>
                         </a>
                       </td>
-                    </tr>
+                    </tr> */}
                   </tbody>
                 </table>
               </div>

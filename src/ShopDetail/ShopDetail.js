@@ -1,12 +1,32 @@
 import * as React from 'react';
+import { useContext, useState } from "react";
+
 import HeaderComp from "../Components/HeaderComponent"
 import FooterComp from "../Components/FooterComponents"
+import { Link, useParams } from 'react-router-dom';
+import { UserContext } from '../App';
 
     {/* ALL JS FILES */}
     <><script src="js/jquery-3.2.1.min.js"></script><script src="js/popper.min.js"></script><script src="js/bootstrap.min.js"></script></>
     {/* ALL PLUGINS */}
     <><script src="js/jquery.superslides.min.js"></script><script src="js/bootstrap-select.js"></script><script src="js/inewsticker.js"></script><script src="js/bootsnav.js."></script><script src="js/images-loded.min.js"></script><script src="js/isotope.min.js"></script><script src="js/owl.carousel.min.js"></script><script src="js/baguetteBox.min.js"></script><script src="js/form-validator.min.js"></script><script src="js/contact-form-script.js"></script><script src="js/custom.js"></script></>
-function ShopDetail(){
+function ShopDetail(params){
+    const [BuyNowQty,setBuyNowQty] = useContext(UserContext);
+    const {id} =useParams();
+    const{products,addToCart,BuyNowFunction}=params;
+   
+    const pwd = products.find((x)=>x.id==id);
+    // console.log(pwd)
+    // const IDValue = document.getElementById('qty').value;
+    // console.log(IDValue);
+    const [value,setValue]=useState()
+const functionQTY =(e)=> {
+    // console.log(e.target.value)
+    
+    setValue(e.target.value)
+    // console.log(BuyNowQty)
+}
+ 
     return(
 <div>
     {/* Start Main Top */}
@@ -36,9 +56,9 @@ function ShopDetail(){
                 <div class="col-xl-5 col-lg-5 col-md-6">
                     <div id="carousel-example-1" class="single-product-slider carousel slide" data-ride="carousel">
                         <div class="carousel-inner" role="listbox">
-                            <div class="carousel-item active"> <img class="d-block w-100" src="https://technext.github.io/freshshop/images/big-img-01.jpg" alt="First slide"/> </div>
-                            <div class="carousel-item"> <img class="d-block w-100" src="https://technext.github.io/freshshop/images/big-img-02.jpg" alt="Second slide"/> </div>
-                            <div class="carousel-item"> <img class="d-block w-100" src="https://technext.github.io/freshshop/images/big-img-03.jpg" alt="Third slide"/> </div>
+                            <div class="carousel-item active"> <img class="d-block w-100" style={{height:"30rem"}} src={pwd.images[0]} alt="First slide"/> </div>
+                            <div class="carousel-item"> <img class="d-block w-100" style={{height:"30rem"}} src={pwd.images[1]} alt="Second slide"/> </div>
+                            <div class="carousel-item"> <img class="d-block w-100 " style={{height:"30rem"}} src={pwd.images[2]} alt="Third slide"/> </div>
                         </div>
                         <a class="carousel-control-prev" href="#carousel-example-1" role="button" data-slide="prev"> 
 						<i class="fa fa-angle-left" aria-hidden="true"></i>
@@ -50,38 +70,37 @@ function ShopDetail(){
 					</a>
                         <ol class="carousel-indicators">
                             <li data-target="#carousel-example-1" data-slide-to="0" class="active">
-                                <img class="d-block w-100 img-fluid" src="https://technext.github.io/freshshop/images/smp-img-01.jpg" alt="" />
+                                <img class="d-block w-100 img-fluid"  style={{height:"3rem"}} src={pwd.images[0]} alt="" />
                             </li>
                             <li data-target="#carousel-example-1" data-slide-to="1">
-                                <img class="d-block w-100 img-fluid" src="https://technext.github.io/freshshop/images/smp-img-02.jpg" alt="" />
+                                <img class="d-block w-100 img-fluid" style={{height:"3rem"}} src={pwd.images[1]} alt="" />
                             </li>
                             <li data-target="#carousel-example-1" data-slide-to="2">
-                                <img class="d-block w-100 img-fluid" src="https://technext.github.io/freshshop/images/smp-img-03.jpg" alt="" />
+                                <img class="d-block w-100 img-fluid" style={{height:"3rem"}} src={pwd.images[2]} alt="" />
                             </li>
                         </ol>
                     </div>
                 </div>
                 <div class="col-xl-7 col-lg-7 col-md-6">
                     <div class="single-product-details">
-                        <h2>Fachion Lorem ipsum dolor sit amet</h2>
-                        <h5> <del>$ 60.00</del> $40.79</h5>
-                        <p class="available-stock"><span> More than 20 available / <a href="#">8 sold </a></span></p>
+                        <h2>{pwd.name}</h2>
+                        <h5> <del>$ {pwd.DelPrice} </del> ${pwd.price}</h5>
+                        <p class="available-stock"><span> More than ${pwd.InitialStock-pwd.sold} available / <a href="#">{pwd.sold} sold </a></span></p>
 						<h4>Short Description:</h4>
-						<p>Nam sagittis a augue eget scelerisque. Nullam lacinia consectetur sagittis. Nam sed neque id eros fermentum dignissim quis at tortor. Nullam ultricies urna quis sem sagittis pharetra. Nam erat turpis, cursus in ipsum at,
-							tempor imperdiet metus. In interdum id nulla tristique accumsan. Ut semper in quam nec pretium. Donec egestas finibus suscipit. Curabitur tincidunt convallis arcu. </p>
+						<p>{pwd.Description}</p>
 						<ul>
 							<li>
 								<div class="form-group quantity-box">
-									<label class="control-label">Quantity</label>
-									<input class="form-control" value="0" min="0" max="20" type="number"/>
+									<label class="control-label">Enter the Quantity</label>
+									<input onChange={functionQTY} id='qty' class="form-control text-black" defaultValue='0'  type="number"/>
 								</div>
 							</li>
 						</ul>
 
 						<div class="price-box-bar">
 							<div class="cart-and-bay-btn ">
-								<a class="btn hvr-hover text-white mr-1" data-fancybox-close="" href="#">Buy New</a>
-								<a class="btn hvr-hover text-white ml-1" data-fancybox-close="" href="#">Add to cart</a>
+								<Link to="/checkOut"class="btn hvr-hover text-white mr-1" data-fancybox-close="" onClick={()=>BuyNowFunction({...pwd,qty:value})} >Buy New</Link> 
+								<a class="btn hvr-hover text-white ml-1" data-fancybox-close="" onClick={()=>addToCart(pwd)}>Add to cart</a>
 							</div>
 						</div>
 

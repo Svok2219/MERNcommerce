@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './App.css';
-import { Routes, Route, Link, BrowserRouter ,  BrowserRouter as Router,} from "react-router-dom";
+import { Routes, Route, Link, BrowserRouter ,  BrowserRouter as Router, Navigate, useNavigate,} from "react-router-dom";
 import Homepage from './Homepage/Homepage';
 import About from './About/About';
 import Gallery from './Gallery/Gallery';
@@ -24,8 +24,10 @@ function App() {
   const { products } = data;
   const [cartItems, setCartItems] = useState([]);
 
-  console.log(Loggedin);
+  // console.log(Loggedin);
   const addToCart = (product) => {
+    setWListItems(WListItems.filter((x)=>x.id!==product.id));
+
     const exist = cartItems.find((x) => x.id === product.id);
     if (exist) {
       setCartItems(
@@ -50,24 +52,55 @@ function App() {
     }
   };
   // console.log(Loggedin)
+ 
+  const [BuyNow,setBuyNow] = useState([]);
+  const [BuyQty,setBuyQty] = useState();
+  const [cartBool,setCartBool] = useState(false);
+  const BuyNowFunction=(productDetail)=>{
+    //  const navigate =useNavigate()
+    setBuyNow(productDetail);
+    setCartBool(true);
+  const IDValue = document.getElementById('qty').value;
+    console.log(IDValue);
+ 
+  }
+  const CartBoolFunction =()=>{
+    setCartBool(false)
+  }
+  const [WListItems, setWListItems] = useState([]);
+
+  const addWishList= async (pwd)=>{
+  // const exist= WListItems.find(x=>x.id===pwd.id);
+  // const res = await
+   setWListItems([...WListItems,{...pwd,Wqty:1}])
+  // .then((res)=>{
+    
+  // })
+  }
+
+  const removeWishList=(pwd)=>{
+    setWListItems(WListItems.filter((x) => x.id !== pwd.id));
+  }
+
+  console.log(WListItems)
   return (
-    <UserContext.Provider  value={[Loggedin,setLoggedin,cartItems]}>
+    <UserContext.Provider  value={[Loggedin,setLoggedin,cartItems,BuyNow,cartBool,setCartBool,addWishList,removeWishList,addToCart]}>
      
         <Router> 
           
       <Routes>
 
-        <Route path="/" element={<Homepage products={products} addToCart={addToCart} />} />
+        <Route path="/" element={<Homepage products={products} addToCart={addToCart} addWishList={addWishList} removeWishList={removeWishList} />} />
         <Route path="about" element={<About />} />
         <Route path="gallery" element={<Gallery />} />
         <Route path="contact" element={<Contackt />} />
-        <Route path="shopDetail" element={<ShopDetail />} />
+        <Route path=":id" element={<ShopDetail products={products} addToCart={addToCart} setBuyQty={setBuyQty} BuyNowFunction={BuyNowFunction}/>} />
         <Route path="shop" element={<Shop/> } />
-        <Route path="wishList" element={<Wishlist />} />
+        <Route path="wishList" element={<Wishlist WListItems={WListItems} addToCart={addToCart} removeWishList={removeWishList}/>} />
 
         <Route element={<PrivateRoutes User={Loggedin} />}>
-        <Route element={<Cart addToCart={addToCart} removeFromCart={removeFromCart}  cartItems={cartItems} />} path="/cart" />
-                <Route element={<Checkout/>} path="/checkOut"/>
+        <Route element={<Cart addToCart={addToCart} removeFromCart={removeFromCart}  cartItems={cartItems} CartBoolFunction={CartBoolFunction}/>} path="/cart" />
+                <Route element={<Checkout BuyQty={BuyQty} setBuyQty={setBuyQty}/>} path="checkOut"/>
                 <Route element={<MyAcount/>} path="myAcount"/>
         </Route>
         

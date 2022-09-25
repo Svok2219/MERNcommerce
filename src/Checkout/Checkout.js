@@ -14,14 +14,29 @@ import Swal from 'sweetalert2'
     
 
     function Checkout(params) {
-    const[Loggedin,setLoggedin,cartItems] =React.useContext(UserContext);
-    console.log(cartItems)
-    const itemsPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
-    const taxPrice = itemsPrice * 0.14;
-    const shippingPrice = itemsPrice > 2000 ? 0 : 20;
-    const discount = itemsPrice * 0.14;
-    const CouponDiscount = itemsPrice * .06
-    const totalPrice = itemsPrice + taxPrice + shippingPrice + discount + CouponDiscount;
+        const {BuyQty,setBuyQty}=params;
+    const[Loggedin,setLoggedin,cartItems,BuyNow,cartBool] =React.useContext(UserContext);
+    console.log(cartBool)
+    // if (!BuyNow) {
+        const itemsPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
+        const taxPrice = itemsPrice * 0.14;
+        const shippingPrice = itemsPrice > 2000 ? 0 : 20;
+        const discount = itemsPrice * 0.14;
+        const CouponDiscount = itemsPrice * .06
+        const totalPrice = itemsPrice + taxPrice + shippingPrice + discount + CouponDiscount;
+
+
+        const itemsPriceBuy = BuyNow.price * BuyNow.qty
+        const taxPriceBuy = itemsPriceBuy * 0.14;
+        const shippingPriceBuy = itemsPriceBuy > 2000 ? 0 : 20;
+        const discountBuy = itemsPriceBuy * 0.14;
+        const CouponDiscountBuy = itemsPriceBuy * .06
+        const totalPriceBuy = itemsPriceBuy + taxPriceBuy + shippingPriceBuy - discountBuy - CouponDiscountBuy;
+    // }
+    // else{
+     
+    // }
+   
 
     const { error, loading, triggerBkash } = useBkash({
 		onSuccess: (data) => {
@@ -66,50 +81,20 @@ import Swal from 'sweetalert2'
     const[openOP,setopenOP]=React.useState(false)
     const OnlinePaymentOpen=()=>{
         setopenOP(true)
-        // setopenLogin(false)
+  
     }
     const OnlinePaymentClose=()=>{
         setopenOP(false)
-        // setopenLogin(true)
+      
     }
     console.log(openOP)
-    // (function(){
-    //  })()
 
     const form = useRef();
 
-    // const sendEmail = (e) => {
-    //   e.preventDefault();
-    //   var templateParams = {
-    //     name: 'James',
-    //     notes: 'Check this out!'
-    // };
-    //   emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', form.current, 'YOUR_PUBLIC_KEY')
-    //     .then((result) => {
-    //         console.log(result.text);
-    //     }, (error) => {
-    //         console.log(error.text);
-    //     });
 
-
-    // };
-    // const formData = new FormData();
-    // formData.append('from_name', 'Testing Purpose');
-    // formData.append('to_email', 'koirishuvo@gmail.com');
-    // formData.append('from_name', 'Shri. ThanosAcharya');
-    // formData.append('to_name', 'Shri. Shuvo Kumar');
-    // formData.append('message', 'CartItems will be here');
-    // formData.append('reply_to', 'koirishuvo@gmail.com');
 
     const Swallo =(x)=>{
-        // var templateParams = {
-        //     from_name:"Testing Purpose",
-        //     to_email:"koirishuvo@gmail.com",
-        //     from_name: 'Shri. ThanosAcharya',
-        //     to_name: 'Shri. Shuvo Kumar',
-        //     message:cartItems,
-        //     reply_to:'koirishuvo@gmail.com'
-        // };
+   
           emailjs.sendForm('service_ezi7z9f', 'template_obzck5d', form.current, 'NxPNigVdSm6c6IGkN')
             .then((result) => {
                 console.log(result.text);
@@ -134,35 +119,17 @@ import Swal from 'sweetalert2'
                 console.log(error.text);
             });
         
-        // function sendEmail() {
-            // Email.send({
-            //   Host: "smtp.gmail.com",
-            //   Username: "sender@email_address.com",
-            //   Password: "Enter your password",
-            //   To: 'receiver@email_address.com',
-            //   From: "sender@email_address.com",
-            //   Subject: "Sending Email using javascript",
-            //   Body: "Well that was easy!!",
-            //   Attachments: [
-            //     {
-            //       name: "File_Name_with_Extension",
-            //       path: "Full Path of the file"
-            //     }]
-            // })
-            //   .then(function (message) {
-            //     alert("Mail has been sent successfully")
-            //   });
-        //   }
+      
 
     }
-    // console.log(Loggedin.displayName);
+
     return (
         <div>
 
     <HeaderComp/>
   
 
-    {/* Start All Title Box */}
+
     <div class="all-title-box">
         <div class="container">
             <div class="row">
@@ -238,7 +205,7 @@ import Swal from 'sweetalert2'
                 </div>
                 {/* <label>enter Your Billing Address</label>
                 <textarea name="Address" className='' /> */}
-                <input type="text" name="Subtotal" className='d-none' value={totalPrice.toFixed(2)} />
+                <input type="text" name="Subtotal" className='d-none' value={cartBool==true ? totalPriceBuy : totalPrice.toFixed(2)} />
                 <label className='d-none'>Subtotal</label>
                 <input type="text" name="from_name" className='d-none' value={'Koiri Shop'} />
                 <label className='d-none'>Sender Name</label>
@@ -248,7 +215,7 @@ import Swal from 'sweetalert2'
                 <label className='d-none'>reply to  customer</label>
                 <input type="text" name="customer_email" className='d-none' value={Loggedin.email}/>
                 <label className='d-none'>Message</label>
-                <textarea name="message" className='d-none' value={`hey george we got your messege`}/>
+                <textarea name="message" className='d-none' value={`Our Representive will knock you very soon...`}/>
                 <input type="submit" value="Send" className='invisible'/>
                 </form>
                     </div>
@@ -281,7 +248,20 @@ import Swal from 'sweetalert2'
                                 <div class="title-left">
                                     <h3>Shopping cart</h3>
                                 </div>
+                                {cartBool==true ?
+                                   <div class="rounded p-2 bg-light">
+                                    
+                                   <div class="media mb-2 border-bottom" key={BuyNow.id}>
+                                   <div class="media-body"> <a >{BuyNow.name}</a>
+                                       <div class="small text-muted">Price: ${BuyNow.price} <span class="mx-2">|</span> Qty: {BuyNow.qty} <span class="mx-2">|</span> Subtotal: ${BuyNow.price*BuyNow.qty}</div>
+                                   </div>
+                                   </div>
+                                   
+                                  
+                               </div>
+                                :
                                 <div class="rounded p-2 bg-light">
+                                    
                                     {cartItems.map((x)=>
                                     <div class="media mb-2 border-bottom" key={x.id}>
                                     <div class="media-body"> <a >{x.name}</a>
@@ -291,6 +271,9 @@ import Swal from 'sweetalert2'
                                     )}
                                    
                                 </div>
+                                }
+                             
+                                
                             </div>
                         </div>
                         <div class="col-md-12 col-lg-12">
@@ -305,29 +288,29 @@ import Swal from 'sweetalert2'
                                 <hr class="my-1"/>
                                 <div class="d-flex">
                                     <h4>Sub Total</h4>
-                                    <div class="ml-auto font-weight-bold"> $ {itemsPrice} </div>
+                                    <div class="ml-auto font-weight-bold"> $ {cartBool==true ?itemsPriceBuy:itemsPrice} </div>
                                 </div>
                                 <div class="d-flex">
                                     <h4>Discount</h4>
-                                    <div class="ml-auto font-weight-bold"> $ {discount.toFixed(2)} </div>
+                                    <div class="ml-auto font-weight-bold"> $ {cartBool==true ?discountBuy.toFixed(2):discount} </div>
                                 </div>
                                 <hr class="my-1"/>
                                 <div class="d-flex">
                                     <h4>Coupon Discount</h4>
-                                    <div class="ml-auto font-weight-bold"> $ {CouponDiscount.toFixed(2)} </div>
+                                    <div class="ml-auto font-weight-bold"> $ {cartBool==true ?CouponDiscountBuy.toFixed(2):CouponDiscount} </div>
                                 </div>
                                 <div class="d-flex">
                                     <h4>Tax</h4>
-                                    <div class="ml-auto font-weight-bold"> $ {taxPrice.toFixed(2)} </div>
+                                    <div class="ml-auto font-weight-bold"> $ {cartBool==true ?taxPriceBuy.toFixed(2):taxPrice} </div>
                                 </div>
                                 <div class="d-flex">
                                     <h4>Shipping Cost</h4>
-                                    <div class="ml-auto font-weight-bold">$ {shippingPrice.toFixed(2)} </div>
+                                    <div class="ml-auto font-weight-bold">$ {cartBool==true ?shippingPriceBuy.toFixed(2):shippingPrice} </div>
                                 </div>
                                 <hr/>
                                 <div class="d-flex gr-total">
                                     <h5>Grand Total</h5>
-                                    <div class="ml-auto h5"> $ {totalPrice.toFixed(2)} </div>
+                                    <div class="ml-auto h5"> $ {cartBool==true ? totalPriceBuy : totalPrice.toFixed(2)} </div>
                                 </div>
                                 <hr/> </div>
                         </div>

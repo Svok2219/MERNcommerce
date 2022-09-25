@@ -1,8 +1,8 @@
 
- import React, { useRef, useState } from "react";
+ import React, {  useRef, useState } from "react";
 import HeaderComp from "../Components/HeaderComponent";
 import FooterComp from "../Components/FooterComponents";
-
+// import  {  useContext } from "react";
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel';
 
@@ -41,11 +41,15 @@ import 'swiper/css/autoplay';
 
 // import required modules
 import SwiperCore,{ Pagination, Navigation ,Autoplay } from "swiper";
+import { Link } from "react-router-dom";
+import { UserContext } from "../App";
 SwiperCore.use([Navigation]);
 
+
+
 function Homepage(params) {
-  
-  const {products,addToCart}=params;
+    // const [addWishList] = React.useContext(UserContext)
+  const {products,addToCart,addWishList}=params;
 //   console.log(products);
 
   function rand(min, max) {
@@ -115,56 +119,7 @@ function Homepage(params) {
     </div>
 
 
-       {/* <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-  <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-  </ol>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="d-block img-fluid" src="https://user-images.githubusercontent.com/113424072/190114296-b09ee076-2d5c-4893-8a38-277731bb4463.jpg" alt="First slide"/>
-    </div>
-    <div class="carousel-item">
-      <img class="d-block img-fluid" src="https://user-images.githubusercontent.com/113424072/190114296-b09ee076-2d5c-4893-8a38-277731bb4463.jpg" alt="Second slide"/>
-    </div>
-    <div class="carousel-item">
-      <img class="d-block img-fluid" src="https://user-images.githubusercontent.com/113424072/190114296-b09ee076-2d5c-4893-8a38-277731bb4463.jpg" alt="Third slide"/>
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-    <div class="categories-shop">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <div class="shop-cat-box">
-                        <img class="img-fluid" src="https://technext.github.io/freshshop/images/categories_img_01.jpg" alt="" />
-                        <a class="btn text-decoration-none text-white hvr-hover" href="#">Lorem ipsum dolor</a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <div class="shop-cat-box">
-                        <img class="img-fluid" src="https://technext.github.io/freshshop/images/categories_img_02.jpg" alt="" />
-                        <a class="btn text-decoration-none text-white hvr-hover" href="#">Lorem ipsum dolor</a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <div class="shop-cat-box">
-                        <img class="img-fluid" src="https://technext.github.io/freshshop/images/categories_img_03.jpg" alt="" />
-                        <a class="btn text-decoration-none text-white hvr-hover" href="#">Lorem ipsum dolor</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> */}
+    
 
 	
 	<div class="box-add-products">
@@ -214,12 +169,12 @@ function Homepage(params) {
                             <div class="type-lb">
                                 <p class="sale">Sale</p>
                             </div>
-                            <img src={pwd.image} class="img-fluid" alt="Image"/>
+                           <Link to={`/${pwd.id}`} > <img src={pwd.image} class="img-fluid" style={{height:"12rem"}} alt="Image"/></Link>
                             <div class="mask-icon">
                                 <ul>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                    <li><Link to={`/${pwd.id}`}  data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></Link></li>
+                                    <li><a href="/" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+                                    <li><a onClick={()=>{addWishList(pwd)}} className="text-white" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
                                 </ul>
                                 <a class="cart" href="#" onClick={() => addToCart(pwd)}>Add to Cart</a>
                             </div>
