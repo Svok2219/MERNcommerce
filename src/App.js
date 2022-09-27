@@ -16,6 +16,7 @@ import PrivateRoutes from './PrivateRoute/PrivateRoutes';
 import data from './data'
 import { useState ,createContext, useContext} from 'react';
 import HeaderComp from './Components/HeaderComponent';
+import Admin from './Admin/Admin';
 export const UserContext = createContext();
 // const CartContext = createContext();
 function App() {
@@ -102,7 +103,7 @@ function App() {
         </Route>
         
         <Route path="login" element={<Authentication />} />
-
+        <Route path="admin" element={<Admin />} />
        
       </Routes>
       </Router>

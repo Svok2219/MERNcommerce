@@ -85,3 +85,32 @@ pre {
 	/* font-size: 28px; */
 }
 }
+
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+.sidebar .nav-linkD.active {
+  color: #2470dc;
+}
+.nav-linkD {
+  display: block;
+  font-size: larger;
+  padding: .5rem 1rem;
+  margin-top: 15px;
+  color: #181717;
+  text-decoration: none;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+}
+/* .nav-linkD::hover{
+  transform: translateX(-50);
+} */
