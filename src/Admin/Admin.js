@@ -2,11 +2,15 @@ import React, { useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCamera, faCoffee,faPlus,faUserCog, faUserShield,faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react';
+// import {FormData} from "formdata-node"
+
 const Admin = () => {
     /* globals Chart:false, feather:false */
-
+    var FormData = require('form-data');
     const [value,setValue]=useState({})
-    const [file,setfile]=useState(null)
+    const [file,setfile]=useState({
+      
+    })
     const [data,setdata]=useState({})
    const blurHandler=(e)=>{
   const VALUE={...value}
@@ -19,38 +23,50 @@ const Admin = () => {
       console.log(file)
       setfile(file)
   }
-  const{FullName,phone,Position,University,Bagaan}=value
+  const{Name,price,InitialStock,DelPrice,Category,Description,image}=value
   const[error,seterror]=useState(false)
+  console.log(Name,price,InitialStock,DelPrice,Category,Description,image)
+  var form = new FormData();
+       form.append('name','some')
+   form.append('price','data')
+  //  form.append('InitialStock',InitialStock)
+  //  form.append('DelPrice',DelPrice)
+  //  form.append('Category',Category)
+  //  form.append('Description',Description)
+  //  form.append('image',image)
+   console.log(form)
+  // const []
+// formData.append('file', file);
+// var options = { content: formData };
+// console.log(options)
   
-  const  submitHandler=(e)=>{
-    e.preventDefault()
-    // console.log(value)
-     const formdata=new FormData()
-     formdata.append('file',file)
-     formdata.append('FullName',FullName)
-     formdata.append('Phone',phone)
-     formdata.append('Position',Position)
-     formdata.append('University',University)
-     formdata.append('Bagaan',Bagaan)
-     
-      fetch('https://utsa-official-server.herokuapp.com/addMember',{
-        method:'POST',
-      body:formdata
-      })
-      .then(res=>res.json())
-      .then(data=>{setdata(data)
-      setstate(!state)
-    console.log(data)})
-      .catch(err=>{console.log(err)
-      setstate(!state)
-    seterror(!error)})
-  
-    }
-    console.log(data)
-    const[state,setstate]=useState(false)
-    const onstate=()=>{
-  setstate(!state)
-    }
+const submitHandler= async (e ) =>{
+  e.preventDefault();
+  const{Name,price,InitialStock,DelPrice,Category,Description,image}=value
+  // console.log(value)
+  // console.log(JSON.stringify({
+  //   name:Name,price:price,InitialStock:InitialStock,DelPrice:DelPrice,Category:Category,Description:Description,image:image
+  // }))
+   const res = await fetch('http://localhost:300/Products',{
+    method:'POST',
+    headers:{
+    'Content-Type':'application/json'
+    },
+    body:JSON.stringify({
+      name:Name,price:price,InitialStock:InitialStock,DelPrice:DelPrice,Category:Category,Description:Description,image:image
+    })
+
+  })
+   
+  if (res) {
+ setValue({})  
+ console.log(res) 
+  }
+
+}
+
+
+    
     return (
         <div>
            <>
@@ -165,109 +181,52 @@ const Admin = () => {
     
           {/* <canvas className="my-4 w-100" id="myChart" width="900" height="380"></canvas> */}
     
-
-
-          <div className='d-flex justify-content-center align-items-center mt-5'>
-<form class="well form-horizontal  col-md-5  ajustify-contnt-center text-center" onSubmit={submitHandler}  method="post"  id="contact_form" >
-<fieldset>
-<div className="">
-  {!data.result && state && <div class="text-center text-light mt-5" >
-  <div class="spinner-border" role="status">
-    <span class="sr-only">Loading...</span>
-  </div>
-</div>}
-
-{error && !data.result && <h4 style={{fontWeight:"25px"}} className="text-danger font-weight-bold text-center p-3 mt-2">An Error Ocurred,Retry</h4>}
-
-{data.result && <h4 style={{fontWeight:"25px"}} className="text-dark font-weight-bold text-center p-3 mt-5">ডাটা পাঠান হয়েছে সাকসেসফুলি</h4>}
-{}
-{file ?<div class="file" >
-<label for="file" class="fileLabel2">
-    <b>{file.name}</b>
-  </label>
-    <input onChange={onchangeHandler} class="fileInput w-100" id="file" type="file" name="Picture" style={{display:'none'}}/>
-   
-</div>
-:<div class="file" >
-<label for="file" class="fileLabel  ">
-{/* <FontAwesomeIcon icon={faCamera}/> */}
-
-  </label>
-    <input onChange={onchangeHandler} class="fileInput w-100" id="file" type="file" name="Picture" style={{display:"none"}}/>
-   
-</div>
-}
-        <hr/>
+          <div className='my-2 mb-5'>
+            <form onSubmit={submitHandler}  method="post">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Product Name</label>
+      <input onBlur={blurHandler} value={Name} type="text" class="form-control" id="" name='Name' placeholder="Product Name"/>
     </div>
-
-<div class="form-group">
-  <div class=" inputGroupContainer">
-  <label class=" control-label">Full Name</label>  
-  <div class="input-group">
-  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input onBlur={blurHandler}  name="FullName" placeholder="Full Name" class="form-control"  type="text"/>
+    <div class="form-group col-md-3">
+      <label for="inputPassword4">Product <del>Price</del></label>
+      <input onBlur={blurHandler} type="number" class="form-control" id="" name='DelPrice' placeholder="del Price"/>
+    </div>
+    <div class="form-group col-md-3">
+      <label for="inputPassword4">Product Price</label>
+      <input onBlur={blurHandler} type="number" class="form-control" id="inputPassword4" name='price' placeholder="Price"/>
     </div>
   </div>
-</div>
-
-
-<div class="form-group">
-    <div class=" inputGroupContainer">
-    <label class=" control-label" >Mobile number</label> 
-    <div class="input-group">
-  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input onBlur={blurHandler} name="phone" placeholder="Mobile Number" class="form-control"  type="text"/>
+  <div class="form-group">
+    <label for="inputAddress">Product Description</label>
+    <textarea onBlur={blurHandler} class="form-control" id="exampleFormControlTextarea1" rows="3" name='Description' style={{height:"100%"}}></textarea>
+      </div>
+  <div class="form-group">
+    <label for="inputAddress2">Category</label>
+    <select onBlur={blurHandler} name='Category' id="inputState" class="form-control">
+        <option selected>Choose...</option>
+        <option>...</option>
+      </select>  </div>
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="inputCity">Initial Stock</label>
+      <input onBlur={blurHandler} name='InitialStock' type="number" class="form-control" id="inputCity" placeholder='How many pieces do I have of these ?'/>
     </div>
-  </div>
-</div>
-
-  <div class="form-group"> 
-    <div class=" selectContainer">
-    <label className="control-label">Position in the Team:</label>
-    <div class="input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-    <select onBlur={blurHandler} name="Position" class="form-control ">
-      <option value="">Select His/Her Position</option>
-      <option>Department of Engineering</option>
-      <option>Department of Agriculture</option>
-      <option >Accounting Office</option>
-      <option >Tresurer's Office</option>
-
-    </select>
-  </div>
-</div>
-</div>
-  
-
-<div class="form-group">
-  <div class=" inputGroupContainer">
-  <label class=" control-label">University</label>  
-  <div class="input-group">
-  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input onBlur={blurHandler}  name="University" placeholder="বিশবিদ্যাল্যয়ের নাম" class="form-control"  type="text"/>
+    <div class="form-group col-md-4">
+      <label for="inputState">Product Image</label>
+      <input  onBlur={blurHandler} name='image' type="text" class="form-control" id="inputCity" placeholder='Enter your pdoduct image Url '/>
     </div>
-  </div>
-</div>
-
-
-       <div class="form-group">
-    <div class=" inputGroupContainer">
-    <label class=" control-label">Address</label>  
-    <div class="input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-  <input onBlur={blurHandler} name="Bagaan" placeholder="বাগানের নাম" class="form-control"  type="text"/>
-    </div>
+    <div class="form-group col-md-4">
+      <label for="inputState">Product Images array</label>
+      <input onBlur={blurHandler} name='images' type="text" class="form-control" id="inputCity" placeholder='Enter your pdoduct image Urls (three image is needed) '/>
     </div>
   </div>
 
-<br/>
-<div class="form-group">
-    <button type="submit" class="btn btn-secondary" onClick={onstate} >SUBMIT <FontAwesomeIcon icon={faPaperPlane}/></button>
-</div>
-</fieldset>
+  <button type="submit" class="btn btn-secondary text-center my-3">Post the Product <FontAwesomeIcon icon={faPaperPlane}/></button>
 </form>
-</div>
+        </div>
 
+         
           <h2>Section title</h2>
           <div className="table-responsive">
             <table className="table table-striped table-sm">
