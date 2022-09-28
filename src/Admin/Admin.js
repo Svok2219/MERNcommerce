@@ -23,9 +23,9 @@ const Admin = () => {
       console.log(file)
       setfile(file)
   }
-  const{Name,price,InitialStock,DelPrice,Category,Description,image}=value
+  const{Name,price,InitialStock,DelPrice,Category,Description,image,CategoryName}=value
   const[error,seterror]=useState(false)
-  console.log(Name,price,InitialStock,DelPrice,Category,Description,image)
+  console.log(Name,price,InitialStock,DelPrice,Category,Description,image,CategoryName)
   var form = new FormData();
        form.append('name','some')
    form.append('price','data')
@@ -53,7 +53,7 @@ const submitHandler= async (e ) =>{
     'Content-Type':'application/json'
     },
     body:JSON.stringify({
-      name:Name,price:price,InitialStock:InitialStock,DelPrice:DelPrice,Category:Category,Description:Description,image:image
+      name:Name,price:price,InitialStock:InitialStock,DelPrice:DelPrice,Category:Category,Description:Description,image:image,sold:0
     })
 
   })
@@ -65,8 +65,51 @@ const submitHandler= async (e ) =>{
 
 }
 
+const categroySubmit= async (e)=>{
+  e.preventDefault();
+  const{Name,price,InitialStock,DelPrice,Category,Description,image,CategoryName,GalleryImgUrl,GalleryImgName}=value
+  // console.log(value)
+  // console.log(JSON.stringify({
+  //   name:Name,price:price,InitialStock:InitialStock,DelPrice:DelPrice,Category:Category,Description:Description,image:image
+  // }))
+   const res = await fetch('http://localhost:300/Category',{
+    method:'POST',
+    headers:{
+    'Content-Type':'application/json'
+    },
+    body:JSON.stringify({
+     Category:CategoryName
+    })
 
-    
+  })
+   
+  if (res) {
+ setValue({})  
+ console.log(res) 
+  }
+}
+
+
+const GallerySubmit= async (e)=>{
+  e.preventDefault();
+  const{Category,imgnamegallary,imageurlgallary}=value
+  console.log(Category,imgnamegallary,imageurlgallary)
+   const res = await fetch('http://localhost:300/Gallery',{
+    method:'POST',
+    headers:{
+    'Content-Type':'application/json'
+    },
+    body:JSON.stringify({
+     Gimage:imageurlgallary,Gname:imgnamegallary,Category:Category
+    })
+
+  })
+   
+  if (res) {
+ setValue({})  
+ console.log(res) 
+  }
+}
     return (
         <div>
            <>
@@ -129,38 +172,7 @@ const submitHandler= async (e ) =>{
               </li>
             </ul>
     
-            {/* <h6 className="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-              <span>Saved reports</span>
-              <a className="link-secondary" href="#" aria-label="Add a new report">
-                <span data-feather="plus-circle"></span>
-              </a>
-            </h6>
-            <ul className="nav flex-column mb-2">
-              <li className="nav-item">
-                <a className="nav-linkD" href="#">
-                  <span data-feather="file-text"></span>
-                  Current month
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-linkD" href="#">
-                  <span data-feather="file-text"></span>
-                  Last quarter
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-linkD" href="#">
-                  <span data-feather="file-text"></span>
-                  Social engagement
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-linkD" href="#">
-                  <span data-feather="file-text"></span>
-                  Year-end sale
-                </a>
-              </li>
-            </ul> */}
+           
           </div>
         </nav>
     
@@ -204,7 +216,7 @@ const submitHandler= async (e ) =>{
   <div class="form-group">
     <label for="inputAddress2">Category</label>
     <select onBlur={blurHandler} name='Category' id="inputState" class="form-control">
-        <option selected>Choose...</option>
+        <option selected>63346d6dbe4f2e8bbb404514</option>
         <option>...</option>
       </select>  </div>
   <div class="form-row">
@@ -225,10 +237,40 @@ const submitHandler= async (e ) =>{
   <button type="submit" class="btn btn-secondary text-center my-3">Post the Product <FontAwesomeIcon icon={faPaperPlane}/></button>
 </form>
         </div>
+     <div className=' d-block d-md-flex justify-content-center align-items-center'>
+        <form class="form-inline my-4 text-center" onSubmit={categroySubmit}>
+        <div class="form-group mx-sm-3 mb-2">
+          <label for="CategoryPost" class="sr-only">Category</label>
+          <input onBlur={blurHandler} type="text" class="form-control" id="" name='CategoryName' placeholder="Post a Category"/>
+        </div>
+        <button type="submit" class="btn btn-secondary mb-2">Post a Category</button>
+        </form>
+        </div>
 
-         
+
+        <form onSubmit={GallerySubmit}>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Image Url</label>
+    <input  onBlur={blurHandler} type="text" name="imageurlgallary" class="form-control"  placeholder="Enter image url"/>
+    {/* <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> */}
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Image Name</label>
+    <input  onBlur={blurHandler} type="text" name="imgnamegallary" class="form-control"  placeholder="Enter image name"/>
+    {/* <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> */}
+  </div>
+  <div class="form-group">
+    <label for="inputAddress2">Category</label>
+    <select onBlur={blurHandler} name='Category' id="inputState" class="form-control">
+        <option >...</option>
+        <option >63346d6dbe4f2e8bbb404514</option>
+      </select>  </div>
+ 
+  <button type="submit" class="btn btn-secondary px-3 py-2">Post GalleryImg</button>
+</form>
+
           <h2>Section title</h2>
-          <div className="table-responsive">
+          {/* <div className="table-responsive">
             <table className="table table-striped table-sm">
               <thead>
                 <tr>
@@ -354,7 +396,7 @@ const submitHandler= async (e ) =>{
                 </tr>
               </tbody>
             </table>
-          </div>
+          </div> */}
         </main>
       </div>
     </div>
