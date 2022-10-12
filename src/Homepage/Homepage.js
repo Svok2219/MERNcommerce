@@ -1,5 +1,5 @@
 
- import React, {  useRef, useState } from "react";
+ import React, {  useEffect, useRef, useState } from "react";
 import HeaderComp from "../Components/HeaderComponent";
 import FooterComp from "../Components/FooterComponents";
 // import  {  useContext } from "react";
@@ -49,25 +49,15 @@ SwiperCore.use([Navigation]);
 
 function Homepage(params) {
     // const [addWishList] = React.useContext(UserContext)
-  const {products,addToCart,addWishList}=params;
+  const {DataPwd,addToCart,addWishList}=params;
 //   console.log(products);
 
   function rand(min, max) {
         return Math.floor(Math.random() * (max - min + 1) + min);
       }
       
-    //   function imgUrl() {
-    //     const id = rand(1, 200);
-    //     return `https://picsum.photos/id/${id}/1920/1080`;
-    //   }
-      
-    //   function createSlide() {
-    //     return (
-    //       <SwiperSlide>
-    //         <img className="img" src={imgUrl()} alt="" />
-    //       </SwiperSlide>
-    //     );
-    //   }
+
+
       
     return (
     <div >
@@ -163,20 +153,20 @@ function Homepage(params) {
             </div>
 
             <div class="row special-list">
-            {products.map((pwd)=>                <div key={pwd.id} class="col-lg-3 col-md-6 special-grid best-seller">
+            {DataPwd.map((pwd)=>                <div key={pwd._id} class="col-lg-3 col-md-6 special-grid best-seller">
                     <div class="products-single fix">
                         <div class="box-img-hover">
                             <div class="type-lb">
                                 <p class="sale">Sale</p>
                             </div>
-                           <Link to={`/${pwd.id}`} > <img src={pwd.image} class="img-fluid" style={{height:"12rem"}} alt="Image"/></Link>
+                           <Link to={`/${pwd._id}`} > <img src={pwd.image} class="img-fluid" style={{height:"12rem"}} alt="Image"/></Link>
                             <div class="mask-icon">
                                 <ul>
-                                    <li><Link to={`/${pwd.id}`}  data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></Link></li>
-                                    <li><a href="/" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+                                    <li><Link to={`/${pwd._id}`}  data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></Link></li>
+                                    <li><a  data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
                                     <li><a onClick={()=>{addWishList(pwd)}} className="text-white" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
                                 </ul>
-                                <a class="cart" href="#" onClick={() => addToCart(pwd)}>Add to Cart</a>
+                                <a class="cart"  onClick={() => addToCart(pwd)}>Add to Cart</a>
                             </div>
                         </div>
                         <div class="why-text">
@@ -187,97 +177,7 @@ function Homepage(params) {
                 </div>
                 
 )}
-                {/* <div class="col-lg-3 col-md-6 special-grid best-seller">
-                    <div class="products-single fix">
-                        <div class="box-img-hover">
-                            <div class="type-lb">
-                                <p class="sale">Sale</p>
-                            </div>
-                            <img src="https://technext.github.io/freshshop/images/img-pro-01.jpg" class="img-fluid" alt="Image"/>
-                            <div class="mask-icon">
-                                <ul>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                </ul>
-                                <a class="cart" href="#">Add to Cart</a>
-                            </div>
-                        </div>
-                        <div class="why-text">
-                            <h4>Lorem ipsum dolor sit amet</h4>
-                            <h5> $7.79</h5>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col-lg-3 col-md-6 special-grid top-featured">
-                    <div class="products-single fix">
-                        <div class="box-img-hover">
-                            <div class="type-lb">
-                                <p class="new">New</p>
-                            </div>
-                            <img src="https://technext.github.io/freshshop/images/img-pro-02.jpg" class="img-fluid" alt="Image"/>
-                            <div class="mask-icon">
-                                <ul>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                </ul>
-                                <a class="cart" href="#">Add to Cart</a>
-                            </div>
-                        </div>
-                        <div class="why-text">
-                            <h4>Lorem ipsum dolor sit amet</h4>
-                            <h5> $9.79</h5>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 special-grid top-featured">
-                    <div class="products-single fix">
-                        <div class="box-img-hover">
-                            <div class="type-lb">
-                                <p class="sale">Sale</p>
-                            </div>
-                            <img src="https://technext.github.io/freshshop/images/img-pro-03.jpg" class="img-fluid" alt="Image"/>
-                            <div class="mask-icon">
-                                <ul>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                </ul>
-                                <a class="cart" href="#">Add to Cart</a>
-                            </div>
-                        </div>
-                        <div class="why-text">
-                            <h4>Lorem ipsum dolor sit amet</h4>
-                            <h5> $10.79</h5>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 special-grid best-seller">
-                    <div class="products-single fix">
-                        <div class="box-img-hover">
-                            <div class="type-lb">
-                                <p class="sale">Sale</p>
-                            </div>
-                            <img src="https://technext.github.io/freshshop/images/img-pro-04.jpg" class="img-fluid" alt="Image"/>
-                            <div class="mask-icon">
-                                <ul>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                </ul>
-                                <a class="cart" href="#">Add to Cart</a>
-                            </div>
-                        </div>
-                        <div class="why-text">
-                            <h4>Lorem ipsum dolor sit amet</h4>
-                            <h5> $15.79</h5>
-                        </div>
-                    </div>
-                </div> */}
             </div>
         </div>
     </div>
@@ -354,152 +254,7 @@ function Homepage(params) {
 
 
     
-    <div class="instagram-box">
-        {/* <div > */}
-        <code className="code">
-        {`
-          .swiper-button-next { color: red; }
-        `}
-      </code>
-        <Swiper class="main-instagram "
-        slidesPerView={4}
-        spaceBetween={0}
-        slidesPerGroup={3}
-        loop={true}
-        
-        loopFillGroupWithBlank={true}
-        // pagination={{
-        //   clickable: true
-        // }}
-        autoplay={{ delay: 6000 }}
-        navigation={true}
-        modules={[ Navigation,Autoplay]}
-        className="mySwiper"
-      >
-        
 
-        <SwiperSlide>
-        <div class="item">
-                <div class="ins-inner-box">
-                    <img className="insimg img-fluid" src="https://technext.github.io/freshshop/images/instagram-img-09.jpg" alt="" />
-                    <div class="hov-in">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-        </SwiperSlide>
-        <SwiperSlide>  <div class="item">
-                <div class="ins-inner-box">
-                    <img className="insimg img-fluid" src="https://technext.github.io/freshshop/images/instagram-img-08.jpg" alt="" />
-                    <div class="hov-in">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div></SwiperSlide>
-        <SwiperSlide>   <div class="item">
-                <div class="ins-inner-box">
-                    <img  className="insimg img-fluid" src="https://technext.github.io/freshshop/images/instagram-img-07.jpg" alt="" />
-                    <div class="hov-in">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div></SwiperSlide>
-        <SwiperSlide>  <div class="item">
-                <div class="ins-inner-box">
-                    <img className="insimg img-fluid" src="https://technext.github.io/freshshop/images/instagram-img-06.jpg" alt="" />
-                    <div class="hov-in">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div></SwiperSlide>
-        <SwiperSlide> <div class="item">
-                <div class="ins-inner-box">
-                    <img  className="insimg img-fluid" src="https://technext.github.io/freshshop/images/instagram-img-05.jpg" alt="" />
-                    <div class="hov-in">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div></SwiperSlide>
-        <SwiperSlide>  <div class="item">
-                <div class="ins-inner-box">
-                    <img className="insimg img-fluid" src="https://technext.github.io/freshshop/images/instagram-img-04.jpg" alt="" />
-                    <div class="hov-in">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div></SwiperSlide>
-        <SwiperSlide> <div class="item">
-                <div class="ins-inner-box">
-                    <img className="insimg img-fluid" src="https://technext.github.io/freshshop/images/instagram-img-03.jpg" alt="" />
-                    <div class="hov-in">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div></SwiperSlide>
-        <SwiperSlide>  <div class="item">
-                <div class="ins-inner-box">
-                    <img className="insimg img-fluid" src="https://technext.github.io/freshshop/images/instagram-img-02.jpg" alt="" />
-                    <div class="hov-in">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div></SwiperSlide>
-        <SwiperSlide>
-             <div class="item">
-                <div class="ins-inner-box">
-                    <img className="insimg img-fluid" src="https://technext.github.io/freshshop/images/instagram-img-01.jpg" alt="" />
-                    <div class="hov-in">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            </SwiperSlide>
-            <SwiperSlide>
-             <div class="item">
-                <div class="ins-inner-box">
-                    <img className="insimg img-fluid" src="https://technext.github.io/freshshop/images/instagram-img-10.jpg" alt="" />
-                    <div class="hov-in">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            </SwiperSlide>
-            <SwiperSlide>
-             <div class="item">
-                <div class="ins-inner-box">
-                    <img className="insimg img-fluid" src="https://technext.github.io/freshshop/images/instagram-img-11.jpg" alt="" />
-                    <div class="hov-in">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            </SwiperSlide>
-            <SwiperSlide>
-             <div class="item">
-                <div class="ins-inner-box">
-                    <img className="insimg img-fluid" src="https://technext.github.io/freshshop/images/instagram-img-12.jpg" alt="" />
-                    <div class="hov-in">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            </SwiperSlide>
-            
-      </Swiper>
-        
-      {/* <pre className="code">
-        {`.swiper-button-next {
-  background-color: red;
-  background-repeat: no-repeat;
-  background-size: 100% auto;
-  background-position: center;
-}
-.swiper-button-next::after {
-  display: none;
-}`}
-      </pre> */}
-        {/* </div> */}
-    </div>
 
      <FooterComp/>
     

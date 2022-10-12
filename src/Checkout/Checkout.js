@@ -6,6 +6,7 @@ import { UserContext } from '../App';
 import GooglePayButton from '@google-pay/button-react';
 import { useBkash } from 'react-bkash';    
 import Swal from 'sweetalert2'
+import { useState, useEffect } from 'react';
 {/* ALL JS FILES */}
     <><script src="js/jquery-3.2.1.min.js"></script><script src="js/popper.min.js"></script><script src="js/bootstrap.min.js"></script></>
     {/* ALL PLUGINS */}
@@ -14,10 +15,15 @@ import Swal from 'sweetalert2'
     
 
     function Checkout(params) {
-        // const {BuyQty,setBuyQty}=params;
+
     const[Loggedin,setLoggedin,cartItems,BuyNow,cartBool] =React.useContext(UserContext);
     console.log(cartBool)
-    // if (!BuyNow) {
+ 
+    
+ 
+
+     
+
         const itemsPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
         const taxPrice = itemsPrice * 0.14;
         const shippingPrice = itemsPrice > 2000 ? 0 : 20;
@@ -32,23 +38,20 @@ import Swal from 'sweetalert2'
         const discountBuy = itemsPriceBuy * 0.14;
         const CouponDiscountBuy = itemsPriceBuy * .06
         const totalPriceBuy = itemsPriceBuy + taxPriceBuy + shippingPriceBuy - discountBuy - CouponDiscountBuy;
-    // }
-    // else{
-     
-    // }
+
    
 
     const { error, loading, triggerBkash } = useBkash({
 		onSuccess: (data) => {
-			console.log(data); // this contains data from api response from onExecutePayment
+			console.log(data);
 		},
 		onClose: () => {
 			console.log('Bkash iFrame closed');
 		},
-		bkashScriptURL: '<BKASH SCRIPT URL PROVIDED TO MERCHANT BY BKASH>', // https://scripts.sandbox.bka.sh/versions/1.2.0-beta/checkout/bKash-checkout-sandbox.js
+		bkashScriptURL: '<BKASH SCRIPT URL PROVIDED TO MERCHANT BY BKASH>', 
 		amount: 1000,
 		onCreatePayment: async (paymentRequest) => {
-			// call your API with the payment request here
+
 			return await fetch('<your backend api>/create/', {
 				method: 'POST',
 				body: JSON.stringify(paymentRequest),
@@ -122,7 +125,20 @@ import Swal from 'sweetalert2'
       
 
     }
+    // useEffect(()=>{
+        const[buyerData,setbuyerData]=useState({})
+        // async function fetchData() {
+        fetch(`http://localhost:300/User/getone/${Loggedin.email}`)
+        .then((res)=>res.json())
+        .then((result)=>{setbuyerData(result.user[0]) ; console.log(result)})
+    //   }
 
+     
+    //   fetchData();
+    // }
+    //   ,[Loggedin])
+
+      console.log(buyerData)
     return (
         <div>
 
@@ -147,46 +163,7 @@ import Swal from 'sweetalert2'
     <div class="cart-box-main">
         <div class="container">
             <div class="row new-account-login">
-                {/* <div class="col-sm-6 col-lg-6 mb-3">
-                    <div class="title-left">
-                        <h3>Account Login</h3>
-                    </div>
-                    <h5><a data-toggle="collapse" href="#formLogin" role="button" aria-expanded="false">Click here to Login</a></h5>
-                    <form class="mt-3 collapse review-form-box" id="formLogin">
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="InputEmail" class="mb-0">Email Address</label>
-                                <input type="email" class="form-control" id="InputEmail" placeholder="Enter Email"/> </div>
-                            <div class="form-group col-md-6">
-                                <label for="InputPassword" class="mb-0">Password</label>
-                                <input type="password" class="form-control" id="InputPassword" placeholder="Password"/> </div>
-                        </div>
-                        <button type="submit" class="btn hvr-hover">Login</button>
-                    </form>
-                </div> */}
-                {/* <div class="col-sm-6 col-lg-6 mb-3">
-                    <div class="title-left">
-                        <h3>Create New Account</h3>
-                    </div>
-                    <h5><a data-toggle="collapse" href="#formRegister" role="button" aria-expanded="false">Click here to Register</a></h5>
-                    <form class="mt-3 collapse review-form-box" id="formRegister">
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="InputName" class="mb-0">First Name</label>
-                                <input type="text" class="form-control" id="InputName" placeholder="First Name"/> </div>
-                            <div class="form-group col-md-6">
-                                <label for="InputLastname" class="mb-0">Last Name</label>
-                                <input type="text" class="form-control" id="InputLastname" placeholder="Last Name"/> </div>
-                            <div class="form-group col-md-6">
-                                <label for="InputEmail1" class="mb-0">Email Address</label>
-                                <input type="email" class="form-control" id="InputEmail1" placeholder="Enter Email"/> </div>
-                            <div class="form-group col-md-6">
-                                <label for="InputPassword1" class="mb-0">Password</label>
-                                <input type="password" class="form-control" id="InputPassword1" placeholder="Password"/> </div>
-                        </div>
-                        <button type="submit" class="btn hvr-hover">Register</button>
-                    </form>
-                </div> */}
+            
             </div>
             <div class="row">
                 <div class="col-sm-6 col-lg-6 mb-3">
@@ -202,11 +179,15 @@ import Swal from 'sweetalert2'
                 </div>
                 <div class="form-group">
                 <label >Enter Reciver's <b>phone Number</b></label>
-                <input type="text" name="Reciver_Phone" class="form-control"  />
+                <input type="text" name="Reciver_Phone" class="form-control" 
+                defaultValue={buyerData.MobileNumber}  
+                />
                 </div>
                 <div class="form-group">
                     <label >Enter the <b>delivery Address</b></label>
-                    <textarea name="Address" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <textarea name="Address" class="form-control" id="exampleFormControlTextarea1" rows="3" 
+                    defaultValue={buyerData.Address}
+                    ></textarea>
                 </div>
                 {/* <label>enter Your Billing Address</label>
                 <textarea name="Address" className='' /> */}

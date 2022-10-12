@@ -38,11 +38,8 @@ function Authentication(params) {
     password:"",
     Address:""
   });
-  // console.log(user)
-  onAuthStateChanged(auth, (currentUser) => {
-    console.log(currentUser);
-    setLoggedin(currentUser);
-  });
+
+
 let name,value;  
 const changeFunc=(event)=>{
 name=event.target.name;
@@ -55,44 +52,50 @@ setUser({...user,[name]:value});
 
 const postData= async (e ) =>{
   e.preventDefault();
-  const{realName,Email,password,Address,userName}=user;
-   const res = await fetch('https://merncommerce-default-rtdb.firebaseio.com/sendingUsersData.json',{
+  const{realName,Email,password,Address,userName,BirthDate}=user;
+  console.log(realName,Email,password,Address,userName,BirthDate)
+  
+try {
+  const user = await createUserWithEmailAndPassword(
+    auth,
+    Email,
+    password
+  );
+  // setLoggedin(user.user.email);
+  console.log(user);
+  localStorage.setItem('User',`${user.user.email}`);
+} catch (error) {
+  console.log(error.message);
+}
+
+   const res = await fetch('http://localhost:300/User',{
     method:'POST',
     headers:{
     'Content-Type':'application/json'
     },
     body:JSON.stringify({
-      realName,
-      userName,
-      Email,
-      password,
-      Address
+     FullName: realName,
+     MobileNumber: userName,
+      Email:Email,
+      BirthDate:BirthDate,
+      Address : Address
     })
   })
   
   if (res) {
+    console.log(res)
  setUser({
   realName:"",
   userName:"",
   Address:"",
   Email:"",
   password:""
- })   
+ })
+//  navigate(-1);
+   
   }
 
 
-  try {
-    const user = await createUserWithEmailAndPassword(
-      auth,
-      Email,
-      password
-    );
-    setLoggedin(user.user.email);
-    console.log(user);
-    localStorage.setItem('User',`${user.user.email}`);
-  } catch (error) {
-    console.log(error.message);
-  }
 }
 
 const navigate = useNavigate();
@@ -105,10 +108,10 @@ const navigate = useNavigate();
         Email,
         password
       );
-      setLoggedin(user.user.email);
-      navigate(-1);
+      // setLoggedin(user.user.email);
+      // navigate(-1);
       // alert('Congratulations! You are logged in...Please refresh or Go back to the preveious page ') 
-      // localStorage.setItem("User",`${user.user.email}`)
+      localStorage.setItem("User",`${user.user.email}`)
       console.log(user.user.email);
     } catch (error) {
       console.log(error.message);
@@ -117,10 +120,12 @@ const navigate = useNavigate();
 
   const logout = async () => {
     await signOut(auth);
+    localStorage.setItem('User', null)
   };
 
+  // console.log(user)
 
-
+  // console.log(Loggedin)
     return(
         <>
        <header class="main-header ">
@@ -132,7 +137,7 @@ const navigate = useNavigate();
                     <button  class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button >
-                    <Link  class="navbar-brand img-fluid " to="/"><img src="https://technext.github.io/freshshop/images/logo.png" class="logo w-5" alt=""/></Link>
+                <Link  className="navbar-brand col-md-3 col-lg-2 text-center text-md-left me-0 px-3" to="/admin"><b>Koiri Shop</b></Link>
                 </div>
                 {/* End Header Navigation */}
 
@@ -228,7 +233,7 @@ const navigate = useNavigate();
 
 <div class="tab-content">
   <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
-    <form method="POST">
+    <form method="POST"  class="text-center  ">
       <div class="text-center mb-3" >
         <p>Sign in with:</p>
         <button type="button" class="btn btn-link btn-floating mx-1">
@@ -272,8 +277,8 @@ const navigate = useNavigate();
 
       {/* Username input */}
       <div class="form-outline mb-4">
-        <input defaultValue={user.userName} onChange={changeFunc} name="userName" type="text" id="registerUsername" class="form-control" />
-        <label class="form-label" for="registerUsername">Username</label>
+        <input defaultValue={user.userName} onChange={changeFunc} name="userName" type="number" id="registerUsername" class="form-control" />
+        <label class="form-label" for="registerUsername">Mobile Number</label>
       </div>
 
       {/* Email input */}
@@ -289,18 +294,28 @@ const navigate = useNavigate();
       </div>
 
       {/* Repeat Password input */}
-      <div class="form-outline mb-4">
+      <div class="form-outline mb-4 text-center justify-content-center" >
         <input  defaultValue={user.Address} onChange={changeFunc} name="Address" type="text" id="registerRepeatPassword" class="form-control" />
         <label class="form-label" for="registerRepeatPassword">Address</label>
       </div>
+  
+       {/* <div class="row"> */}
+        {/* <div class="form-outline mb-4 col-md-6 d-flex justify-content-center"> */}
+      <div class="form-outline w-full mb-4">
+      <input defaultValue={user.BirthDate} onChange={changeFunc} type="date" id="birthday" name="BirthDate"/>
+      <br/>
+      <label class="form-label" for="BirthDate">Birthday</label>
+      </div>
+      {/* </div> */}
+      {/* </div> */}
       </>
 }
 
       {/* 2 column grid layout */}
       <div class="row mb-4">
         <div class="col-md-6 d-flex justify-content-center">
-          {/* Checkbox */}
-          <div class="form-check mb-3 mb-md-0">
+         
+          <div class="form-check mb-3 mb-md-0 ">
             <input class="form-check-input" type="checkbox" value="" id="loginCheck" checked />
             <label class="form-check-label" for="loginCheck"> Remember me </label>
           </div>

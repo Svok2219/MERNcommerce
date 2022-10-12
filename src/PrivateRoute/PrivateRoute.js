@@ -2,10 +2,12 @@ import { useContext } from 'react';
 import { Outlet, Navigate } from 'react-router-dom'
 import { UserContext } from '../App';
 
-const PrivateRoutes = (props) => {
-    // const {User}=props;
-    // let auth = localStorage.getItem("user");
+const PrivateRoute = (props) => {
+    const {User}=props;
+
     const[Loggedin,setLoggedin,cartItems] = useContext(UserContext);
+   console.log(Loggedin);
+   
 if(!Loggedin){
    return (
       <div class="d-flex justify-content-center "> <div class="loadingio-spinner-pulse-v3puu1fwgxe "><div class="ldio-06fbmar2z23g">
@@ -14,7 +16,7 @@ if(!Loggedin){
    )
 }
 else{
-  const user = Loggedin.email 
+  const user = Loggedin.email == 'shuvo@koiri.com'
 
 
 
@@ -22,6 +24,7 @@ return(
          user ?   <Outlet/> :<Navigate to="/login"/>   
     )
 }
+ 
 }
 
-export default PrivateRoutes;
+export default PrivateRoute;
