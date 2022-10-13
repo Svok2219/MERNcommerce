@@ -88,7 +88,7 @@ function Homepage(params) {
     <div class="  absolute centered text-dark d-md-none " >
                     <div class="row ">
                         <div class="col-md-12 covSlide">
-                            <h1 class="m-b-20 text-light cov" style={{fontSize:"28px",fontWeight:"bolder",letterSpacing:"1px"}}><strong>Welcome To <br/> Freshshop</strong></h1>
+                            <h1 class="m-b-20 text-light cov" style={{fontSize:"28px",fontWeight:"bolder",letterSpacing:"1px"}}><strong>Welcome To <br/>KoiriShop</strong></h1>
                             <p class="" style={{fontSize: "10px",color:"whitesmoke"}}>See how your users experience your website in realtime or view <br/> trends to see any changes in performance over time.</p>
                             <p ><a  class="btn hvr-hover btnHeaderSmall text-white" href="#">Shop New</a></p>
                         </div>
@@ -98,7 +98,7 @@ function Homepage(params) {
     <div class=" text-center absolute centered text-dark  d-none d-sm-block" >
                     <div class="row ">
                         <div class="col-md-12 ">
-                            <h1 class="m-b-20 text-light cov" style={{fontSize:"64px",fontWeight:"bolder",letterSpacing:"4px"}}><strong>Welcome To <br/> Freshshop</strong></h1>
+                            <h1 class="m-b-20 text-light cov" style={{fontSize:"64px",fontWeight:"bolder",letterSpacing:"4px"}}><strong>Welcome To <br/>KoiriShop</strong></h1>
                             <p class="m-b-40" style={{fontSize: "18px",color:"whitesmoke"}}>See how your users experience your website in realtime or view <br/> trends to see any changes in performance over time.</p>
                             <p style={{fontSize: "18px",
 }}><a class="btn hvr-hover btnHeader text-white" href="#">Shop New</a></p>
@@ -110,6 +110,32 @@ function Homepage(params) {
 
 
     
+    
+    <div class="categories-shop">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <div class="shop-cat-box">
+                        <img class="img-fluid" src="https://technext.github.io/freshshop/images/categories_img_01.jpg" alt="" />
+                        <a class=" hvr-hover text-white" href="#">Organic Fertilisers</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <div class="shop-cat-box">
+                        <img class="img-fluid" src="https://technext.github.io/freshshop/images/categories_img_02.jpg" alt="" />
+                        <a class=" hvr-hover text-white" >Vermi(earthworms)</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <div class="shop-cat-box">
+                        <img class="img-fluid" src="https://technext.github.io/freshshop/images/categories_img_03.jpg" alt="" />
+                        <a class=" hvr-hover text-white" href="#">Vermiwash</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+            
 
 	
 	<div class="box-add-products">
@@ -129,6 +155,7 @@ function Homepage(params) {
 		</div>
 	</div>
 
+    
 
     <div class="products-box">
         <div class="container">
@@ -258,10 +285,7 @@ function Homepage(params) {
 
      <FooterComp/>
     
-    <div class="footer-copyright">
-        <p class="footer-company">no Rights Reserved. &copy; 2022 <a href="#">ThewayShop</a> Design By :
-            <a href="https://html.design/">Shuvo Copycatfish</a></p>
-    </div>
+    
 
 
     </div>

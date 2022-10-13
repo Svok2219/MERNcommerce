@@ -7,6 +7,18 @@ import data from '../../src/data'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera, faCoffee,faPlus,faUserCog, faUserShield,faPaperPlane,faPencilAlt,faCancel } from '@fortawesome/free-solid-svg-icons'
 
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+
+// import "./styles.css";
+
+// import required modules
+import { Pagination } from "swiper";
+
 export default function HeaderComp(props) {
     const[Loggedin,setLoggedin,cartItems]=useContext(UserContext)
     console.log(data);
@@ -28,7 +40,15 @@ export default function HeaderComp(props) {
         }
         fetchDataPwd();}
         ,[Data])
-    return (
+        const lefty = "<";const righty="/>"
+
+        const  offers = [{one:"20% off Entire Purchase Pro",key:1},{two:'kisi aur ke khyalo main gum'},{three:'kita koitam baal'},{four:"bechbar damei offer diram"},{five:"dhoro bondhu amar keho nai"}]
+                 console.log(offers.length)
+                //    const 
+                //     products [
+                //         {one:"20% off Entire Purchase Promo code: offT80"},{two:'kisi aur ke khyalo main gum'},{three:'kita koitam baal'},{four:"bechbar damei offer diram"},{five:"dhoro bondhu amar keho nai"}]
+                //         // console.log(data)
+                        return (
         <div>
                 {/* Start Main Top */}
     <div class="main-top">
@@ -51,9 +71,12 @@ export default function HeaderComp(props) {
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 d-flex">
-
-                    <div class="text-slid-box">
-                        <div id="offer-box" class="carouselTicker">
+         
+                    {/* <div class="text-slid-box">
+                        <div id="offer-box" >
+    
+   
+    
                             <ul class="offer-box">
                                 <li>
                                     <i class="fab fa-opencart"></i> 20% off Entire Purchase Promo code: offT80
@@ -63,7 +86,7 @@ export default function HeaderComp(props) {
                                 </li>
                                 <li>
                                     <i class="fab fa-opencart"></i> 51% - 82% off on Vegetables
-                                </li>
+                                </li>  */}
                                 {/* <li>
                                     <i class="fab fa-opencart"></i> Off 10%! Shop Vegetables
                                 </li>
@@ -82,9 +105,9 @@ export default function HeaderComp(props) {
                                 <li>
                                     <i class="fab fa-opencart"></i> Off 50%! Shop Now 
                                 </li> */}
-                            </ul>
+                             {/* </ul> 
                         </div>
-                    </div>
+                    </div> */}
                     <div class="btn ">
 						<select id="basic" class="  show-tick form-control" data-placeholder="Sign In">
 							<option>Register Here</option>
@@ -110,11 +133,11 @@ export default function HeaderComp(props) {
         <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav ">
             <div class="container">
                 {/* Start Header Navigation */}
-                <div class="navbar-header">
+                <div class="navbar-header d-flex d-md-block">
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                <Link  className="navbar-brand col-md-3 col-lg-2 text-center text-md-left me-0 px-3" to="/admin"><b>Koiri Shop</b></Link>
+                <Link  className="navbar-brand col-md-3 col-lg-2 text-center text-md-left me-0  mt-md-2" to="/" ><p className='text-dark ' style={{fontSize:"32px",fontWeight:"bolder"}}><span className='text-info'>{lefty}</span>Koiri Shop<span className='text-info'>{righty}</span></p></Link>
                 </div>
                 {/* End Header Navigation */}
 

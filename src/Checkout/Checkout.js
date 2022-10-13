@@ -165,6 +165,7 @@ import { useState, useEffect } from 'react';
             <div class="row new-account-login">
             
             </div>
+            
             <div class="row">
                 <div class="col-sm-6 col-lg-6 mb-3">
                     <div class="checkout-address">
@@ -459,12 +460,7 @@ import { useState, useEffect } from 'react';
 <FooterComp/>
 
 
-    {/* Start copyright  */}
-    <div class="footer-copyright">
-        <p class="footer-company">All Rights Reserved. &copy; 2018 <a href="#">ThewayShop</a> Design By :
-            <a href="https://html.design/">html design</a></p>
-    </div>
-    {/* End copyright  */}
+    
 
     <a href="#" id="back-to-top" title="Back to top" >&uarr;</a>
 

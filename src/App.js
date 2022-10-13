@@ -31,7 +31,7 @@ export const UserContext = createContext();
 
 // const CartContext = createContext();
 function App() {
-  const [Loggedin,setLoggedin]=useState()
+  const [Loggedin,setLoggedin]=useState(false)
 
   const { products } = data;
   const [cartItems, setCartItems] = useState([]);
@@ -107,7 +107,18 @@ function App() {
   fetchDataPwd();}
   ,[DataPwd])
   console.log(DataPwd)
+
+
+  const [loading, setLoading] = useState(true);
+  const spinner = document.getElementById("spinner");
+  if (spinner) {
+    setTimeout(() => {
+      spinner.style.display = "none";
+      setLoading(false);
+    }, 2000);
+  }
   return (
+    !loading && (
     <UserContext.Provider  value={[Loggedin,setLoggedin,cartItems,BuyNow,cartBool,setCartBool,addWishList,removeWishList,addToCart]}>
      
      <BrowserRouter> 
@@ -141,7 +152,7 @@ function App() {
       </Routes>
 
       </BrowserRouter>    
-         </UserContext.Provider>
+         </UserContext.Provider>)
    
   );
 }

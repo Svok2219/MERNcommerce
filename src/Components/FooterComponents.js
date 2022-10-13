@@ -300,6 +300,10 @@ function FooterComp(params) {
           </div>
         </div>
       </div>
+      <div class="footer-copyright">
+        <p class="footer-company">no Rights Reserved. &copy; 2022 <a href="#">TheKoiriShop</a> Design By :
+            <a href="https://shuvokoiri.netlify.app/">Shuvo Kumar Koiri</a></p>
+    </div>
     </footer>
   );
 }

@@ -7,6 +7,13 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Link } from "react-router-dom";
 import Swal from 'sweetalert2';
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
+} from "firebase/auth";
+import { auth } from "../Authentication/firebase-config";
 const Admin = () => {
 const [clicked,setClicked]=useState(false)
 // const []
@@ -245,10 +252,13 @@ const [show, setShow] = useState(false);
 const handleClose = () => setShow(false);
 const handleShow = (x) => {setShow(true); setPwd(x);    setBool(true);
 };
-const towfunc =()=>{
-  localStorage.setItem('User', null) 
-   window.location.reload(false)
-}
+
+
+const logout = async () => {
+  await signOut(auth);
+  localStorage.setItem('User', null)
+  window.location.reload(false)
+};
     return (
         <div>
            <>
@@ -261,7 +271,7 @@ const towfunc =()=>{
       {/* <input className="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"/> */}
       <div className="navbar-nav">
         <div className="nav-item text-nowrap">
-          <a className="nav-link px-3" href="#" onClick={towfunc}>Sign out</a>
+          <a className="nav-link px-3" href="#" onClick={logout}>Sign out</a>
         </div>
       </div>
     </header>

@@ -94,20 +94,46 @@
         <script src="js/baguetteBox.min.js"></script> -->
 
    </script>
-    <title>React App</title>
+    <title>KoiriShop App</title>
+    <style>
+      .loadingPre {
+        -webkit-animation: sk-scaleout 1s infinite ease-in-out;
+        animation: sk-scaleout 1s infinite ease-in-out;
+        background-color: #124c62;
+        border-radius: 100%;
+        height: 6em;
+        width: 6em;
+      }
+
+      .containerio {
+        align-items: center;
+        background-color: white;
+        display: flex;
+        height: 100vh;
+        justify-content: center;
+        width: 100vw;
+      }
+
+      @keyframes sk-scaleout {
+        0% {
+          -webkit-transform: scale(0);
+          transform: scale(0);
+        }
+        100% {
+          -webkit-transform: scale(1);
+          opacity: 0.5;
+          transform: scale(1);
+        }
+      }
+    </style>
   </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+  <body style="overflow-x:hidden">
+    <!-- <noscript>You need to enable JavaScript to run this app.</noscript> -->
+    <div id="spinner" class="containerio">
+      <div class="loadingPre"></div>
+    </div>
+    <div id="root">
+    </div>
+   
   </body>
 </html>
