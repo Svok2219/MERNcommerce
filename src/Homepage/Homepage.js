@@ -1,5 +1,5 @@
 
- import React, {  useEffect, useRef, useState } from "react";
+ import React, {  useContext, useEffect, useRef, useState } from "react";
 import HeaderComp from "../Components/HeaderComponent";
 import FooterComp from "../Components/FooterComponents";
 // import  {  useContext } from "react";
@@ -51,16 +51,96 @@ function Homepage(params) {
     // const [addWishList] = React.useContext(UserContext)
   const {DataPwd,addToCart,addWishList}=params;
 //   console.log(products);
-
+const[Loggedin,setLoggedin,cartItems]=useContext(UserContext)
   function rand(min, max) {
         return Math.floor(Math.random() * (max - min + 1) + min);
       }
       
 
-
+    //  console.log(offers.length)
+    var arrStr = ['20% off Entire Purchase Pro', 'kisi aur ke khyalo main gum', 'kita koitam baal', "bechbar damei offer diram", "dhoro bondhu amar keho nai"]
+    //  console.log(randElement);
+     const MINUTE_MS = 2000;
+     const [li,setli]=useState('')
+     useEffect(() => {
+       const interval = setInterval(() => {
+        const randElement = arrStr[Math.floor(Math.random() * arrStr.length)];
+        setli(randElement)   
+    }, MINUTE_MS);
+     
+       return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
+     }, [])
+    // console.log(li)
       
     return (
     <div >
+         <div class="main-top sticky-top">
+        <div class="container-fluid">
+            <div class="row d-flex justify-content-center align-items-center">
+                <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+					{/* <div class="custom-select-box"> */}
+                      
+                    {/* </div> */}
+                    
+                    <div class="right-phone-box">
+                        <p>Call US :- <a href="#"> +11 900 800 100</a></p>
+                    </div>
+                    <div class="our-link">
+                        <ul>
+                            {/* <li><Link to="/myAcount"><i class="fa fa-user s_color"></i> My Account</Link></li> */}
+                            <li><Link to="/about"><i class="fas fa-location-arrow"></i> Our location</Link></li>
+                            <li><Link to="/contact"><i class="fas fa-headset"></i> Contact Us</Link></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 ">
+        
+                    <div class="text-slid-box">
+                        <div id="offer-box" > 
+    
+   
+    
+                            <ul class="offer-box  mt-0 mt-md-1">
+                                <li>
+                                    <i class="fab fa-opencart"></i> {li}  </li>
+                             </ul> 
+                        </div>
+                    </div>
+          
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-8 col-xs-8 text-center d-flex justify-content-center align-items-center gap-2">
+
+                <div class="btn ">
+						<select id="basic" class="  show-tick form-control" data-placeholder="Sign In">
+							<option>Register Here</option>
+							<option>Sign In</option>
+						</select>
+       
+
+					</div>
+                    <div class="btn nav-item">
+                   <Link to="/myAcount">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="#ffffff" class=" bi bi-person-circle" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                    </svg>
+</Link> 
+                    </div>
+                    {/* <div class="search nav-item"><a href="#" > */}
+{/* <Button variant="primary" >
+        Launch demo modal
+      </Button> */}
+
+<svg  xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="white" class=" bi bi-cart" viewBox="0 0 16 16">
+  <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+</svg>
+   <span class="font-weight-bold  mt-3 text-light">{cartItems.length}</span>
+   {/* </a></div> */}
+
+                </div>
+            </div>
+        </div>
+    </div>
        <HeaderComp/>
        <div  class="HeadContainer" >
        <Swiper
@@ -101,7 +181,7 @@ function Homepage(params) {
                             <h1 class="m-b-20 text-light cov" style={{fontSize:"64px",fontWeight:"bolder",letterSpacing:"4px"}}><strong>Welcome To <br/>KoiriShop</strong></h1>
                             <p class="m-b-40" style={{fontSize: "18px",color:"whitesmoke"}}>See how your users experience your website in realtime or view <br/> trends to see any changes in performance over time.</p>
                             <p style={{fontSize: "18px",
-}}><a class="btn hvr-hover btnHeader text-white" href="#">Shop New</a></p>
+}}><Link to="/shop" class="btn hvr-hover btnHeader text-white" >Shop New</Link></p>
                         </div>
                     </div>
                 </div> 

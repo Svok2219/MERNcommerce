@@ -38,13 +38,13 @@ function App() {
 
   // console.log(Loggedin);
   const addToCart = (product) => {
-    setWListItems(WListItems.filter((x)=>x.id!==product.id));
+    setWListItems(WListItems.filter((x)=>x._id!==product._id));
 
-    const exist = cartItems.find((x) => x.id === product.id);
+    const exist = cartItems.find((x) => x._id === product._id);
     if (exist) {
       setCartItems(
         cartItems.map((x) =>
-          x.id === product.id ? { ...exist, qty: exist.qty + 1 } : x
+          x._id === product._id ? { ...exist, qty: exist.qty + 1 } : x
         )
       );
     } else {
@@ -52,13 +52,13 @@ function App() {
     }
   };
   const removeFromCart = (product) => {
-    const exist = cartItems.find((x) => x.id === product.id);
+    const exist = cartItems.find((x) => x._id === product._id);
     if (exist.qty === 1) {
-      setCartItems(cartItems.filter((x) => x.id !== product.id));
+      setCartItems(cartItems.filter((x) => x._id !== product._id));
     } else {
       setCartItems(
         cartItems.map((x) =>
-          x.id === product.id ? { ...exist, qty: exist.qty - 1 } : x
+          x._id === product._id ? { ...exist, qty: exist.qty - 1 } : x
         )
       );
     }
@@ -87,7 +87,7 @@ function App() {
   }
 
   const removeWishList=(pwd)=>{
-    setWListItems(WListItems.filter((x) => x.id !== pwd.id));
+    setWListItems(WListItems.filter((x) => x._id !== pwd._id));
   }
 
   console.log(WListItems)
@@ -108,7 +108,7 @@ function App() {
   ,[DataPwd])
   console.log(DataPwd)
 
-
+  
   const [loading, setLoading] = useState(true);
   const spinner = document.getElementById("spinner");
   if (spinner) {
@@ -117,6 +117,23 @@ function App() {
       setLoading(false);
     }, 2000);
   }
+
+  // const [randomPwd, setrandomPwd] = useState([]);
+  // const[C,setC]=useState(true)
+ 
+//  useEffect(() => {
+//   //  if(DataPwd>0){
+//   const shuffled = [DataPwd].sort(() => 0.5 - Math.random());
+  
+//   setrandomPwd(shuffled.slice(0, 4))
+// // }
+//  }, [C])
+
+  // console.log(randomPwd)
+  // const arr = ['b', 'c', 'a', 'd'];
+  // console.log(getMultipleRandom(DataPwd, 2)); // 👉️ ['d', 'a'];
+  // console.log(getMultipleRandom(arr, 3)); // 👉️ ['b', 'a', 'c']
+  
   return (
     !loading && (
     <UserContext.Provider  value={[Loggedin,setLoggedin,cartItems,BuyNow,cartBool,setCartBool,addWishList,removeWishList,addToCart]}>
