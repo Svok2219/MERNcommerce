@@ -1876,44 +1876,7 @@
  .filter-price-left{
      margin-bottom: 20px;
 }
- #slider-range .ui-slider-handle {
-     background-color: #b0b435;
-     border: 2px solid #fff;
-     border-radius: 50%;
-     cursor: pointer;
-     height: 21px;
-     top: -6px;
-     transition: none 0s ease 0s;
-     width: 21px;
-     box-shadow: 0px 0px 6.65px 0.35px rgba(0,0,0,0.15);
-}
- #slider-range .ui-slider-range {
-     background-color: #b0b435;
-     border-radius: 0;
-}
- #slider-range {
-     background: #000000;
-     border: medium none;
-     border-radius: 50px;
-     float: left;
-     height: 10px;
-     margin-top: 14px;
-     width: 100%;
-}
- .price-box-slider p{
-     clear: both;
-     margin-top: 20px;
-     display: inline-block;
-     width: 100%;
-}
- .price-box-slider p input{
-     margin-top: 5px;
-}
- .price-box-slider p button{
-     border: none;
-     color: #ffffff;
-     float: right;
-}
+
  .brand-box {
      display: inline-block;
      width: 100%;
