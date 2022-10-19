@@ -286,9 +286,9 @@ function Homepage(params) {
                   src="https://technext.github.io/freshshop/images/categories_img_01.jpg"
                   alt=""
                 />
-                <a class=" hvr-hover text-white" href="#">
+                 <Link to="/category/63348a5057d055056472fbe7"  class=" hvr-hover text-white">
                   Organic Fertilisers
-                </a>
+                </Link>
               </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
@@ -298,7 +298,7 @@ function Homepage(params) {
                   src="https://technext.github.io/freshshop/images/categories_img_02.jpg"
                   alt=""
                 />
-                <a class=" hvr-hover text-white">Vermi(earthworms)</a>
+                <Link to="/category/63346d6dbe4f2e8bbb404514"  class=" hvr-hover text-white">Vermi(earthworms)</Link>
               </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
@@ -308,9 +308,9 @@ function Homepage(params) {
                   src="https://technext.github.io/freshshop/images/categories_img_03.jpg"
                   alt=""
                 />
-                <a class=" hvr-hover text-white" href="#">
+                 <Link to="/category/63346d5dbe4f2e8bbb404512"  class=" hvr-hover text-white">
                   Vermiwash
-                </a>
+                </Link>
               </div>
             </div>
           </div>

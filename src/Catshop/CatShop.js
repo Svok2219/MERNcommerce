@@ -1,42 +1,52 @@
 import * as React from 'react';
 import HeaderComp from "../Components/HeaderComponent";
 import FooterComp from "../Components/FooterComponents";
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import data from '../data';
 import Swal from 'sweetalert2';
-import ReactSlider from "react-slider";
-import { useState } from "react";
-{/* ALL JS FILES */}
-    <><script src="js/jquery-3.2.1.min.js"></script><script src="js/popper.min.js"></script><script src="js/bootstrap.min.js"></script></>
-    {/* ALL PLUGINS */}
-    <><script src="js/jquery.superslides.min.js"></script><script src="js/bootstrap-select.js"></script><script src="js/inewsticker.js"></script><script src="js/bootsnav.js."></script><script src="js/images-loded.min.js"></script><script src="js/isotope.min.js"></script><script src="js/owl.carousel.min.js"></script><script src="js/baguetteBox.min.js"></script><script src="js/jquery-ui.js"></script><script src="js/jquery.nicescroll.min.js"></script><script src="js/form-validator.min.js"></script><script src="js/contact-form-script.js"></script><script src="js/custom.js"></script></>
-
-    function Shop (params){
+    {/* ALL JS FILES */}
+    // <><script src="js/jquery-3.2.1.min.js"></script><script src="js/popper.min.js"></script><script src="js/bootstrap.min.js"></script></>
+    // {/* ALL PLUGINS */}
+    // <><script src="js/jquery.superslides.min.js"></script><script src="js/bootstrap-select.js"></script><script src="js/inewsticker.js"></script><script src="js/bootsnav.js."></script><script src="js/images-loded.min.js"></script><script src="js/isotope.min.js"></script><script src="js/owl.carousel.min.js"></script><script src="js/baguetteBox.min.js"></script><script src="js/jquery-ui.js"></script><script src="js/jquery.nicescroll.min.js"></script><script src="js/form-validator.min.js"></script><script src="js/contact-form-script.js"></script><script src="js/custom.js"></script></>
+function CatShop (params){
     const { DataPwd, addToCart, addWishList } = params;
     const [query, setQuery] = React.useState("");
     const [Data, setData] = React.useState([]);
     const [bool, setbool] = React.useState(false);
-    const [filter,setfilter]=React.useState(false)
-    const [min, setMin] = useState(0);
+    const [Pwd,setdata]=React.useState([])
     const [noitem,setnoitem]=React.useState()
-const [max, setMax] = useState(4500);
-console.log(min,max)
-    const filterCliked= async (e)=>{
-      e.preventDefault()
-      setbool(true)
-      const pwdArray =  await DataPwd.filter((item)=>
-      item.price>min && item.price<max ?item:null);
-      setnoitem(pwdArray)
-      console.log("tipaise",pwdArray)
+    const constant=true
+    const{id}=useParams()
+// console.log(DataPwd,id)
+const[catRouted,setcatRouted]=React.useState(true)  
+    React.useEffect(()=>{async function fetchData() {
+     await fetch(`http://mern-com.herokuapp.com/Products/FindByCategory/${id}`)
+      .then(res=>res.json())
+      .then(result=>{setdata(result)
+        if(result.length>0){
+          
+          // alert(result.length)
+          // setbool(true) ;
+          
+          setnoitem(result);
+          // setQuery(id)
+      }
+      else{alert('absolute nothingness')}
+      })
+      
     }
+    fetchData();}
+    ,[constant])
+// console.log(Pwd,noitem);
+ 
     const queryfunc =(e)=>{
         e.preventDefault()
-        setfilter(true)
+        setcatRouted(false)
         setbool(false)
     const pwdArray =   DataPwd.filter((item)=>item.name.toLowerCase().includes(query));
-    setData(pwdArray);
+    // setData(pwdArray);
     }
-    console.log(query,Data)
+    // console.log(query,Data)
     React.useEffect(() => {
         Data.length==0 && query &&  Swal.fire({
                                     icon: 'error',
@@ -47,7 +57,7 @@ console.log(min,max)
                             }, [Data])
    
 
-    const [cats,setCats]=React.useState([])
+const [cats,setCats]=React.useState([])
 React.useEffect(()=>{async function fetchData() {
   fetch('http://mern-com.herokuapp.com/Category/getAllCategories')
   .then(res=>res.json())
@@ -55,11 +65,11 @@ React.useEffect(()=>{async function fetchData() {
 }
 fetchData();}
 ,[cats])
-console.log(cats)
-
+// console.log(cats)
+ 
 const findbyCategory=(i)=>{
-  setfilter(true)
   setbool(true)
+  setcatRouted(false)
 console.log(i)
 const catPwd=DataPwd.filter((x)=>x.Category.name==i)
 setnoitem(catPwd)
@@ -67,13 +77,10 @@ setnoitem(catPwd)
 
 // console.log(noitem)
 
-function updateTextInput(val) {
-  document.getElementById('textInput').value=val; 
-}
 
 
     return(
-        <body>
+        <div>
 
       <HeaderComp/>
 
@@ -127,7 +134,8 @@ function updateTextInput(val) {
 
                         <div class="product-categorie-box">
                             <div class="tab-content">
-                              {bool==false || filter==false?
+                              {noitem ?
+                              bool==false && catRouted==false? 
                                 <div role="tabpanel" class="tab-pane fade show active" id="grid-view">
                             {DataPwd.length>0 ?        
           <div class="row special-list">
@@ -275,20 +283,11 @@ function updateTextInput(val) {
 
           :  <div role="tabpanel" class="tab-pane fade show active" id="grid-view">
             <h1>length is {noitem.length}</h1>
-            </div>}
+            </div>
+
+            :<h1>absolute nothingness</h1>}
                                 <div role="tabpanel" class="tab-pane fade" id="list-view">
-                             {/* {query && Data.length==0 &&
-                            //   alert(`no result found for ${query}`)
-                            <div
-                             class="">
-                            <div class="row d-flex justify-content-center align-items-center">
-                                <h3>no result found for <span className="text-secondary font-weight-bold">{query}</span></h3>
-                                <div class="d-flex justify-content-center "> <div class="loadingio-spinner-pulse-v3puu1fwgxe "><div class="ldio-06fbmar2z23g">
-<div></div><div></div><div></div>
-</div></div></div>
-                                </div>
-                                </div>
-                            } */}
+                     
 
                                 { Data.length>0 && query?  
                        Data.map(pwd => (
@@ -449,58 +448,14 @@ dataToggle="tooltip" dataPlacement="right" ><i class="far fa-heart"></i></a></li
                             <div class="title-left">
                                 <h3>Price</h3>
                             </div>
-                            <div class="wrapper">
-        {/* <div class="values">
-            <span id="range1">
-                0
-            </span>
-            <span> &dash; </span>
-            <span id="range2">
-                100
-            </span>
-        </div> */}
-        {/* <main> */}
-      <div className="containerRange">
-        <ReactSlider
-          defaultValue={[min, max]}
-          className="sliderR"
-          trackClassName="tracker"
-          min={0}
-          max={4500}
-          minDistance={50}
-          step={50}
-          withTracks={true}
-          pearling={true}
-          renderThumb={(props) => {
-            return <div {...props} className="thumb"></div>;
-          }}
-          renderTrack={(props) => {
-            return <div {...props} className="track"></div>;
-          }}
-          onChange={([min, max]) => {
-            setMin(min);
-            setMax(max);
-          }}
-        />
-      
-      </div>
-    {/* </main> */}
-    </div>                    
-    <div class="price-box-slider d-flex justify-content-center align-items-center ">
-    <div className="values-wrapper mt-3">
-            <p>${min}-${max}</p>
-          {/* <p>
-            Min Value:
-            <span>{min} $</span>
-          </p>
-          <p>
-            Max Value:
-            <span>{max} $</span>
-          </p> */}
-        </div>
-      <p>
- <button class="btn hvr-hover mt-3" onClick={filterCliked} type="submit">Filter</button>
- </p>
+                            <div class="price-box-slider">
+                                <input type="range" id="slider-range" class="form-range ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
+                                  {/* <div class="ui-slider-range ui-widget-header ui-corner-all" style={{left: "25%", width: "50%"}}></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style={{left: "25%"}}></span><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style={{left: "75%"}}></span> */}
+                                  </input>
+                                <p>
+                                    <input type="text" id="amount" readonly="" style={{border:"0", color:"#fbb714", fontWeight:"bold"}}/>
+                                    <button class="btn hvr-hover" type="submit">Filter</button>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -508,6 +463,7 @@ dataToggle="tooltip" dataPlacement="right" ><i class="far fa-heart"></i></a></li
             </div>
         </div>
     </div>
+
 
 
 <FooterComp/>
@@ -522,8 +478,8 @@ dataToggle="tooltip" dataPlacement="right" ><i class="far fa-heart"></i></a></li
 
     <a href="#" id="back-to-top" title="Back to top" >&uarr;</a>
 
-</body>
+</div>
 
     )
 }
-export default Shop;
+export default CatShop;

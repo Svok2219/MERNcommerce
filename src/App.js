@@ -27,6 +27,7 @@ import {
 import { auth } from "./Authentication/firebase-config";
 import PrivateRoute from './PrivateRoute/PrivateRoute';
 import PrivateRouteCO from './PrivateRoute/PrivateRouteCO';
+import CatShop from './Catshop/CatShop';
 export const UserContext = createContext();
 
 // const CartContext = createContext();
@@ -100,7 +101,7 @@ function App() {
 
   const [DataPwd,setDataPwd]=useState([])
   useEffect(()=>{async function fetchDataPwd() {
-   await fetch('http://mern-com.herokuapp.com/Products')          
+   await fetch('http://localhost:300/Products')          
     .then(response => response.json())
     .then(data =>{ setDataPwd(data)});
   }
@@ -118,21 +119,6 @@ function App() {
     }, 2000);
   }
 
-  // const [randomPwd, setrandomPwd] = useState([]);
-  // const[C,setC]=useState(true)
- 
-//  useEffect(() => {
-//   //  if(DataPwd>0){
-//   const shuffled = [DataPwd].sort(() => 0.5 - Math.random());
-  
-//   setrandomPwd(shuffled.slice(0, 4))
-// // }
-//  }, [C])
-
-  // console.log(randomPwd)
-  // const arr = ['b', 'c', 'a', 'd'];
-  // console.log(getMultipleRandom(DataPwd, 2)); // 👉️ ['d', 'a'];
-  // console.log(getMultipleRandom(arr, 3)); // 👉️ ['b', 'a', 'c']
   
   return (
     !loading && (
@@ -150,6 +136,12 @@ function App() {
             : <p>.....incoming</p>}
         
         <Route path="shop" element={<Shop DataPwd={DataPwd}/> } />
+        {DataPwd?  
+        <Route path="category/:id" element={<CatShop DataPwd={DataPwd}/> } />
+        :<div class="d-flex justify-content-center "> <div class="loadingio-spinner-pulse-v3puu1fwgxe "><div class="ldio-06fbmar2z23g">
+        <div></div><div></div><div></div>
+        </div></div></div>
+        }
         <Route path="wishList" element={<Wishlist WListItems={WListItems} addToCart={addToCart} removeWishList={removeWishList}/>} />
         <Route element={<Cart addToCart={addToCart} removeFromCart={removeFromCart}  cartItems={cartItems} CartBoolFunction={CartBoolFunction}/>} path="/cart" />
 
