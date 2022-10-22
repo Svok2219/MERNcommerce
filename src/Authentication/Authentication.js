@@ -12,6 +12,7 @@ import FooterComp from "../Components/FooterComponents";
 import { UserContext } from "../App";
 import { Outlet, Navigate } from 'react-router-dom'
 import HeaderComp from "../Components/HeaderComponent";
+import Swal from "sweetalert2";
 
 
 function Authentication(params) {
@@ -66,6 +67,13 @@ try {
   // setLoggedin(user.user.email);
   console.log(user);
   localStorage.setItem('User',`${user.user.email}`);
+  Swal.fire({
+    position: 'top-end',
+    icon: 'success',
+    title: 'You have successfully Loged In',
+    showConfirmButton: false,
+    timer: 1500
+  })
 } catch (error) {
   console.log(error.message);
 }
@@ -115,6 +123,13 @@ const navigate = useNavigate();
       // alert('Congratulations! You are logged in...Please refresh or Go back to the preveious page ') 
       localStorage.setItem("User",`${user.user.email}`)
       console.log(user.user.email);
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'You have successfully Loged In',
+        showConfirmButton: false,
+        timer: 1500
+      })
     } catch (error) {
       console.log(error.message);
     }
@@ -133,11 +148,11 @@ const navigate = useNavigate();
       <div className="my-5 mx-5">
 <ul class="nav nav-pills nav-justified mb-3 d-md-flex" id="ex1" role="tablist">
 <li class="nav-item" role="presentation">
-<button onClick={()=>loginOpen()} type="button" class="btn btn-primary w-75">Login</button>
+<button onClick={()=>loginOpen()} type="button" class="btn btn-secondary w-75">Login</button>
 
 </li>
 <li class="nav-item" role="presentation">
-<button  onClick={()=>regOpen()} type="button" class="btn btn-outline-primary w-75">Register</button>
+<button  onClick={()=>regOpen()} type="button" class="btn btn-outline-secondary w-75">Register</button>
   </li>
 </ul>
 
@@ -145,7 +160,7 @@ const navigate = useNavigate();
 <div class="tab-content">
 <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
   <form method="POST"  class="text-center  ">
-    <div class="text-center mb-3" >
+    {/* <div class="text-center mb-3" >
       <p>Sign in with:</p>
       <button type="button" class="btn btn-link btn-floating mx-1">
         <i class="fab fa-facebook-f"></i>
@@ -162,9 +177,9 @@ const navigate = useNavigate();
       <button type="button" class="btn btn-link btn-floating mx-1">
         <i class="fab fa-github"></i>
       </button>
-    </div>
+    </div> */}
 
-    <p class="text-center">or:</p>
+    {/* <p class="text-center">or:</p> */}
 {!openReg ?
 
 <>
@@ -227,8 +242,8 @@ const navigate = useNavigate();
       <div class="col-md-6 d-flex justify-content-center">
        
         <div class="form-check mb-3 mb-md-0 ">
-          <input class="form-check-input" type="checkbox" value="" id="loginCheck" checked />
-          <label class="form-check-label" for="loginCheck"> Remember me </label>
+          {/* <input class="form-check-input" type="checkbox" value="" id="loginCheck" checked /> */}
+          {/* <label class="form-check-label" for="loginCheck"> Remember me </label> */}
         </div>
       </div>
 
@@ -243,19 +258,19 @@ const navigate = useNavigate();
 
       <div class="col-md-6 d-flex justify-content-center">
         {/* Simple link */}
-        <a href="#!">Forgot password?</a>
+        {/* <a href="#!">Forgot password?</a> */}
       </div>
     </div>
 
     {/* Submit button */}
     {openReg ?
-    <button  onClick={postData}  class="btn btn-primary btn-block mb-4">Sign up</button>
+    <button  onClick={postData}  class="btn btn-secondary btn-block mb-4">Sign up</button>
     :
-    <button  onClick={login} class="btn btn-primary btn-block mb-4">Sign in</button>
+    <button  onClick={login} class="btn btn-secondary btn-block mb-4">Sign in</button>
     }
     {/* Register buttons */}
     <div class="text-center">
-      <p>Not a member? <a href="#!" onClick={logout}>Register</a></p>
+      {/* <p>Not a member? <a href="#!" onClick={logout}>Register</a></p> */}
     </div>
   </form>
 </div>
@@ -296,7 +311,7 @@ const navigate = useNavigate();
     </div>
 </div>
     {/* Submit button */}
-    {/* <button type="" class="btn btn-primary btn-block mb-3">Sign in</button> */}
+    {/* <button type="" class="btn btn-secondary btn-block mb-3">Sign in</button> */}
   </form>
 </div>
 </div>

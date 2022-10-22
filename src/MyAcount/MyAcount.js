@@ -1,10 +1,61 @@
 import * as React from 'react';
 import HeaderComp from "../Components/HeaderComponent"
 import FooterComp from "../Components/FooterComponents"
-
+import { UserContext } from '../App';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import { signOut } from 'firebase/auth';
+import { auth } from '../Authentication/firebase-config';
     <><script src="js/jquery-3.2.1.min.js"></script><script src="js/popper.min.js"></script><script src="js/bootstrap.min.js"></script><script src="js/jquery.superslides.min.js"></script><script src="js/bootstrap-select.js"></script><script src="js/inewsticker.js"></script><script src="js/bootsnav.js."></script><script src="js/images-loded.min.js"></script><script src="js/isotope.min.js"></script><script src="js/owl.carousel.min.js"></script><script src="js/baguetteBox.min.js"></script><script src="js/form-validator.min.js"></script><script src="js/contact-form-script.js"></script><script src="js/custom.js"></script></>
     
 function MyAcount(params) {
+    const[Loggedin,setLoggedin,cartItems,BuyNow,cartBool] =React.useContext(UserContext);
+    const[buyerData,setbuyerData]=React.useState({})
+    // async function fetchData() {
+    fetch(`http://localhost:300/User/getone/${Loggedin.email}`)
+    .then((res)=>res.json())
+    .then((result)=>{setbuyerData(result.user[0]) })
+
+    const[buyerDataOrders,setbuyerDataOrders]=React.useState()
+    React.useEffect(()=>{async function fetchDataPwd() {
+   await fetch(`http://localhost:300/Orders/${Loggedin.email}`)
+    .then((res)=>res.json())
+    .then((result)=>{setbuyerDataOrders(result.content) ; 
+        // console.log(result.content)
+    })
+}
+fetchDataPwd();}
+,[])
+    // console.log(buyerDataOrders)
+
+    const[OrderDescription,setOrderDescription]=React.useState()
+    const orderDetailHandler =(y)=>{
+        fetch(`http://localhost:300/Orders/Description/${y}`)
+        .then((res)=>res.json())
+        .then((result)=>{setOrderDescription(result.content) 
+            //  console.log(result)
+            })
+    
+    //     React.useEffect(()=>{async function fetchDataPwd() {
+    //    await fetch(`http://localhost:300/Orders/Description/${y}`)
+    //     .then((res)=>res.json())
+    //     .then((result)=>{setOrderDescription(result.content) ; console.log(result)})
+    // }
+    // fetchDataPwd();}
+    // ,[])
+    }
+    // console.log(OrderDescription)
+
+    const [show, setShow] = React.useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    const logout = async () => {
+        await signOut(auth);
+        localStorage.setItem('User', null)
+        window.location.reload(false)
+      };
  return (
 <div>
     <HeaderComp/>
@@ -21,182 +72,92 @@ function MyAcount(params) {
             </div>
         </div>
     </div>
-    <div class="my-account-box-main">
-        <div class="container">
-            <div class="my-account-page">
-                <div class="row">
-                    <div class="col-lg-4 col-md-12">
-                        <div class="account-box">
-                            <div class="service-box">
-                                <div class="service-icon">
-                                    <a href="#"> <i class="fa fa-gift"></i> </a>
-                                </div>
-                                <div class="service-desc">
-                                    <h4>Your Orders</h4>
-                                    <p>Track, return, or buy things again</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12">
-                        <div class="account-box">
-                            <div class="service-box">
-                                <div class="service-icon">
-                                    <a href="#"><i class="fa fa-lock"></i> </a>
-                                </div>
-                                <div class="service-desc">
-                                    <h4>Login &amp; security</h4>
-                                    <p>Edit login, name, and mobile number</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12">
-                        <div class="account-box">
-                            <div class="service-box">
-                                <div class="service-icon">
-                                    <a href="#"> <i class="fa fa-location-arrow"></i> </a>
-                                </div>
-                                <div class="service-desc">
-                                    <h4>Your Addresses</h4>
-                                    <p>Edit addresses for orders and gifts</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12">
-                        <div class="account-box">
-                            <div class="service-box">
-                                <div class="service-icon">
-                                    <a href="#"> <i class="fa fa-credit-card"></i> </a>
-                                </div>
-                                <div class="service-desc">
-                                    <h4>Payment options</h4>
-                                    <p>Edit or add payment methods</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12">
-                        <div class="account-box">
-                            <div class="service-box">
-                                <div class="service-icon">
-                                    <a href="#"> <i class="fab fa-paypal"></i> </a>
-                                </div>
-                                <div class="service-desc">
-                                    <h4>PayPal</h4>
-                                    <p>View benefits and payment settings</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12">
-                        <div class="account-box">
-                            <div class="service-box">
-                                <div class="service-icon">
-                                    <a href="#"> <i class="fab fa-amazon"></i> </a>
-                                </div>
-                                <div class="service-desc">
-                                    <h4>Amazon Pay balance</h4>
-                                    <p>Add money to your balance</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
+    <div class="container rounded bg-white mt-5 mb-5" style={{overflowX:"hidden"}}>
+    <div class="row">
+        <div class="col-md-2 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://thumbs.dreamstime.com/b/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg"/><span class="font-weight-bold">{Loggedin.displayName || buyerData.FullName}</span><span class="text-black-50">{Loggedin.email}</span><span> </span></div>
+        </div>
+        <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Profile Settings</h4>
                 </div>
-                <div class="bottom-box">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-12">
-                            <div class="account-box">
-                                <div class="service-box">
-                                    <div class="service-desc">
-                                        <h4>Gold &amp; Diamond Jewellery</h4>
-                                        <ul>
-                                            <li> <a href="#">Apps and more</a> </li>
-                                            <li> <a href="#">Content and devices</a> </li>
-                                            <li> <a href="#">Music settings</a> </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-12">
-                            <div class="account-box">
-                                <div class="service-box">
-                                    <div class="service-desc">
-                                        <h4>Handloom &amp; Handicraft Store</h4>
-                                        <ul>
-                                            <li> <a href="#">Advertising preferences </a> </li>
-                                            <li> <a href="#">Communication preferences</a> </li>
-                                            <li> <a href="#">SMS alert preferences</a> </li>
-                                            <li> <a href="#">Message center</a> </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-12">
-                            <div class="account-box">
-                                <div class="service-box">
-                                    <div class="service-desc">
-                                        <h4>The Designer Boutique</h4>
-                                        <ul>
-                                            <li> <a href="#">Amazon Pay</a> </li>
-                                            <li> <a href="#">Bank accounts for refunds</a> </li>
-                                            <li> <a href="#">Coupons</a> </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-12">
-                            <div class="account-box">
-                                <div class="service-box">
-                                    <div class="service-desc">
-                                        <h4>Gift Boxes, Gift Tags, Greeting Cards</h4>
-                                        <ul>
-                                            <li> <a href="#">Leave delivery feedback</a> </li>
-                                            <li> <a href="#">Lists</a> </li>
-                                            <li> <a href="#">Photo ID proofs</a> </li>
-                                            <li> <a href="#">Profile</a> </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-12">
-                            <div class="account-box">
-                                <div class="service-box">
-                                    <div class="service-desc">
-                                        <h4>Other accounts</h4>
-                                        <ul>
-                                            <li> <a href="#">Amazon Business registration</a> </li>
-                                            <li> <a href="#">Seller account</a> </li>
-                                            <li> <a href="#">Amazon Web Services</a> </li>
-                                            <li> <a href="#">Login with Amazon</a> </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-12">
-                            <div class="account-box">
-                                <div class="service-box">
-                                    <div class="service-desc">
-                                        <h4>Shopping programs and rentals</h4>
-                                        <ul>
-                                            <li> <a href="#">Subscribe &amp; Save</a> </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="row mt-2">
+                    <div class="col-md-6"><label class="labels">FullName</label><input type="text" class="form-control" placeholder="first name" value={Loggedin.displayName || buyerData.FullName}/></div>
+                    <div class="col-md-6"><label class="labels">Email</label><input type="text" class="form-control" value={Loggedin.email} placeholder="surname"/></div>
                 </div>
+                <div class="row mt-3">
+                    <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" placeholder="enter phone number" value={buyerData.MobileNumber}/></div>
+                    <div class="col-md-12"><label class="labels">Address</label><input type="text" class="form-control" placeholder="enter address line 1" value={buyerData.Address}/></div>
+                    <div class="col-md-12"><label class="labels">Birth Date</label><input type="text" class="form-control" placeholder="enter address line 2" value={buyerData.BirthDate}/></div>
+             
+                </div>
+   
             </div>
         </div>
+        {/* {console.log(buyerDataOrders)} */}
+        <div class="col-md-5 overflower" >
+        <h3><u>Your Orders History</u></h3>
+            {!buyerDataOrders ? <div class="d-flex justify-content-center "> <div class="loadingio-spinner-pulse-v3puu1fwgxe "><div class="ldio-06fbmar2z23g">
+<div></div><div></div><div></div>
+</div></div></div> :
+        <div class="  bg-light">
+         
+                          {
+                          buyerDataOrders.length===0?<h3>No Order History</h3> :
+
+                          buyerDataOrders.map((x)=>
+                          <h4 onClick={handleShow} className='text-center'>OrderID: <h7  onClick={()=>orderDetailHandler(x._id)} class="text-dark orderDetailButton">{x._id}</h7></h4>
+                        //   x.map(element => 
+                           
+                        //     <div class="media mb-2 border-bottom" key={element.Description._id}>
+                        //     <div class="media-body"> <a >{element.Description.name}</a>
+                        //         <div class="small text-muted">Price: ${element.Description.price} <span class="mx-2">|</span> Qty: {element.Description.qty} <span class="mx-2">|</span> Subtotal: ${element.Description.price*element.Description.qty}</div>
+                        //     </div>
+                        //     </div>
+                        // )
+                                   
+                                    )}
+                                   
+           </div>}
+        
+           <Modal show={show} onHide={handleClose}>
+           {!OrderDescription ? <div class="d-flex justify-content-center "> <div class="loadingio-spinner-pulse-v3puu1fwgxe "><div class="ldio-06fbmar2z23g">
+<div></div><div></div><div></div>
+</div></div></div> : <>
+       
+        <Modal.Header >
+          <Modal.Title class="d-flex justify-content-center align-items-center"><p>Total Payable Amount : ${OrderDescription.Payment}</p>          <Button className="ml-3" variant="dark" >
+           {OrderDescription.OrderStatus}
+          </Button></Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+            {OrderDescription.Description.map((element)=>
+            <div class="media mb-2 border-bottom" key={element._id}>
+                             <div class="media-body"> <a >{element.name}</a>
+                                 <div class="small text-muted">Price: ${element.price} <span class="mx-2">|</span> Qty: {element.qty} <span class="mx-2">|</span> Subtotal: ${element.price*element.qty}</div>
+                             </div>
+                             </div>)}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+
+        </Modal.Footer>
+
+        </>}
+      </Modal>
+
+        </div>
     </div>
-    <div class="instagram-box">
+</div>
+
+<div className='d-flex justify-content-center align-items-center'>
+<button type="button" class="btn btn-outline-secondary px-5 py-2 my-3" onClick={logout}>Log Out</button>
+</div>
+    <><div class="instagram-box">
         <div class="main-instagram owl-carousel owl-theme">
             <div class="item">
                 <div class="ins-inner-box">
@@ -279,93 +240,7 @@ function MyAcount(params) {
                 </div>
             </div>
         </div>
-    </div>
-    <FooterComp/>
-    {/*<footer>
-        <div class="footer-main">
-            <div class="container">
-				<div class="row">
-					<div class="col-lg-4 col-md-12 col-sm-12">
-						<div class="footer-top-box">
-							<h3>Business Time</h3>
-							<ul class="list-time">
-								<li>Monday - Friday: 08.00am to 05.00pm</li> <li>Saturday: 10.00am to 08.00pm</li> <li>Sunday: <span>Closed</span></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-12 col-sm-12">
-						<div class="footer-top-box">
-							<h3>Newsletter</h3>
-							<form class="newsletter-box">
-								<div class="form-group">
-									<input class="" type="email" name="Email" placeholder="Email Address*" />
-									<i class="fa fa-envelope"></i>
-								</div>
-								<button class="btn hvr-hover" type="submit">Submit</button>
-							</form>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-12 col-sm-12">
-						<div class="footer-top-box">
-							<h3>Social Media</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-							<ul>
-                                <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fab fa-google-plus" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fab fa-pinterest-p" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fab fa-whatsapp" aria-hidden="true"></i></a></li>
-                            </ul>
-						</div>
-					</div>
-				</div>
-				<hr/>
-                <div class="row">
-                    <div class="col-lg-4 col-md-12 col-sm-12">
-                        <div class="footer-widget">
-                            <h4>About Freshshop</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> 
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p> 							
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12 col-sm-12">
-                        <div class="footer-link">
-                            <h4>Information</h4>
-                            <ul>
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Customer Service</a></li>
-                                <li><a href="#">Our Sitemap</a></li>
-                                <li><a href="#">Terms &amp; Conditions</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Delivery Information</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12 col-sm-12">
-                        <div class="footer-link-contact">
-                            <h4>Contact Us</h4>
-                            <ul>
-                                <li>
-                                    <p><i class="fas fa-map-marker-alt"></i>Address: Michael I. Days 3756 <br/>Preston Street Wichita,<br/> KS 67213 </p>
-                                </li>
-                                <li>
-                                    <p><i class="fas fa-phone-square"></i>Phone: <a href="tel:+1-888705770">+1-888 705 770</a></p>
-                                </li>
-                                <li>
-                                    <p><i class="fas fa-envelope"></i>Email: <a href="mailto:contactinfo@gmail.com">contactinfo@gmail.com</a></p>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>*/}
-
-  
-    <a href="#" id="back-to-top" title="Back to top" >&uarr;</a>
+    </div><FooterComp /><a href="#" id="back-to-top" title="Back to top">&uarr;</a></>
 
 </div>
 

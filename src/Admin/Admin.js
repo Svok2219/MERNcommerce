@@ -56,6 +56,19 @@ const removeUser= async (item)=>{
 })
 }
     
+const [DataOrder,setDataOrder]=useState([])
+    useEffect(()=>{async function fetchDataPwd() {
+      fetch('http://localhost:300/Orders')          
+      .then(response => response.json())
+      .then(result =>{ setDataOrder(result.content)});
+    }
+    fetchDataPwd();}
+    ,[DataOrder])
+    console.log(DataOrder)
+
+    
+
+
 const [DataPwd,setDataPwd]=useState([])
   useEffect(()=>{async function fetchDataPwd() {
     fetch('http://localhost:300/Products')          
@@ -119,7 +132,7 @@ const UpdateProduct= async  (e)=>{
   .then((result)=>{console.log(result);setClicked(false); Swal.fire({
     position: 'top-end',
     icon: 'success',
-    title: 'Your DATA has been POSTED',
+    title: 'Your DATA has been PATched',
     showConfirmButton: false,
     timer: 1500
   })})
@@ -259,7 +272,53 @@ const logout = async () => {
   localStorage.setItem('User', null)
   window.location.reload(false)
 };
-    return (
+
+
+const handleUpdateOrderStatus = async (Pwd)=> {
+  console.log(Pwd._id)
+  await fetch(`http://localhost:300/Orders/${Pwd._id}`, {
+    method: 'PATCH',
+    headers: {
+        'Content-type': 'application/json'
+    },
+    body:JSON.stringify({
+      OrderStatus:"Approved"
+    })
+    // ,images:[{imagesOne:imagesOne,imagesZero:imagesZero,imagesTwo:imagesZero}]
+})
+.then((res)=>res.json())
+.then((result)=>{console.log(result);setClicked(false); Swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  title: 'Your DATA has been Patched',
+  showConfirmButton: false,
+  timer: 1500
+})})
+.catch((err)=>alert(err))
+}
+   
+const handleCancelOrderStatus = async (Pwd)=> {
+  console.log(Pwd._id)
+  await fetch(`http://localhost:300/Orders/${Pwd._id}`, {
+    method: 'PATCH',
+    headers: {
+        'Content-type': 'application/json'
+    },
+    body:JSON.stringify({
+      OrderStatus:"Canceled"
+    })
+    // ,images:[{imagesOne:imagesOne,imagesZero:imagesZero,imagesTwo:imagesZero}]
+})
+.then((res)=>res.json())
+.then((result)=>{console.log(result);setClicked(false); Swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  title: 'Your DATA has been Patched',
+  showConfirmButton: false,
+  timer: 1500
+})})
+}
+return (
         <div>
            <>
     
@@ -662,7 +721,50 @@ const logout = async () => {
   </div>
 </div>
 :null} */}
-
+<h2 class="mt-5" id='Orders'>List of Orders (Approve & Cancel)</h2>
+          <div className="table-responsive mt-2">
+            <table className="table table-striped table-sm">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">DelPrice</th>
+                  <th scope="col">InitialStock</th>
+                  <th scope="col">
+                   Cancel
+                  </th>
+                  <th scope="col">
+                   Approve
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+              {DataOrder.map((x)=>
+                <tr key={x._id}>
+                  <td>{x.CustomerName}</td>
+                  <td>{x.Payment}</td>
+                  <td>{x._id}</td>
+                  <td>{x.OrderStatus}</td>
+                  {/* <td>{x.Description}</td> */}
+                  {/* <td>{x.Category}</td> */}
+                
+              
+                  <td>
+                  <i
+                  //  onClick={() => removeProduct(x._id)}
+                   class="fas fa-minus " onClick={()=>handleCancelOrderStatus(x)}></i>
+                  </td>
+                  <td class=" cursor-pointer">
+                    <FontAwesomeIcon icon={faPencilAlt} onClick={()=>handleUpdateOrderStatus(x)} 
+                    // onClick={()=>handleShow(x)}
+                    />
+                  </td>
+                  </tr>
+)}
+               
+              </tbody>
+            </table>
+          </div>
         </main>
       </div>
     </div>

@@ -95,9 +95,42 @@ import { useState, useEffect } from 'react';
     const form = useRef();
 
 
-
-    const Swallo =(x)=>{
+      
+    const Swallo = async(x)=>{
    
+        // const{Name,price,InitialStock,DelPrice,Category,Description,image,sold,CategoryName,GalleryImgUrl,GalleryImgName,imagesZero,imagesOne,imagesTwo}=value
+        // const images = [imagesOne,imagesZero,imagesTwo]
+        // console.log(images)
+         const res = await fetch('http://localhost:300/Orders',{
+          method:'POST',
+          headers:{
+          'Content-Type':'application/json'
+          },
+          body:JSON.stringify({
+            CustomerName:buyerData.FullName,
+            CustomerID:buyerData._id,
+            // OrderStatus:req.body.OrderStatus,
+            CustomerEmail:Loggedin.email,
+            Description:cartBool?BuyNow:cartItems.map((x)=>x),
+            Payment:cartBool?totalPriceBuy.toFixed(2):totalPrice.toFixed(2)
+            // name:Name,price:price,InitialStock:InitialStock,DelPrice:DelPrice,Category:Category,Description:Description,image:image,sold:0,images:images
+          })
+      
+        })
+         
+        if (res) {
+      //  setValue({})  
+    //    setClicked(false)
+      //  console.log(res) 
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Your Order has been POSTED',
+        showConfirmButton: false,
+        timer: 1500
+      })
+        }
+        
           emailjs.sendForm('service_ezi7z9f', 'template_obzck5d', form.current, 'NxPNigVdSm6c6IGkN')
             .then((result) => {
                 console.log(result.text);
@@ -122,8 +155,6 @@ import { useState, useEffect } from 'react';
                 console.log(error.text);
             });
         
-      
-
     }
     // useEffect(()=>{
         const[buyerData,setbuyerData]=useState({})
@@ -249,7 +280,7 @@ import { useState, useEffect } from 'react';
                                 <div class="rounded p-2 bg-light">
                                     
                                     {cartItems.map((x)=>
-                                    <div class="media mb-2 border-bottom" key={x.id}>
+                                    <div class="media mb-2 border-bottom" key={x._id}>
                                     <div class="media-body"> <a >{x.name}</a>
                                         <div class="small text-muted">Price: ${x.price} <span class="mx-2">|</span> Qty: {x.qty} <span class="mx-2">|</span> Subtotal: ${x.price*x.qty}</div>
                                     </div>
@@ -296,7 +327,7 @@ import { useState, useEffect } from 'react';
                                 <hr/>
                                 <div class="d-flex gr-total">
                                     <h5>Grand Total</h5>
-                                    <div class="ml-auto h5"> $ {cartBool? totalPriceBuy : totalPrice.toFixed(2)} </div>
+                                    <div class="ml-auto h5"> $ {cartBool? totalPriceBuy.toFixed(2) : totalPrice.toFixed(2)} </div>
                                 </div>
                                 <hr/> </div>
                         </div>

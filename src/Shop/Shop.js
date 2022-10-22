@@ -17,14 +17,14 @@ import { useState } from "react";
     const [Data, setData] = React.useState([]);
     const [bool, setbool] = React.useState(false);
     const [filter,setfilter]=React.useState(false)
-    const [min, setMin] = useState(0);
     const [noitem,setnoitem]=React.useState()
+    const [min, setMin] = useState(0);
 const [max, setMax] = useState(4500);
 console.log(min,max)
-    const filterCliked= async (e)=>{
+    const filterCliked=  (e)=>{
       e.preventDefault()
       setbool(true)
-      const pwdArray =  await DataPwd.filter((item)=>
+      const pwdArray = DataPwd.filter((item)=>
       item.price>min && item.price<max ?item:null);
       setnoitem(pwdArray)
       console.log("tipaise",pwdArray)
@@ -67,9 +67,9 @@ setnoitem(catPwd)
 
 // console.log(noitem)
 
-function updateTextInput(val) {
-  document.getElementById('textInput').value=val; 
-}
+// function updateTextInput(val) {
+//   document.getElementById('textInput').value=val; 
+// }
 
 
     return(
@@ -127,7 +127,7 @@ function updateTextInput(val) {
 
                         <div class="product-categorie-box">
                             <div class="tab-content">
-                              {bool==false || filter==false?
+                              {bool==false ?
                                 <div role="tabpanel" class="tab-pane fade show active" id="grid-view">
                             {DataPwd.length>0 ?        
           <div class="row special-list">
@@ -274,7 +274,74 @@ function updateTextInput(val) {
           }           </div>
 
           :  <div role="tabpanel" class="tab-pane fade show active" id="grid-view">
-            <h1>length is {noitem.length}</h1>
+            <div class="row">
+            {noitem.map(pwd => (
+            <div
+              key={pwd._id}
+              class="col-lg-4 col-md-6 special-grid best-seller"
+            >
+              <div class="products-single fix">
+                <div class="box-img-hover">
+                  <div class="type-lb">
+                    <p class="sale">Sale</p>
+                  </div>
+                  <Link to={`/${pwd._id}`}>
+                    {" "}
+                    <img
+                      src={pwd.image}
+                      class="img-fluid"
+                      style={{ height: "12rem" }}
+                      alt="Image"
+                    />
+                  </Link>
+                  <div class="mask-icon">
+                    <ul>
+                      <li>
+                        <Link
+                          to={`/${pwd._id}`}
+                          data-toggle="tooltip"
+                          data-placement="right"
+                          title="View"
+                        >
+                          <i class="fas fa-eye"></i>
+                        </Link>
+                      </li>
+                      <li>
+                        <a
+                          data-toggle="tooltip"
+                          data-placement="right"
+                          title="Compare"
+                        >
+                          <i class="fas fa-sync-alt"></i>
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          onClick={() => {
+                            addWishList(pwd);
+                          }}
+                          className="text-white"
+                          data-toggle="tooltip"
+                          data-placement="right"
+                          title="Add to Wishlist"
+                        >
+                          <i class="far fa-heart"></i>
+                        </a>
+                      </li>
+                    </ul>
+                    <a class="cart text-light" onClick={() => addToCart(pwd)}>
+                      Add to Cart
+                    </a>
+                  </div>
+                </div>
+                <div class="why-text">
+                  <h4>{pwd.name}</h4>
+                  <h5> $ {pwd.price}</h5>
+                </div>
+              </div>
+            </div>
+          ))}
+          </div>
             </div>}
                                 <div role="tabpanel" class="tab-pane fade" id="list-view">
                              {/* {query && Data.length==0 &&

@@ -3,6 +3,8 @@ import HeaderComp from "../Components/HeaderComponent";
 import FooterComp from "../Components/FooterComponents";
 import { Link, useParams } from 'react-router-dom';
 import data from '../data';
+import ReactSlider from "react-slider";
+import { useState ,useEffect} from "react";
 import Swal from 'sweetalert2';
     {/* ALL JS FILES */}
     // <><script src="js/jquery-3.2.1.min.js"></script><script src="js/popper.min.js"></script><script src="js/bootstrap.min.js"></script></>
@@ -15,6 +17,16 @@ function CatShop (params){
     const [bool, setbool] = React.useState(false);
     const [Pwd,setdata]=React.useState([])
     const [noitem,setnoitem]=React.useState()
+    const [min, setMin] = useState(0);
+    const [max, setMax] = useState(4500);
+    const filterCliked=  (e)=>{
+      e.preventDefault()
+      setbool(true)
+      const pwdArray = DataPwd.filter((item)=>
+      item.price>min && item.price<max ?item:null);
+      setnoitem(pwdArray)
+      console.log("tipaise",pwdArray)
+    }
     const constant=true
     const{id}=useParams()
 // console.log(DataPwd,id)
@@ -27,7 +39,7 @@ const[catRouted,setcatRouted]=React.useState(true)
           
           // alert(result.length)
           // setbool(true) ;
-          
+          setcatRouted(true);
           setnoitem(result);
           // setQuery(id)
       }
@@ -44,7 +56,7 @@ const[catRouted,setcatRouted]=React.useState(true)
         setcatRouted(false)
         setbool(false)
     const pwdArray =   DataPwd.filter((item)=>item.name.toLowerCase().includes(query));
-    // setData(pwdArray);
+    setData(pwdArray);
     }
     // console.log(query,Data)
     React.useEffect(() => {
@@ -281,11 +293,81 @@ setnoitem(catPwd)
           </div></div></div>
           }           </div>
 
-          :  <div role="tabpanel" class="tab-pane fade show active" id="grid-view">
-            <h1>length is {noitem.length}</h1>
+          :  <div role="tabpanel" class="tab-pane fade show active " id="grid-view">
+            {/* <h1>length is {noitem.length}</h1> */}
+            <div class="row ">
+           {noitem.map(pwd => (
+            <div
+              key={pwd._id}
+              class="col-lg-4 col-md-6 special-grid best-seller"
+            >
+              <div class="products-single fix">
+                <div class="box-img-hover">
+                  <div class="type-lb">
+                    <p class="sale">Sale</p>
+                  </div>
+                  <Link to={`/${pwd._id}`}>
+                    {" "}
+                    <img
+                      src={pwd.image}
+                      class="img-fluid"
+                      style={{ height: "12rem" }}
+                      alt="Image"
+                    />
+                  </Link>
+                  <div class="mask-icon">
+                    <ul>
+                      <li>
+                        <Link
+                          to={`/${pwd._id}`}
+                          data-toggle="tooltip"
+                          data-placement="right"
+                          title="View"
+                        >
+                          <i class="fas fa-eye"></i>
+                        </Link>
+                      </li>
+                      <li>
+                        <a
+                          data-toggle="tooltip"
+                          data-placement="right"
+                          title="Compare"
+                        >
+                          <i class="fas fa-sync-alt"></i>
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          onClick={() => {
+                            addWishList(pwd);
+                          }}
+                          className="text-white"
+                          data-toggle="tooltip"
+                          data-placement="right"
+                          title="Add to Wishlist"
+                        >
+                          <i class="far fa-heart"></i>
+                        </a>
+                      </li>
+                    </ul>
+                    <a class="cart text-light" onClick={() => addToCart(pwd)}>
+                      Add to Cart
+                    </a>
+                  </div>
+                </div>
+                <div class="why-text">
+                  <h4>{pwd.name}</h4>
+                  <h5> $ {pwd.price}</h5>
+                </div>
+              </div>
+            </div>
+          ))}
+          </div>
             </div>
 
-            :<h1>absolute nothingness</h1>}
+            :<div class="d-flex justify-content-center "> <div class="loadingio-spinner-pulse-v3puu1fwgxe "><div class="ldio-06fbmar2z23g">
+            <div></div><div></div><div></div>
+            </div></div></div>}
                                 <div role="tabpanel" class="tab-pane fade" id="list-view">
                      
 
@@ -448,14 +530,58 @@ dataToggle="tooltip" dataPlacement="right" ><i class="far fa-heart"></i></a></li
                             <div class="title-left">
                                 <h3>Price</h3>
                             </div>
-                            <div class="price-box-slider">
-                                <input type="range" id="slider-range" class="form-range ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
-                                  {/* <div class="ui-slider-range ui-widget-header ui-corner-all" style={{left: "25%", width: "50%"}}></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style={{left: "25%"}}></span><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style={{left: "75%"}}></span> */}
-                                  </input>
-                                <p>
-                                    <input type="text" id="amount" readonly="" style={{border:"0", color:"#fbb714", fontWeight:"bold"}}/>
-                                    <button class="btn hvr-hover" type="submit">Filter</button>
-                                </p>
+                            <div class="wrapper">
+        {/* <div class="values">
+            <span id="range1">
+                0
+            </span>
+            <span> &dash; </span>
+            <span id="range2">
+                100
+            </span>
+        </div> */}
+        {/* <main> */}
+      <div className="containerRange">
+        <ReactSlider
+          defaultValue={[min, max]}
+          className="sliderR"
+          trackClassName="tracker"
+          min={0}
+          max={4500}
+          minDistance={50}
+          step={50}
+          withTracks={true}
+          pearling={true}
+          renderThumb={(props) => {
+            return <div {...props} className="thumb"></div>;
+          }}
+          renderTrack={(props) => {
+            return <div {...props} className="track"></div>;
+          }}
+          onChange={([min, max]) => {
+            setMin(min);
+            setMax(max);
+          }}
+        />
+      
+      </div>
+    {/* </main> */}
+    </div>                    
+    <div class="price-box-slider d-flex justify-content-center align-items-center ">
+    <div className="values-wrapper mt-3">
+            <p>${min}-${max}</p>
+          {/* <p>
+            Min Value:
+            <span>{min} $</span>
+          </p>
+          <p>
+            Max Value:
+            <span>{max} $</span>
+          </p> */}
+        </div>
+      <p>
+ <button class="btn hvr-hover mt-3" onClick={filterCliked} type="submit">Filter</button>
+ </p>
                             </div>
                         </div>
                     </div>
