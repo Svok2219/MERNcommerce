@@ -44,7 +44,7 @@ export default function HeaderComp(props) {
   const [DataPwd, setDataPwd] = useState([]);
   useEffect(() => {
     async function fetchDataPwd() {
-      fetch("http://localhost:300/Products")
+      fetch("http://mern-com.herokuapp.com/Products")
         .then(response => response.json())
         .then(data => {
           setDataPwd(data);

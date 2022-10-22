@@ -12,13 +12,13 @@ function MyAcount(params) {
     const[Loggedin,setLoggedin,cartItems,BuyNow,cartBool] =React.useContext(UserContext);
     const[buyerData,setbuyerData]=React.useState({})
     // async function fetchData() {
-    fetch(`http://localhost:300/User/getone/${Loggedin.email}`)
+    fetch(`http://mern-com.herokuapp.com/User/getone/${Loggedin.email}`)
     .then((res)=>res.json())
     .then((result)=>{setbuyerData(result.user[0]) })
 
     const[buyerDataOrders,setbuyerDataOrders]=React.useState()
     React.useEffect(()=>{async function fetchDataPwd() {
-   await fetch(`http://localhost:300/Orders/${Loggedin.email}`)
+   await fetch(`http://mern-com.herokuapp.com/Orders/${Loggedin.email}`)
     .then((res)=>res.json())
     .then((result)=>{setbuyerDataOrders(result.content) ; 
         // console.log(result.content)
@@ -30,14 +30,14 @@ fetchDataPwd();}
 
     const[OrderDescription,setOrderDescription]=React.useState()
     const orderDetailHandler =(y)=>{
-        fetch(`http://localhost:300/Orders/Description/${y}`)
+        fetch(`http://mern-com.herokuapp.com/Orders/Description/${y}`)
         .then((res)=>res.json())
         .then((result)=>{setOrderDescription(result.content) 
             //  console.log(result)
             })
     
     //     React.useEffect(()=>{async function fetchDataPwd() {
-    //    await fetch(`http://localhost:300/Orders/Description/${y}`)
+    //    await fetch(`http://mern-com.herokuapp.com/Orders/Description/${y}`)
     //     .then((res)=>res.json())
     //     .then((result)=>{setOrderDescription(result.content) ; console.log(result)})
     // }

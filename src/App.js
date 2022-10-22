@@ -101,7 +101,7 @@ function App() {
 
   const [DataPwd,setDataPwd]=useState([])
   useEffect(()=>{async function fetchDataPwd() {
-   await fetch('http://localhost:300/Products')          
+   await fetch('http://mern-com.herokuapp.com/Products')          
     .then(response => response.json())
     .then(data =>{ setDataPwd(data)});
   }
