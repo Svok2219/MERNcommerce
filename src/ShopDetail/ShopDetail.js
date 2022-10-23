@@ -38,7 +38,7 @@ function ShopDetail(params){
     const pwd=products.find((x)=>x._id===id)
     // const Pwd=products.find((x)=>x.Category._id===pwd.Category._id)
     useEffect(()=>{async function fetchData() {
-     await fetch(`http://mern-com.herokuapp.com/Products/FindByCategory/${pwd.Category._id}`)
+     await fetch(`https://mern-com.herokuapp.com/Products/FindByCategory/${pwd.Category._id}`)
       .then(res=>res.json())
       .then(result=>{setData(result);console.log(result)})
     }
@@ -158,8 +158,67 @@ console.log(pwd,Pwd)
                 </div> 
             </div>
 			
+
+
+            <div class="row my-5">
+                <div class="col-lg-12">
+                    <div class="title-all text-center">
+                        <h1>Featured Products</h1>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet lacus enim.</p>
+                    </div>
+                    <Swiper 
+     slidesPerView={3}
+     spaceBetween={3}
+     slidesPerGroup={3}
+     loop={true}
+     
+     loopFillGroupWithBlank={true}
+     // pagination={{
+     //   clickable: true
+     // }}
+     autoplay={{ delay: 6000 }}
+    //  navigation={true}
+     modules={[ Autoplay]}
+     className="mySwiper"
+   >
+{Pwd.length>0 ?   Pwd.map((pwd)=>
+<SwiperSlide className=' col-md-4 col-12'>
+               {/* <div key={pwd._id} class=" special-grid best-seller"> */}
+                    <div class="products-single fix">
+                        <div class="box-img-hover">
+                            <div class="type-lb">
+                                <p class="sale">Sale</p>
+                            </div>
+                           <Link to={`/${pwd._id}`} > <img src={pwd.image} class="img-fluid" style={{height:"12rem"}} alt="Image"/></Link>
+                            <div class="mask-icon">
+                                <ul>
+                                    <li><Link to={`/${pwd._id}`}  data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></Link></li>
+                                    <li><a  data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+                                    <li><a onClick={()=>{addWishList(pwd)}} className="text-white" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                </ul>
+                                <a class="cart"  onClick={() => addToCart(pwd)}>Add to Cart</a>
+                            </div>
+                        </div>
+                        <div class="why-text">
+                            <h4>{pwd.name}</h4>
+                            <h5> $ {pwd.price}</h5>
+                        </div>
+                    </div>
+                {/* </div>                */}
+</SwiperSlide> 
+) : null}
+   </Swiper>
+
+
+                    
+
+
+                </div>
+            </div>
+
+
 			<div class="row my-5">
-				<div class="card card-outline-secondary my-4">
+				<div class=" card-outline-secondary my-4">
 					<div class="card-header">
 						<h2>Product Reviews</h2>
 					</div>
@@ -199,61 +258,6 @@ console.log(pwd,Pwd)
 				  </div>
 			</div>
 
-            <div class="row my-5">
-                <div class="col-lg-12">
-                    <div class="title-all text-center">
-                        <h1>Featured Products</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet lacus enim.</p>
-                    </div>
-                    <Swiper 
-     slidesPerView={3}
-     spaceBetween={3}
-     slidesPerGroup={3}
-     loop={true}
-     
-     loopFillGroupWithBlank={true}
-     // pagination={{
-     //   clickable: true
-     // }}
-     autoplay={{ delay: 6000 }}
-    //  navigation={true}
-     modules={[ Autoplay]}
-     className="mySwiper"
-   >
-{Pwd.length>0 ?   Pwd.map((pwd)=>
-<SwiperSlide className='col-6 col-md-4'>
-               {/* <div key={pwd._id} class=" special-grid best-seller"> */}
-                    <div class="products-single fix">
-                        <div class="box-img-hover">
-                            <div class="type-lb">
-                                <p class="sale">Sale</p>
-                            </div>
-                           <Link to={`/${pwd._id}`} > <img src={pwd.image} class="img-fluid" style={{height:"12rem"}} alt="Image"/></Link>
-                            <div class="mask-icon">
-                                <ul>
-                                    <li><Link to={`/${pwd._id}`}  data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></Link></li>
-                                    <li><a  data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                    <li><a onClick={()=>{addWishList(pwd)}} className="text-white" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                </ul>
-                                <a class="cart"  onClick={() => addToCart(pwd)}>Add to Cart</a>
-                            </div>
-                        </div>
-                        <div class="why-text">
-                            <h4>{pwd.name}</h4>
-                            <h5> $ {pwd.price}</h5>
-                        </div>
-                    </div>
-                {/* </div>                */}
-</SwiperSlide> 
-) : null}
-   </Swiper>
-
-
-                    
-
-
-                </div>
-            </div>
 
         </div>
     </div>

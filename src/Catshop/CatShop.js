@@ -32,7 +32,7 @@ function CatShop (params){
 // console.log(DataPwd,id)
 const[catRouted,setcatRouted]=React.useState(true)  
     React.useEffect(()=>{async function fetchData() {
-     await fetch(`http://mern-com.herokuapp.com/Products/FindByCategory/${id}`)
+     await fetch(`https://mern-com.herokuapp.com/Products/FindByCategory/${id}`)
       .then(res=>res.json())
       .then(result=>{setdata(result)
         if(result.length>0){
@@ -71,7 +71,7 @@ const[catRouted,setcatRouted]=React.useState(true)
 
 const [cats,setCats]=React.useState([])
 React.useEffect(()=>{async function fetchData() {
-  fetch('http://mern-com.herokuapp.com/Category/getAllCategories')
+  fetch('https://mern-com.herokuapp.com/Category/getAllCategories')
   .then(res=>res.json())
   .then(result=>setCats(result.content))
 }

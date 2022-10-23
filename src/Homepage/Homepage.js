@@ -118,8 +118,8 @@ function Homepage(params) {
                   class="  show-tick form-control"
                   data-placeholder="Sign In"
                 >
-                  <option>Register Here</option>
-                  <option>Sign In</option>
+                  <option><Link to="/login">Register Here</Link></option>
+                  <option><Link to="/login">Sign In</Link></option>
                 </select>
               </div>
               <div class="btn nav-item">

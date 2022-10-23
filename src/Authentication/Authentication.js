@@ -78,7 +78,7 @@ try {
   console.log(error.message);
 }
 
-   const res = await fetch('http://mern-com.herokuapp.com/User',{
+   const res = await fetch('https://mern-com.herokuapp.com/User',{
     method:'POST',
     headers:{
     'Content-Type':'application/json'

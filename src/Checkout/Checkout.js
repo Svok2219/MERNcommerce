@@ -101,7 +101,7 @@ import { useState, useEffect } from 'react';
         // const{Name,price,InitialStock,DelPrice,Category,Description,image,sold,CategoryName,GalleryImgUrl,GalleryImgName,imagesZero,imagesOne,imagesTwo}=value
         // const images = [imagesOne,imagesZero,imagesTwo]
         // console.log(images)
-         const res = await fetch('http://mern-com.herokuapp.com/Orders',{
+         const res = await fetch('https://mern-com.herokuapp.com/Orders',{
           method:'POST',
           headers:{
           'Content-Type':'application/json'
@@ -159,7 +159,7 @@ import { useState, useEffect } from 'react';
     // useEffect(()=>{
         const[buyerData,setbuyerData]=useState({})
         // async function fetchData() {
-        fetch(`http://mern-com.herokuapp.com/User/getone/${Loggedin.email}`)
+        fetch(`https://mern-com.herokuapp.com/User/getone/${Loggedin.email}`)
         .then((res)=>res.json())
         .then((result)=>{setbuyerData(result.user[0]) ; console.log(result)})
     //   }
