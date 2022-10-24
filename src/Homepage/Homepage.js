@@ -109,7 +109,7 @@ function Homepage(params) {
                   id="basic"
                   class="  show-tick form-control"
                   data-placeholder="Sign In"
-                  onChange={()=>handleClick()}
+                  onSelect={()=>handleClick()}
                 >
                   <option><Link to="/login">Register Here</Link></option>
                   <option><Link to="/login">Sign In</Link></option>
