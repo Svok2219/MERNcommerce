@@ -83,16 +83,20 @@ fetchDataPwd();}
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-right">Profile Settings</h4>
                 </div>
-                <div class="row mt-2">
+               
+<div class="row mt-2">
                     <div class="col-md-6"><label class="labels">FullName</label><input type="text" class="form-control" placeholder="first name" value={Loggedin.displayName || buyerData.FullName}/></div>
                     <div class="col-md-6"><label class="labels">Email</label><input type="text" class="form-control" value={Loggedin.email} placeholder="surname"/></div>
                 </div>
-                <div class="row mt-3">
+             
+{!buyerData ? <div class="d-flex justify-content-center "> <div class="loadingio-spinner-pulse-v3puu1fwgxe "><div class="ldio-06fbmar2z23g">
+<div></div><div></div><div></div>
+</div></div></div> :
+   <div class="row mt-3">
                     <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" placeholder="enter phone number" value={buyerData.MobileNumber}/></div>
                     <div class="col-md-12"><label class="labels">Address</label><input type="text" class="form-control" placeholder="enter address line 1" value={buyerData.Address}/></div>
                     <div class="col-md-12"><label class="labels">Birth Date</label><input type="text" class="form-control" placeholder="enter address line 2" value={buyerData.BirthDate}/></div>
-             
-                </div>
+                </div>}
    
             </div>
         </div>
