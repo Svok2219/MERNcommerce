@@ -222,7 +222,7 @@ import { useState, useEffect } from 'react';
                 <div class="form-group">
                     <label >Enter the <b>delivery Address</b></label>
  {!buyerData?            <textarea name="Address" class="form-control" id="exampleFormControlTextarea1" rows="3" 
-                    defaultValue="....loading
+                    defaultValue="....loading"
                     ></textarea>   :     <textarea name="Address" class="form-control" id="exampleFormControlTextarea1" rows="3" 
                     defaultValue={buyerData.Address}
                     ></textarea>
