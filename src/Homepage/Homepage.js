@@ -109,10 +109,10 @@ function Homepage(params) {
                   id="basic"
                   class="  show-tick form-control"
                   data-placeholder="Sign In"
-                  onBlur={()=>handleClick()}
+ 
                 >
-                  <option>Register Here</option>
-                  <option>Sign In</option>
+                  <option                  onClick={()=>handleClick()}>Register Here</option>
+                  <option                  onClick={()=>handleClick()}>Sign In</option>
                 </select>
               </div>
               <div class="btn nav-item">
