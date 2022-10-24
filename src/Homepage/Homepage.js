@@ -5,24 +5,8 @@ import FooterComp from "../Components/FooterComponents";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel";
 
-// // import '../js/'
-// import  "../js/jquery-3.2.1.min.js";
-// import '../js/popper.min.js"';
-// import '../js/bootstrap.min.js';
-// import "../js/jquery.superslides.min.js";
-// import "../js/bootstrap-select.js";
-// import "../js/inewsticker.js";
-// import "../js/bootsnav.js.";
-// import "../js/images-loded.min.js";
-// import "../js/isotope.min.js";
-// import "../js/owl.carousel.min.js";
-// import "../js/baguetteBox.min.js";
-// import "../js/form-validator.min.js";
-// import "../js/contact-form-script.js";
-// import "../js/custom.js";
+import { useHistory } from "react-router-dom";
 
-// Import Swiper React components
-// import { Swiper, SwiperSlide } from "swiper/react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 // import { Navigation, Pagination, Autoplay } from 'swiper';
@@ -69,6 +53,11 @@ function Homepage(params) {
   }, []);
   // console.log(li)
 
+   let history = useHistory();
+
+  function handleClick() {
+    history.push("/login");
+  }
   return (
     <div>
       <div class="main-top sticky-top">
@@ -117,6 +106,7 @@ function Homepage(params) {
                   id="basic"
                   class="  show-tick form-control"
                   data-placeholder="Sign In"
+                  onChange={handleClick()}
                 >
                   <option><Link to="/login">Register Here</Link></option>
                   <option><Link to="/login">Sign In</Link></option>
