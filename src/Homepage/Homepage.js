@@ -5,7 +5,7 @@ import FooterComp from "../Components/FooterComponents";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel";
 
-import { useHistory } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -53,10 +53,13 @@ function Homepage(params) {
   }, []);
   // console.log(li)
 
-   let history = useHistory();
+   const navigate = useNavigate();
+
 
   function handleClick() {
-    history.push("/login");
+  console.log("should be navigated to login page")
+    navigate('/'); 
+
   }
   return (
     <div>
