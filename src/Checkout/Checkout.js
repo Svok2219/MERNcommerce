@@ -211,15 +211,22 @@ import { useState, useEffect } from 'react';
                 </div>
                 <div class="form-group">
                 <label >Enter Reciver's <b>phone Number</b></label>
+{!buyerData? <input type="text" name="Reciver_Phone" class="form-control" 
+                defaultValue="loading....."  
+                /> :
                 <input type="text" name="Reciver_Phone" class="form-control" 
                 defaultValue={buyerData.MobileNumber}  
                 />
+}
                 </div>
                 <div class="form-group">
                     <label >Enter the <b>delivery Address</b></label>
-                    <textarea name="Address" class="form-control" id="exampleFormControlTextarea1" rows="3" 
+ {!buyerData?            <textarea name="Address" class="form-control" id="exampleFormControlTextarea1" rows="3" 
+                    defaultValue="....loading
+                    ></textarea>   :     <textarea name="Address" class="form-control" id="exampleFormControlTextarea1" rows="3" 
                     defaultValue={buyerData.Address}
                     ></textarea>
+}
                 </div>
                 {/* <label>enter Your Billing Address</label>
                 <textarea name="Address" className='' /> */}
