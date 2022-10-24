@@ -101,7 +101,7 @@ try {
   Email:"",
   password:""
  })
- navigate(-1);
+//  navigate(-1);
    
   }
 
@@ -129,7 +129,7 @@ const navigate = useNavigate();
         timer: 1500
       
       })
-      navigate(-1);
+//       navigate(-1);
     } catch (error) {
       alert(error.message);
       
