@@ -58,7 +58,7 @@ function Homepage(params) {
 
   function handleClick() {
   console.log("should be navigated to login page")
-    navigate('/'); 
+    navigate('/login'); 
 
   }
   return (
