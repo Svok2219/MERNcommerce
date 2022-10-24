@@ -363,8 +363,8 @@ function Homepage(params) {
             </div>
           </div>
 
-          <div class="row special-list">
-            {!DataPwd? <div class="d-flex justify-content-center "> <div class="loadingio-spinner-pulse-v3puu1fwgxe "><div class="ldio-06fbmar2z23g">
+          <div class="row special-list d-flex justify-content-center align-items-center">
+            {!DataPwd? <div class="d-flex justify-content-center align-items-center"> <div class="loadingio-spinner-pulse-v3puu1fwgxe "><div class="ldio-06fbmar2z23g">
             <div></div><div></div><div></div>
             </div></div></div>:
                         DataPwd.map(pwd => (
