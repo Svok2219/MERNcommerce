@@ -64,7 +64,7 @@ try {
     Email,
     password
   );
- 
+  // setLoggedin(user.user.email);
   console.log(user);
   localStorage.setItem('User',`${user.user.email}`);
   Swal.fire({
@@ -75,10 +75,10 @@ try {
     timer: 1500
   })
 } catch (error) {
-  alert(error.message);
+  console.log(error.message);
 }
 
-   const res = await fetch('https://mern-com.herokuapp.com/User',{
+   const res = await fetch('http://mern-com.herokuapp.com/User',{
     method:'POST',
     headers:{
     'Content-Type':'application/json'
@@ -101,7 +101,7 @@ try {
   Email:"",
   password:""
  })
-//  navigate(-1);
+ navigate(-1);
    
   }
 
@@ -118,7 +118,9 @@ const navigate = useNavigate();
         Email,
         password
       );
-
+      // setLoggedin(user.user.email);
+      // navigate(-1);
+      // alert('Congratulations! You are logged in...Please refresh or Go back to the preveious page ') 
       localStorage.setItem("User",`${user.user.email}`)
       console.log(user.user.email);
       Swal.fire({
@@ -127,12 +129,9 @@ const navigate = useNavigate();
         title: 'You have successfully Loged In',
         showConfirmButton: false,
         timer: 1500
-      
       })
-//       navigate(-1);
     } catch (error) {
-      alert(error.message);
-      
+      console.log(error.message);
     }
   };
 
@@ -141,7 +140,7 @@ const navigate = useNavigate();
     localStorage.setItem('User', null)
   };
 
-  if(!Loggedin || Loggedin==false){
+  if(!Loggedin || Loggedin===false){
 
     return(
       <>
@@ -166,15 +165,12 @@ const navigate = useNavigate();
       <button type="button" class="btn btn-link btn-floating mx-1">
         <i class="fab fa-facebook-f"></i>
       </button>
-
       <button type="button" class="btn btn-link btn-floating mx-1">
         <i class="fab fa-google"></i>
       </button>
-
       <button type="button" class="btn btn-link btn-floating mx-1">
         <i class="fab fa-twitter"></i>
       </button>
-
       <button type="button" class="btn btn-link btn-floating mx-1">
         <i class="fab fa-github"></i>
       </button>
