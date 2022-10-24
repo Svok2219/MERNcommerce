@@ -111,8 +111,8 @@ function Homepage(params) {
                   data-placeholder="Sign In"
                   onSelect={()=>handleClick()}
                 >
-                  <option><Link to="/login">Register Here</Link></option>
-                  <option><Link to="/login">Sign In</Link></option>
+                  <option>Register Here</option>
+                  <option>Sign In</option>
                 </select>
               </div>
               <div class="btn nav-item">
