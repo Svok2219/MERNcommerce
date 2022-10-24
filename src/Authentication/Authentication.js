@@ -101,7 +101,7 @@ try {
   Email:"",
   password:""
  })
-//  navigate(-1);
+ navigate(-1);
    
   }
 
@@ -127,9 +127,12 @@ const navigate = useNavigate();
         title: 'You have successfully Loged In',
         showConfirmButton: false,
         timer: 1500
+      
       })
+      navigate(-1);
     } catch (error) {
       alert(error.message);
+      
     }
   };
 
