@@ -89,7 +89,7 @@ function Cart(params) {
                         <a href="#">
                           <img
                             class="img-fluid"
-                            src="https://technext.github.io/freshshop/images/img-pro-01.jpg"
+                            src={item.image}
                             alt=""
                           />
                         </a>
