@@ -64,7 +64,7 @@ try {
     Email,
     password
   );
-  // setLoggedin(user.user.email);
+ 
   console.log(user);
   localStorage.setItem('User',`${user.user.email}`);
   Swal.fire({
@@ -75,7 +75,7 @@ try {
     timer: 1500
   })
 } catch (error) {
-  console.log(error.message);
+  alert(error.message);
 }
 
    const res = await fetch('https://mern-com.herokuapp.com/User',{
@@ -101,7 +101,7 @@ try {
   Email:"",
   password:""
  })
- navigate(-1);
+//  navigate(-1);
    
   }
 
@@ -118,9 +118,7 @@ const navigate = useNavigate();
         Email,
         password
       );
-      // setLoggedin(user.user.email);
-      // navigate(-1);
-      // alert('Congratulations! You are logged in...Please refresh or Go back to the preveious page ') 
+
       localStorage.setItem("User",`${user.user.email}`)
       console.log(user.user.email);
       Swal.fire({
@@ -131,7 +129,7 @@ const navigate = useNavigate();
         timer: 1500
       })
     } catch (error) {
-      console.log(error.message);
+      alert(error.message);
     }
   };
 
@@ -140,7 +138,7 @@ const navigate = useNavigate();
     localStorage.setItem('User', null)
   };
 
-  if(!Loggedin || Loggedin===false){
+  if(!Loggedin || Loggedin==false){
 
     return(
       <>
