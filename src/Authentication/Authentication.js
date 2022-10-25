@@ -56,7 +56,7 @@ function Authentication(params) {
 
     try {
       const user = await createUserWithEmailAndPassword(auth, Email, password);
-      // setLoggedin(user.user.email);
+
       console.log(user);
       localStorage.setItem("User", `${user.user.email}`);
       Swal.fire({
@@ -70,10 +70,10 @@ function Authentication(params) {
       alert(error.message);
     }
 
-    const res = await fetch("http://mern-com.herokuapp.com/User", {
+    const res = await fetch("https://mern-com.herokuapp.com/User", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-type": "application/json"
       },
       body: JSON.stringify({
         FullName: realName,
