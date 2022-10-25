@@ -50,26 +50,9 @@ function Authentication(params) {
   const navigate = useNavigate();
 
   const postData = async e => {
+       
     e.preventDefault();
-    const { realName, Email, password, Address, userName, BirthDate } = user;
-    console.log(realName, Email, password, Address, userName, BirthDate);
-
-    try {
-      const user = await createUserWithEmailAndPassword(auth, Email, password);
-      // setLoggedin(user.user.email);
-      console.log(user);
-      localStorage.setItem("User", `${user.user.email}`);
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "You have successfully Loged In",
-        showConfirmButton: false,
-        timer: 1500
-      });
-    } catch (error) {
-      alert(error.message);
-    }
-
+    
     const res = await fetch("http://mern-com.herokuapp.com/User", {
       method: "POST",
       headers: {
@@ -85,6 +68,13 @@ function Authentication(params) {
     });
 
     if (res) {
+       Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "You have successfully Loged In",
+        showConfirmButton: false,
+        timer: 3000
+      });
       console.log(res);
       setUser({
         realName: "",
@@ -95,6 +85,20 @@ function Authentication(params) {
       });
       // navigate(-1);
     }
+ 
+    const { realName, Email, password, Address, userName, BirthDate } = user;
+    console.log(realName, Email, password, Address, userName, BirthDate);
+
+    try {
+      const user = await createUserWithEmailAndPassword(auth, Email, password);
+      // setLoggedin(user.user.email);
+      console.log(user);
+      localStorage.setItem("User", `${user.user.email}`);
+ 
+    } catch (error) {
+      alert(error.message);
+    }
+
   };
   const varrify = localStorage.getItem("User") === "shuvo@koiri.com";
   console.log(varrify);
