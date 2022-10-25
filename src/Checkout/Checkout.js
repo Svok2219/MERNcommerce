@@ -107,8 +107,8 @@ import { useState, useEffect } from 'react';
           },
           body:JSON.stringify({
             CustomerName:buyerData.FullName,
-            CustomerID:buyerData._id,
-            // OrderStatus:req.body.OrderStatus,
+          CustomerID:buyerData._id,
+           OrderStatus:req.body.OrderStatus,
             CustomerEmail:Loggedin.email,
             Description:cartBool?BuyNow:cartItems.map((x)=>x),
             Payment:cartBool?totalPriceBuy.toFixed(2):totalPrice.toFixed(2)
@@ -123,7 +123,7 @@ import { useState, useEffect } from 'react';
             .then((result) => {
                 console.log(result.text);
                 Swal.fire({
-                    title: '<h2>Order Successful</h2><strong>Order ID : <u>11312325498*7975</u></strong>',
+                    title: '<h2>Order Successful</h2><strong>Order ID : <u>{result.CustomerID}</u></strong>',
                     icon: 'success',
                     html:
                       'You can still <b>cancel your order</b>, <br/>' +
@@ -132,13 +132,7 @@ import { useState, useEffect } from 'react';
                     showCloseButton: true,
                     showCancelButton: true,
                     focusConfirm: false,
-                    confirmButtonText:
-                      '<Link to="/"><i class="fas fa-search"></i> Track my order!</Link>',
-                    confirmButtonAriaLabel: 'Thumbs up, great!',
-                    cancelButtonText:
-                      '<i class="fa fa-times"></i> cancel the Order!',
-                    cancelButtonAriaLabel: 'Thumbs down ,cancel the Order!'
-                  })
+                    })
             }, (error) => {
                 console.log(error.text);
             });
