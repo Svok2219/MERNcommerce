@@ -118,12 +118,12 @@ import { useState, useEffect } from 'react';
         })
          
         if (res) {
-
+setloading(false)
    emailjs.sendForm('service_ezi7z9f', 'template_obzck5d', form.current, 'NxPNigVdSm6c6IGkN')
             .then((result) => {
                 console.log(result.text);
                 Swal.fire({
-                    title: '<h2>Order Successful</h2><strong>Order ID : <u>{result.CustomerID}</u></strong>',
+                    title: '<h2>Order Successful</h2><strong>Order ID : <u>{res.CustomerID}</u></strong>',
                     icon: 'success',
                     html:
                       'You can still <b>cancel your order</b>, <br/>' +
@@ -131,13 +131,13 @@ import { useState, useEffect } from 'react';
                       'or call us before the approvement process',
                     showCloseButton: true,
                     showCancelButton: true,
-                    focusConfirm: false,
+                    focusConfirm: false
                     })
             }, (error) => {
-                console.log(error.text);
+                alert(error.text);
             });
 
-         setloading(false)
+         
       Swal.fire({
         position: 'top-end',
         icon: 'success',
