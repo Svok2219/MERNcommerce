@@ -21,7 +21,7 @@ import { useState, useEffect } from 'react';
  
     
  
-
+      const[Loading,setloading]=useState(false)
      
 
         const itemsPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
@@ -96,11 +96,9 @@ import { useState, useEffect } from 'react';
 
 
       
-    const Swallo = async(x)=>{
-   
-        // const{Name,price,InitialStock,DelPrice,Category,Description,image,sold,CategoryName,GalleryImgUrl,GalleryImgName,imagesZero,imagesOne,imagesTwo}=value
-        // const images = [imagesOne,imagesZero,imagesTwo]
-        // console.log(images)
+    const Swallo = async ()=>{
+   setloading(true)
+        
          const res = await fetch('https://mern-com.herokuapp.com/Orders',{
           method:'POST',
           headers:{
@@ -119,9 +117,7 @@ import { useState, useEffect } from 'react';
         })
          
         if (res) {
-      //  setValue({})  
-    //    setClicked(false)
-      //  console.log(res) 
+            setloading(false)
       Swal.fire({
         position: 'top-end',
         icon: 'success',
@@ -203,6 +199,19 @@ import { useState, useEffect } from 'react';
                         <div class="title-left">
                             <h3>Billing address</h3>
                         </div>
+
+{!buyerData || ! Loggedin ? 
+    <div class="d-flex justify-content-center ">
+    {" "}
+    <div class="loadingio-spinner-pulse-v3puu1fwgxe ">
+      <div class="ldio-06fbmar2z23g">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+    :
                 <form ref={form} >
                 <div class="form-group">
                 <label className=''>Reciever's Name:</label>
@@ -242,6 +251,9 @@ import { useState, useEffect } from 'react';
                 <textarea name="message" className='d-none' value={`Our Representive will knock you very soon...`}/>
                 <input type="submit" value="Send" className='invisible'/>
                 </form>
+}
+
+
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-6 mb-3">
@@ -339,7 +351,7 @@ import { useState, useEffect } from 'react';
                                 <hr/> </div>
                         </div>
                         {!openOP ? 
-                        <div onClick={Swallo} class="col-12 d-flex shopping-box"> <a class="ml-auto btn hvr-hover text-white">Place Order</a> </div>
+                        <div onClick={Swallo} class="col-12 d-flex shopping-box"> <a class="ml-auto btn hvr-hover text-white">Place Order {Loading==true && <b><i class="fas fa-spinner fa-pulse text-info font-weight-bolder"></i></b>}</a> </div>
                        :
                         <div className='col-12 d-flex shopping-box mt-2 ml-auto '>
                         <GooglePayButton

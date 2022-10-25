@@ -11,8 +11,8 @@ import Swal from 'sweetalert2';
     // {/* ALL PLUGINS */}
     // <><script src="js/jquery.superslides.min.js"></script><script src="js/bootstrap-select.js"></script><script src="js/inewsticker.js"></script><script src="js/bootsnav.js."></script><script src="js/images-loded.min.js"></script><script src="js/isotope.min.js"></script><script src="js/owl.carousel.min.js"></script><script src="js/baguetteBox.min.js"></script><script src="js/jquery-ui.js"></script><script src="js/jquery.nicescroll.min.js"></script><script src="js/form-validator.min.js"></script><script src="js/contact-form-script.js"></script><script src="js/custom.js"></script></>
 function CatShop (params){
-    const { DataPwd, addToCart, addWishList } = params;
-    const [query, setQuery] = React.useState("");
+  const { DataPwd, addToCart, addWishList ,WListItems,cartItems} = params;
+  const [query, setQuery] = React.useState("");
     const [Data, setData] = React.useState([]);
     const [bool, setbool] = React.useState(false);
     const [Pwd,setdata]=React.useState([])
@@ -93,6 +93,117 @@ setnoitem(catPwd)
 
     return(
         <div>
+
+<div class="main-top sticky-top">
+        <div class="container-fluid">
+          <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+              {/* <div class="custom-select-box"> */}
+
+              {/* </div> */}
+
+              <div class="right-phone-box">
+                <p>
+                  Call US :- <a href="#"> +11 900 800 100</a>
+                </p>
+              </div>
+              <div class="our-link">
+                <ul>
+                  {/* <li><Link to="/myAcount"><i class="fa fa-user s_color"></i> My Account</Link></li> */}
+                  <li>
+                    <Link to="/about">
+                      <i class="fas fa-location-arrow"></i> Our location
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/contact">
+                      <i class="fas fa-headset"></i> Contact Us
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 ">
+              <div class="text-slid-box">
+                {/* <div id="offer-box">
+                  <ul class="offer-box  mt-0 mt-md-1">
+                    <li>
+                      <i class="fab fa-opencart"></i> {li}{" "}
+                    </li>
+                  </ul>
+                </div> */}
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-8 col-xs-8 text-center d-flex justify-content-center align-items-center gap-5">
+              <div class="btn ">
+                {/* <select
+                  id="basic"
+                  class="  show-tick form-control"
+                  data-placeholder="Sign In"
+ 
+                >
+                  <option                  onClick={()=>handleClick()}>Register Here</option>
+                  <option                  onClick={()=>handleClick()}>Sign In</option>
+                </select> */}
+                <Link to="/wishList">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="27"
+                    height="27"
+                    fill="white"
+                    class="bi bi-heart text-center"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                  </svg>
+                </Link>
+                <span class="font-weight-bold  mt-3 text-light">
+                  {WListItems.length}
+                </span>
+              </div>
+              <div class="btn nav-item mx-3">
+                <Link to="/myAcount">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="36"
+                    height="36"
+                    fill="#ffffff"
+                    class=" bi bi-person-circle"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                    <path
+                      fill-rule="evenodd"
+                      d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
+                    />
+                  </svg>
+                </Link>
+              </div>
+              {/* <div class="search nav-item"><a href="#" > */}
+              {/* <Button variant="primary" >
+        Launch demo modal
+      </Button> */}
+              <Link to="/cart">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="36"
+                  height="36"
+                  fill="white"
+                  class=" bi bi-cart"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                </svg>
+              </Link>
+              <span class="font-weight-bold  mt-3 text-light">
+                {cartItems.length}
+              </span>
+              {/* </a></div> */}
+            </div>
+          </div>
+        </div>
+      </div>
+
 
       <HeaderComp/>
 
