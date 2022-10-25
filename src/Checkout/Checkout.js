@@ -80,7 +80,7 @@ import { useState, useEffect } from 'react';
 		},
 	});
 
-
+const[openResult,setopenResult]=React.useState([])
     const[openOP,setopenOP]=React.useState(false)
     const OnlinePaymentOpen=()=>{
         setopenOP(true)
@@ -119,11 +119,23 @@ import { useState, useEffect } from 'react';
          
         if (res) {
 setloading(false)
-   emailjs.sendForm('service_ezi7z9f', 'template_obzck5d', form.current, 'NxPNigVdSm6c6IGkN')
+   
+setopenResult(res)
+         
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Your Order has been POSTED',
+        showConfirmButton: false,
+        timer: 1500
+      })
+        }
+        
+        emailjs.sendForm('service_ezi7z9f', 'template_obzck5d', form.current, 'NxPNigVdSm6c6IGkN')
             .then((result) => {
                 console.log(result.text);
                 Swal.fire({
-                    title: '<h2>Order Successful</h2><strong>Order ID : <u>{res.CustomerID}</u></strong>',
+                    title: '<h2>Order Successful</h2><strong>Order ID : <u>{openResult.CustomerID}</u></strong>',
                     icon: 'success',
                     html:
                       'You can still <b>cancel your order</b>, <br/>' +
@@ -135,19 +147,7 @@ setloading(false)
                     })
             }, (error) => {
                 alert(error.text);
-            });
-
-         
-      Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Your Order has been POSTED',
-        showConfirmButton: false,
-        timer: 1500
-      })
-        }
-        
-          
+            });  
         
     }
     // useEffect(()=>{
@@ -158,12 +158,6 @@ setloading(false)
         .then((result)=>{setbuyerData(result.user[0]) ; console.log(result)})
     //   }
 
-     
-    //   fetchData();
-    // }
-    //   ,[Loggedin])
-
-      console.log(buyerData)
     return (
         <div>
 
