@@ -98,7 +98,28 @@ import { useState, useEffect } from 'react';
       
     const Swallo = async ()=>{
    setloading(true)
-        emailjs.sendForm('service_ezi7z9f', 'template_obzck5d', form.current, 'NxPNigVdSm6c6IGkN')
+        
+
+         const res = await fetch('https://mern-com.herokuapp.com/Orders',{
+          method:'POST',
+          headers:{
+          'Content-Type':'application/json'
+          },
+          body:JSON.stringify({
+            CustomerName:buyerData.FullName,
+            CustomerID:buyerData._id,
+            // OrderStatus:req.body.OrderStatus,
+            CustomerEmail:Loggedin.email,
+            Description:cartBool?BuyNow:cartItems.map((x)=>x),
+            Payment:cartBool?totalPriceBuy.toFixed(2):totalPrice.toFixed(2)
+            // name:Name,price:price,InitialStock:InitialStock,DelPrice:DelPrice,Category:Category,Description:Description,image:image,sold:0,images:images
+          })
+      
+        })
+         
+        if (res) {
+
+   emailjs.sendForm('service_ezi7z9f', 'template_obzck5d', form.current, 'NxPNigVdSm6c6IGkN')
             .then((result) => {
                 console.log(result.text);
                 Swal.fire({
@@ -122,25 +143,7 @@ import { useState, useEffect } from 'react';
                 console.log(error.text);
             });
 
-         const res = await fetch('https://mern-com.herokuapp.com/Orders',{
-          method:'POST',
-          headers:{
-          'Content-Type':'application/json'
-          },
-          body:JSON.stringify({
-            CustomerName:buyerData.FullName,
-            CustomerID:buyerData._id,
-            // OrderStatus:req.body.OrderStatus,
-            CustomerEmail:Loggedin.email,
-            Description:cartBool?BuyNow:cartItems.map((x)=>x),
-            Payment:cartBool?totalPriceBuy.toFixed(2):totalPrice.toFixed(2)
-            // name:Name,price:price,InitialStock:InitialStock,DelPrice:DelPrice,Category:Category,Description:Description,image:image,sold:0,images:images
-          })
-      
-        })
-         
-        if (res) {
-            setloading(false)
+         setloading(false)
       Swal.fire({
         position: 'top-end',
         icon: 'success',
