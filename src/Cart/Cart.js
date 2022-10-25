@@ -1,9 +1,9 @@
-import * as React from 'react';
+import * as React from "react";
 import HeaderComp from "../Components/HeaderComponent";
 import FooterComp from "../Components/FooterComponents";
-import { useContext, useState } from 'react';
-import { UserContext } from '../App';
-import { Link } from 'react-router-dom';
+import { useContext, useState } from "react";
+import { UserContext } from "../App";
+import { Link } from "react-router-dom";
 {
   /* ALL JS FILES */
 }
@@ -29,11 +29,10 @@ import { Link } from 'react-router-dom';
   <script src="js/custom.js"></script>
 </>;
 
-
 function Cart(params) {
   // console.log(params);
-  const {addToCart,removeFromCart,CartBoolFunction}=params;
-  const[Loggedin,setLoggedin,cartItems]=useContext(UserContext)
+  const { addToCart, removeFromCart, CartBoolFunction } = params;
+  const [Loggedin, setLoggedin, cartItems] = useContext(UserContext);
   // console.log(cartItems);
 
   const itemsPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
@@ -67,6 +66,11 @@ function Cart(params) {
         <div class="container">
           <div class="row">
             <div class="col-lg-12">
+              {cartItems.length === 0 && (
+                <div className="h3 mb-4 text-center text-dark font-weight-bold d-flex justify-content-center align-items-center">
+                  Cart is empty
+                </div>
+              )}
               <div class="table-main table-responsive">
                 <table class="table">
                   <thead>
@@ -81,45 +85,43 @@ function Cart(params) {
                     </tr>
                   </thead>
                   <tbody>
-                  
-                  {cartItems.length === 0 && <div className='text-center text-dark font-weight-bold'>Cart is empty</div>}
-        {cartItems.map((item) => (
-                  <tr key={item.id}>
-                      <td class="thumbnail-img">
-                        <a href="#">
-                          <img
-                            class="img-fluid"
-                            src={item.image}
-                            alt=""
-                          />
-                        </a>
-                      </td>
-                      <td class="name-pr">
-                        <a href="#">{item.name}</a>
-                      </td>
-                      <td class="price-pr">
-                        <p>$ {item.price}</p>
-                      </td>
-                      <td class="price-pr ">
-                      <p>{item.qty}</p>
-                      </td>
-                      <td class="remove-pr">
-                        <a>
-                        <i onClick={()=>addToCart(item)} class="fas fa-plus "></i>
-                        </a>
-                      </td>
-                      <td class="total-pr">
-                        <p>$ {item.price * item.qty}</p>
-                      </td>
-                      <td class="remove-pr">
-                        <a >
-                          <i onClick={() => removeFromCart(item)} class="fas fa-minus "></i>
-                        </a>
-                      </td>
-                    </tr>
-        ))}
-
-         
+                    {cartItems.map(item => (
+                      <tr key={item.id}>
+                        <td class="thumbnail-img">
+                          <a href="#">
+                            <img class="img-fluid" src={item.image} alt="" />
+                          </a>
+                        </td>
+                        <td class="name-pr">
+                          <a href="#">{item.name}</a>
+                        </td>
+                        <td class="price-pr">
+                          <p>$ {item.price}</p>
+                        </td>
+                        <td class="price-pr ">
+                          <p>{item.qty}</p>
+                        </td>
+                        <td class="remove-pr">
+                          <a>
+                            <i
+                              onClick={() => addToCart(item)}
+                              class="fas fa-plus "
+                            ></i>
+                          </a>
+                        </td>
+                        <td class="total-pr">
+                          <p>$ {item.price * item.qty}</p>
+                        </td>
+                        <td class="remove-pr">
+                          <a>
+                            <i
+                              onClick={() => removeFromCart(item)}
+                              class="fas fa-minus "
+                            ></i>
+                          </a>
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>
@@ -151,49 +153,60 @@ function Cart(params) {
             </div>
           </div> */}
           {cartItems.length !== 0 && (
-          <div class="row my-5">
-            <div class="col-lg-8 col-sm-12"></div>
-            <div class="col-lg-4 col-sm-12">
-              <div class="order-box">
-                <h3>Order summary</h3>
-                <div class="d-flex">
-                  <h4>Sub Total</h4>
-                  <div class="ml-auto font-weight-bold"> $ {itemsPrice} </div>
-                </div>
-                {/* <div class="d-flex">
+            <div class="row my-5">
+              <div class="col-lg-8 col-sm-12"></div>
+              <div class="col-lg-4 col-sm-12">
+                <div class="order-box">
+                  <h3>Order summary</h3>
+                  <div class="d-flex">
+                    <h4>Sub Total</h4>
+                    <div class="ml-auto font-weight-bold"> $ {itemsPrice} </div>
+                  </div>
+                  {/* <div class="d-flex">
                   <h4>Discount</h4>
                   <div class="ml-auto font-weight-bold"> $ 40 </div>
                 </div> */}
-                <hr class="my-1" />
-                {/* <div class="d-flex">
+                  <hr class="my-1" />
+                  {/* <div class="d-flex">
                   <h4>Coupon Discount</h4>
                   <div class="ml-auto font-weight-bold"> $ 10 </div>
                 </div> */}
-                <div class="d-flex">
-                  <h4>Tax</h4>
-                  <div class="ml-auto font-weight-bold"> $ {taxPrice.toFixed(2)} </div>
+                  <div class="d-flex">
+                    <h4>Tax</h4>
+                    <div class="ml-auto font-weight-bold">
+                      {" "}
+                      $ {taxPrice.toFixed(2)}{" "}
+                    </div>
+                  </div>
+                  <div class="d-flex">
+                    <h4>shipping Price</h4>
+                    <div class="ml-auto font-weight-bold">
+                      {" "}
+                      $ {shippingPrice.toFixed(2)}{" "}
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="d-flex gr-total">
+                    <h5>Grand Total</h5>
+                    <div class="ml-auto h5"> {totalPrice.toFixed(2)} </div>
+                  </div>
+                  <hr />{" "}
                 </div>
-                <div class="d-flex">
-                  <h4>shipping Price</h4>
-                  <div class="ml-auto font-weight-bold"> $ {shippingPrice.toFixed(2)} </div>
-                </div>
-                <hr />
-                <div class="d-flex gr-total">
-                  <h5>Grand Total</h5>
-                  <div class="ml-auto h5"> {totalPrice.toFixed(2)} </div>
-                </div>
-                <hr />{" "}
+              </div>
+              <div class="col-12 d-flex shopping-box">
+                <Link
+                  to="/checkOut"
+                  onClick={CartBoolFunction}
+                  class="ml-auto btn hvr-hover text-white"
+                >
+                  Checkout
+                </Link>{" "}
               </div>
             </div>
-            <div class="col-12 d-flex shopping-box">
-              <Link to="/checkOut" onClick={CartBoolFunction}  class="ml-auto btn hvr-hover text-white">
-                Checkout
-              </Link>{" "}
-            </div>
-          </div>    )}
+          )}
         </div>
       </div>
-      
+
       {/* End Cart */}
 
       {/* Start Instagram Feed  */}
@@ -303,9 +316,6 @@ function Cart(params) {
       </div>
 
       <FooterComp />
-   
-  
-     
 
       <a href="#" id="back-to-top" title="Back to top" class="d-none">
         &uarr;

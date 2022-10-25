@@ -5,8 +5,7 @@ import FooterComp from "../Components/FooterComponents";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel";
 
-import { useNavigate } from 'react-router-dom';
-
+import { useNavigate } from "react-router-dom";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 // import { Navigation, Pagination, Autoplay } from 'swiper';
@@ -25,7 +24,7 @@ SwiperCore.use([Navigation]);
 
 function Homepage(params) {
   // const [addWishList] = React.useContext(UserContext)
-  const { DataPwd, addToCart, addWishList } = params;
+  const { DataPwd, addToCart, addWishList, WListItems } = params;
   //   console.log(products);
   const [Loggedin, setLoggedin, cartItems] = useContext(UserContext);
   function rand(min, max) {
@@ -35,10 +34,10 @@ function Homepage(params) {
   //  console.log(offers.length)
   var arrStr = [
     "20% off Entire Purchase Pro",
-    "kisi aur ke khyalo main gum",
-    "kita koitam baal",
-    "bechbar damei offer diram",
-    "dhoro bondhu amar keho nai"
+    "19tk off to use the code off19",
+    "discount sales opens next sunday",
+    "shiping charges are free upto 1000tk purchase",
+    "we don't seek your email password!"
   ];
   //  console.log(randElement);
   const MINUTE_MS = 2000;
@@ -53,13 +52,11 @@ function Homepage(params) {
   }, []);
   // console.log(li)
 
-   const navigate = useNavigate();
-
+  const navigate = useNavigate();
 
   function handleClick() {
-  console.log("should be navigated to login page")
-    navigate('/login'); 
-
+    console.log("should be navigated to login page");
+    navigate("/login");
   }
   return (
     <div>
@@ -103,9 +100,9 @@ function Homepage(params) {
                 </div>
               </div>
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-8 col-xs-8 text-center d-flex justify-content-center align-items-center gap-2">
+            <div class="col-lg-4 col-md-4 col-sm-8 col-xs-8 text-center d-flex justify-content-center align-items-center gap-5">
               <div class="btn ">
-                <select
+                {/* <select
                   id="basic"
                   class="  show-tick form-control"
                   data-placeholder="Sign In"
@@ -113,9 +110,24 @@ function Homepage(params) {
                 >
                   <option                  onClick={()=>handleClick()}>Register Here</option>
                   <option                  onClick={()=>handleClick()}>Sign In</option>
-                </select>
+                </select> */}
+                <Link to="/wishList">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="27"
+                    height="27"
+                    fill="white"
+                    class="bi bi-heart text-center"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                  </svg>
+                </Link>
+                <span class="font-weight-bold  mt-3 text-light">
+                  {WListItems.length}
+                </span>
               </div>
-              <div class="btn nav-item">
+              <div class="btn nav-item mx-3">
                 <Link to="/myAcount">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -137,17 +149,17 @@ function Homepage(params) {
               {/* <Button variant="primary" >
         Launch demo modal
       </Button> */}
-                      <Link to="/cart">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="36"
-                height="36"
-                fill="white"
-                class=" bi bi-cart"
-                viewBox="0 0 16 16"
-              >
-                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-              </svg>
+              <Link to="/cart">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="36"
+                  height="36"
+                  fill="white"
+                  class=" bi bi-cart"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                </svg>
               </Link>
               <span class="font-weight-bold  mt-3 text-light">
                 {cartItems.length}
@@ -175,7 +187,7 @@ function Homepage(params) {
                 backgroundColor: "#333"
                 // height: "657px"
               }}
-              src="https://technext.github.io/freshshop/images/banner-03.jpg"
+              src="https://dummyimage.com/1450x675/000000/c2c3d1&text=Koiri+Shop1"
               alt=""
             />
           </SwiperSlide>
@@ -188,7 +200,7 @@ function Homepage(params) {
                 backgroundColor: "#333"
                 // height: "657px"
               }}
-              src="https://technext.github.io/freshshop/images/banner-02.jpg"
+              src="https://dummyimage.com/1450x675/000000/c2c3d1&text=Koiri+Shop2"
               alt=""
             />
           </SwiperSlide>
@@ -202,7 +214,7 @@ function Homepage(params) {
                 backgroundColor: "#333"
                 // height: "657px"
               }}
-              src=" https://technext.github.io/freshshop/images/banner-01.jpg"
+              src="https://dummyimage.com/1450x675/000000/c2c3d1&text=Koiri+Shop3"
               alt=""
             />
           </SwiperSlide>
@@ -277,10 +289,13 @@ function Homepage(params) {
               <div class="shop-cat-box">
                 <img
                   class="img-fluid"
-                  src="https://technext.github.io/freshshop/images/categories_img_01.jpg"
+                  src="https://dummyimage.com/600x450/000/fff"
                   alt=""
                 />
-                 <Link to="/category/63348a5057d055056472fbe7"  class=" hvr-hover text-white">
+                <Link
+                  to="/category/63348a5057d055056472fbe7"
+                  class=" hvr-hover text-white"
+                >
                   Organic Fertilisers
                 </Link>
               </div>
@@ -289,20 +304,28 @@ function Homepage(params) {
               <div class="shop-cat-box">
                 <img
                   class="img-fluid"
-                  src="https://technext.github.io/freshshop/images/categories_img_02.jpg"
+                  src="https://dummyimage.com/600x450/000/fff"
                   alt=""
                 />
-                <Link to="/category/63346d6dbe4f2e8bbb404514"  class=" hvr-hover text-white">Vermi(earthworms)</Link>
+                <Link
+                  to="/category/63346d6dbe4f2e8bbb404514"
+                  class=" hvr-hover text-white"
+                >
+                  Vermi(earthworms)
+                </Link>
               </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
               <div class="shop-cat-box">
                 <img
                   class="img-fluid"
-                  src="https://technext.github.io/freshshop/images/categories_img_03.jpg"
+                  src="https://dummyimage.com/600x450/000/fff"
                   alt=""
                 />
-                 <Link to="/category/63346d5dbe4f2e8bbb404512"  class=" hvr-hover text-white">
+                <Link
+                  to="/category/63346d5dbe4f2e8bbb404512"
+                  class=" hvr-hover text-white"
+                >
                   Vermiwash
                 </Link>
               </div>
@@ -318,7 +341,7 @@ function Homepage(params) {
               <div class="offer-box-products">
                 <img
                   class="img-fluid"
-                  src="https://technext.github.io/freshshop/images/add-img-01.jpg"
+                  src="https://dummyimage.com/600x500/000/fff"
                   alt=""
                 />
               </div>
@@ -327,7 +350,7 @@ function Homepage(params) {
               <div class="offer-box-products">
                 <img
                   class="img-fluid"
-                  src="https://technext.github.io/freshshop/images/add-img-02.jpg"
+                  src="https://dummyimage.com/600x500/000/fff"
                   alt=""
                 />
               </div>
@@ -341,7 +364,7 @@ function Homepage(params) {
           <div class="row">
             <div class="col-lg-12">
               <div class="title-all text-center">
-                <h1>Fruits & Vegetables</h1>
+                <h1>All Products Available</h1>
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
                   sit amet lacus enim.
@@ -352,87 +375,100 @@ function Homepage(params) {
           <div class="row">
             <div class="col-lg-12">
               <div class="special-menu text-center">
-                <div class="button-group filter-button-group">
+                {/* <div class="button-group filter-button-group">
                   <button class="active" data-filter="*">
                     All
                   </button>
                   <button data-filter=".top-featured">Top featured</button>
                   <button data-filter=".best-seller">Best seller</button>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
 
           <div class="row special-list d-flex justify-content-center align-items-center">
-            {!DataPwd? <div class="d-flex justify-content-center align-items-center"> <div class="loadingio-spinner-pulse-v3puu1fwgxe "><div class="ldio-06fbmar2z23g">
-            <div></div><div></div><div></div>
-            </div></div></div>:
-                        DataPwd.map(pwd => (
-              <div
-                key={pwd._id}
-                class="col-lg-3 col-md-6 special-grid best-seller"
-              >
-                <div class="products-single fix">
-                  <div class="box-img-hover">
-                    <div class="type-lb">
-                      <p class="sale">Sale</p>
-                    </div>
-                    <Link to={`/${pwd._id}`}>
-                      {" "}
-                      <img
-                        src={pwd.image}
-                        class="img-fluid"
-                        style={{ height: "12rem" }}
-                        alt="Image"
-                      />
-                    </Link>
-                    <div class="mask-icon">
-                      <ul>
-                        <li>
-                          <Link
-                            to={`/${pwd._id}`}
-                            data-toggle="tooltip"
-                            data-placement="right"
-                            title="View"
-                          >
-                            <i class="fas fa-eye"></i>
-                          </Link>
-                        </li>
-                        <li>
-                          <a
-                            data-toggle="tooltip"
-                            data-placement="right"
-                            title="Compare"
-                          >
-                            <i class="fas fa-sync-alt"></i>
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            onClick={() => {
-                              addWishList(pwd);
-                            }}
-                            className="text-white"
-                            data-toggle="tooltip"
-                            data-placement="right"
-                            title="Add to Wishlist"
-                          >
-                            <i class="far fa-heart"></i>
-                          </a>
-                        </li>
-                      </ul>
-                      <a class="cart text-light" onClick={() => addToCart(pwd)}>
-                        Add to Cart
-                      </a>
-                    </div>
-                  </div>
-                  <div class="why-text">
-                    <h4>{pwd.name}</h4>
-                    <h5> $ {pwd.price}</h5>
+            {!DataPwd ? (
+              <div class="d-flex justify-content-center align-items-center">
+                {" "}
+                <div class="loadingio-spinner-pulse-v3puu1fwgxe ">
+                  <div class="ldio-06fbmar2z23g">
+                    <div></div>
+                    <div></div>
+                    <div></div>
                   </div>
                 </div>
               </div>
-            ))}
+            ) : (
+              DataPwd.map(pwd => (
+                <div
+                  key={pwd._id}
+                  class="col-lg-3 col-md-6 special-grid best-seller"
+                >
+                  <div class="products-single fix">
+                    <div class="box-img-hover">
+                      <div class="type-lb">
+                        <p class="sale">Sale</p>
+                      </div>
+                      <Link to={`/${pwd._id}`}>
+                        {" "}
+                        <img
+                          src={pwd.image}
+                          class="img-fluid"
+                          style={{ height: "12rem" }}
+                          alt="Image"
+                        />
+                      </Link>
+                      <div class="mask-icon">
+                        <ul>
+                          <li>
+                            <Link
+                              to={`/${pwd._id}`}
+                              data-toggle="tooltip"
+                              data-placement="right"
+                              title="View"
+                            >
+                              <i class="fas fa-eye"></i>
+                            </Link>
+                          </li>
+                          <li>
+                            <a
+                              data-toggle="tooltip"
+                              data-placement="right"
+                              title="Compare"
+                            >
+                              <i class="fas fa-sync-alt"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a
+                              onClick={() => {
+                                addWishList(pwd);
+                              }}
+                              className="text-white"
+                              data-toggle="tooltip"
+                              data-placement="right"
+                              title="Add to Wishlist"
+                            >
+                              <i class="far fa-heart"></i>
+                            </a>
+                          </li>
+                        </ul>
+                        <a
+                          class="cart text-light"
+                          onClick={() => addToCart(pwd)}
+                        >
+                          Add to Cart
+                        </a>
+                      </div>
+                    </div>
+                    <div class="why-text">
+                      <h4>{pwd.name}</h4>
+                      <h5> $ {pwd.price}</h5>
+                    </div>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         </div>
       </div>
@@ -456,7 +492,7 @@ function Homepage(params) {
                 <div class="blog-img">
                   <img
                     class="img-fluid"
-                    src="https://technext.github.io/freshshop/images/blog-img-02.jpg"
+                    src="https://dummyimage.com/600x400/000/fff"
                     alt=""
                   />
                 </div>
@@ -495,7 +531,7 @@ function Homepage(params) {
                 <div class="blog-img">
                   <img
                     class="img-fluid"
-                    src="https://technext.github.io/freshshop/images/blog-img.jpg"
+                    src="https://dummyimage.com/600x400/000/fff"
                     alt=""
                   />
                 </div>
@@ -534,7 +570,7 @@ function Homepage(params) {
                 <div class="blog-img">
                   <img
                     class="img-fluid"
-                    src="https://technext.github.io/freshshop/images/blog-img-01.jpg"
+                    src="https://dummyimage.com/600x400/000/fff"
                     alt=""
                   />
                 </div>
