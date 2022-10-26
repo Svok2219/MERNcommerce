@@ -118,7 +118,8 @@ import { useState, useEffect } from 'react';
          
         if (res) {
             setloading(false)
-            setResult(res.CustomerID)
+            console.log(res)
+            // setResult(res.CustomerID)
       Swal.fire({
         position: 'top-end',
         icon: 'success',
@@ -126,31 +127,34 @@ import { useState, useEffect } from 'react';
         showConfirmButton: false,
         timer: 1500
       })
+
+      emailjs.sendForm('service_ezi7z9f', 'template_obzck5d', form.current, 'NxPNigVdSm6c6IGkN')
+      .then((result) => {
+          console.log(result.text);
+          Swal.fire({
+              title: `<h2>Order Successful</h2><strong>Order ID : <u>${res.CustomerID}</u></strong>`,
+              icon: 'success',
+              html:
+                'You can still <b>cancel your order</b>, <br/>' +
+                '<a href="//sweetalert2.github.io">Chat with Customer Care</a> ' +
+                'or call us before the approvement process',
+              showCloseButton: true,
+              showCancelButton: true,
+              focusConfirm: false,
+              // confirmButtonText:
+              //   '<Link to="/"><i class="fas fa-search"></i> Track my order!</Link>',
+              // confirmButtonAriaLabel: 'Thumbs up, great!',
+              // cancelButtonText:
+              //   '<i class="fa fa-times"></i> cancel the Order!',
+              // cancelButtonAriaLabel: 'Thumbs down ,cancel the Order!'
+            })
+      }, (error) => {
+          alert(error.text);
+      });
+
         }
         
-          emailjs.sendForm('service_ezi7z9f', 'template_obzck5d', form.current, 'NxPNigVdSm6c6IGkN')
-            .then((result) => {
-                console.log(result.text);
-                Swal.fire({
-                    title: `<h2>Order Successful</h2><strong>Order ID : <u>${resultOrder}</u></strong>`,
-                    icon: 'success',
-                    html:
-                      'You can still <b>cancel your order</b>, <br/>' +
-                      '<a href="//sweetalert2.github.io">Chat with Customer Care</a> ' +
-                      'or call us before the approvement process',
-                    showCloseButton: true,
-                    showCancelButton: true,
-                    focusConfirm: false,
-                    // confirmButtonText:
-                    //   '<Link to="/"><i class="fas fa-search"></i> Track my order!</Link>',
-                    // confirmButtonAriaLabel: 'Thumbs up, great!',
-                    // cancelButtonText:
-                    //   '<i class="fa fa-times"></i> cancel the Order!',
-                    // cancelButtonAriaLabel: 'Thumbs down ,cancel the Order!'
-                  })
-            }, (error) => {
-                console.log(error.text);
-            });
+   
         
     }
     // useEffect(()=>{
