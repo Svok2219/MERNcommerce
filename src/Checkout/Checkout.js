@@ -21,7 +21,7 @@ import { useState, useEffect } from 'react';
  
     
  
-
+      const[Loading,setloading]=useState(false)
      
 
         const itemsPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
@@ -95,12 +95,10 @@ import { useState, useEffect } from 'react';
     const form = useRef();
 
 
-      
-    const Swallo = async(x)=>{
-   
-        // const{Name,price,InitialStock,DelPrice,Category,Description,image,sold,CategoryName,GalleryImgUrl,GalleryImgName,imagesZero,imagesOne,imagesTwo}=value
-        // const images = [imagesOne,imagesZero,imagesTwo]
-        // console.log(images)
+    const[resultOrder,setResult]=React.useState()
+    const Swallo = async ()=>{
+   setloading(true)
+        
          const res = await fetch('https://mern-com.herokuapp.com/Orders',{
           method:'POST',
           headers:{
@@ -119,9 +117,8 @@ import { useState, useEffect } from 'react';
         })
          
         if (res) {
-      //  setValue({})  
-    //    setClicked(false)
-      //  console.log(res) 
+            setloading(false)
+            setResult(res.CustomerID)
       Swal.fire({
         position: 'top-end',
         icon: 'success',
@@ -135,7 +132,7 @@ import { useState, useEffect } from 'react';
             .then((result) => {
                 console.log(result.text);
                 Swal.fire({
-                    title: '<h2>Order Successful</h2><strong>Order ID : <u>11312325498*7975</u></strong>',
+                    title: `<h2>Order Successful</h2><strong>Order ID : <u>${resultOrder}</u></strong>`,
                     icon: 'success',
                     html:
                       'You can still <b>cancel your order</b>, <br/>' +
@@ -144,12 +141,12 @@ import { useState, useEffect } from 'react';
                     showCloseButton: true,
                     showCancelButton: true,
                     focusConfirm: false,
-                    confirmButtonText:
-                      '<Link to="/"><i class="fas fa-search"></i> Track my order!</Link>',
-                    confirmButtonAriaLabel: 'Thumbs up, great!',
-                    cancelButtonText:
-                      '<i class="fa fa-times"></i> cancel the Order!',
-                    cancelButtonAriaLabel: 'Thumbs down ,cancel the Order!'
+                    // confirmButtonText:
+                    //   '<Link to="/"><i class="fas fa-search"></i> Track my order!</Link>',
+                    // confirmButtonAriaLabel: 'Thumbs up, great!',
+                    // cancelButtonText:
+                    //   '<i class="fa fa-times"></i> cancel the Order!',
+                    // cancelButtonAriaLabel: 'Thumbs down ,cancel the Order!'
                   })
             }, (error) => {
                 console.log(error.text);
@@ -203,6 +200,19 @@ import { useState, useEffect } from 'react';
                         <div class="title-left">
                             <h3>Billing address</h3>
                         </div>
+
+{!buyerData || ! Loggedin ? 
+    <div class="d-flex justify-content-center ">
+    {" "}
+    <div class="loadingio-spinner-pulse-v3puu1fwgxe ">
+      <div class="ldio-06fbmar2z23g">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+    :
                 <form ref={form} >
                 <div class="form-group">
                 <label className=''>Reciever's Name:</label>
@@ -211,15 +221,22 @@ import { useState, useEffect } from 'react';
                 </div>
                 <div class="form-group">
                 <label >Enter Reciver's <b>phone Number</b></label>
+{!buyerData? <input type="text" name="Reciver_Phone" class="form-control" 
+                defaultValue="loading....."  
+                /> :
                 <input type="text" name="Reciver_Phone" class="form-control" 
                 defaultValue={buyerData.MobileNumber}  
                 />
+}
                 </div>
                 <div class="form-group">
                     <label >Enter the <b>delivery Address</b></label>
-                    <textarea name="Address" class="form-control" id="exampleFormControlTextarea1" rows="3" 
+ {!buyerData?            <textarea name="Address" class="form-control" id="exampleFormControlTextarea1" rows="3" 
+                    defaultValue="....loading"
+                    ></textarea>   :     <textarea name="Address" class="form-control" id="exampleFormControlTextarea1" rows="3" 
                     defaultValue={buyerData.Address}
                     ></textarea>
+}
                 </div>
                 {/* <label>enter Your Billing Address</label>
                 <textarea name="Address" className='' /> */}
@@ -235,6 +252,9 @@ import { useState, useEffect } from 'react';
                 <textarea name="message" className='d-none' value={`Our Representive will knock you very soon...`}/>
                 <input type="submit" value="Send" className='invisible'/>
                 </form>
+}
+
+
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-6 mb-3">
@@ -332,7 +352,7 @@ import { useState, useEffect } from 'react';
                                 <hr/> </div>
                         </div>
                         {!openOP ? 
-                        <div onClick={Swallo} class="col-12 d-flex shopping-box"> <a class="ml-auto btn hvr-hover text-white">Place Order</a> </div>
+                        <div onClick={Swallo} class="col-12 d-flex shopping-box"> <a class="ml-auto btn hvr-hover text-white">Place Order {Loading==true && <b><i class="fas fa-spinner fa-pulse text-info font-weight-bolder"></i></b>}</a> </div>
                        :
                         <div className='col-12 d-flex shopping-box mt-2 ml-auto '>
                         <GooglePayButton
