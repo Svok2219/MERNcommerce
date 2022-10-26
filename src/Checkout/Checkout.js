@@ -95,7 +95,7 @@ import { useState, useEffect } from 'react';
     const form = useRef();
 
 
-      
+    const[resultOrder,setResult]=React.useState()
     const Swallo = async ()=>{
    setloading(true)
         
@@ -118,6 +118,7 @@ import { useState, useEffect } from 'react';
          
         if (res) {
             setloading(false)
+            setResult(res.CustomerID)
       Swal.fire({
         position: 'top-end',
         icon: 'success',
@@ -131,7 +132,7 @@ import { useState, useEffect } from 'react';
             .then((result) => {
                 console.log(result.text);
                 Swal.fire({
-                    title: '<h2>Order Successful</h2><strong>Order ID : <u>11312325498*7975</u></strong>',
+                    title: `<h2>Order Successful</h2><strong>Order ID : <u>${resultOrder}</u></strong>`,
                     icon: 'success',
                     html:
                       'You can still <b>cancel your order</b>, <br/>' +
@@ -140,12 +141,12 @@ import { useState, useEffect } from 'react';
                     showCloseButton: true,
                     showCancelButton: true,
                     focusConfirm: false,
-                    confirmButtonText:
-                      '<Link to="/"><i class="fas fa-search"></i> Track my order!</Link>',
-                    confirmButtonAriaLabel: 'Thumbs up, great!',
-                    cancelButtonText:
-                      '<i class="fa fa-times"></i> cancel the Order!',
-                    cancelButtonAriaLabel: 'Thumbs down ,cancel the Order!'
+                    // confirmButtonText:
+                    //   '<Link to="/"><i class="fas fa-search"></i> Track my order!</Link>',
+                    // confirmButtonAriaLabel: 'Thumbs up, great!',
+                    // cancelButtonText:
+                    //   '<i class="fa fa-times"></i> cancel the Order!',
+                    // cancelButtonAriaLabel: 'Thumbs down ,cancel the Order!'
                   })
             }, (error) => {
                 console.log(error.text);
