@@ -80,7 +80,7 @@ import { useState, useEffect } from 'react';
 		},
 	});
 
-const[openResult,setopenResult]=React.useState([])
+
     const[openOP,setopenOP]=React.useState(false)
     const OnlinePaymentOpen=()=>{
         setopenOP(true)
@@ -95,11 +95,10 @@ const[openResult,setopenResult]=React.useState([])
     const form = useRef();
 
 
-      
+    const[resultOrder,setResult]=React.useState()
     const Swallo = async ()=>{
    setloading(true)
         
-
          const res = await fetch('https://mern-com.herokuapp.com/Orders',{
           method:'POST',
           headers:{
@@ -107,8 +106,8 @@ const[openResult,setopenResult]=React.useState([])
           },
           body:JSON.stringify({
             CustomerName:buyerData.FullName,
-          CustomerID:buyerData._id,
-           OrderStatus:req.body.OrderStatus,
+            CustomerID:buyerData._id,
+            // OrderStatus:req.body.OrderStatus,
             CustomerEmail:Loggedin.email,
             Description:cartBool?BuyNow:cartItems.map((x)=>x),
             Payment:cartBool?totalPriceBuy.toFixed(2):totalPrice.toFixed(2)
@@ -118,10 +117,8 @@ const[openResult,setopenResult]=React.useState([])
         })
          
         if (res) {
-setloading(false)
-   
-setopenResult(res)
-         
+            setloading(false)
+            setResult(res.CustomerID)
       Swal.fire({
         position: 'top-end',
         icon: 'success',
@@ -131,11 +128,11 @@ setopenResult(res)
       })
         }
         
-        emailjs.sendForm('service_ezi7z9f', 'template_obzck5d', form.current, 'NxPNigVdSm6c6IGkN')
+          emailjs.sendForm('service_ezi7z9f', 'template_obzck5d', form.current, 'NxPNigVdSm6c6IGkN')
             .then((result) => {
                 console.log(result.text);
                 Swal.fire({
-                    title: '<h2>Order Successful</h2><strong>Order ID : <u>{openResult.CustomerID}</u></strong>',
+                    title: `<h2>Order Successful</h2><strong>Order ID : <u>${resultOrder}</u></strong>`,
                     icon: 'success',
                     html:
                       'You can still <b>cancel your order</b>, <br/>' +
@@ -143,11 +140,17 @@ setopenResult(res)
                       'or call us before the approvement process',
                     showCloseButton: true,
                     showCancelButton: true,
-                    focusConfirm: false
-                    })
+                    focusConfirm: false,
+                    // confirmButtonText:
+                    //   '<Link to="/"><i class="fas fa-search"></i> Track my order!</Link>',
+                    // confirmButtonAriaLabel: 'Thumbs up, great!',
+                    // cancelButtonText:
+                    //   '<i class="fa fa-times"></i> cancel the Order!',
+                    // cancelButtonAriaLabel: 'Thumbs down ,cancel the Order!'
+                  })
             }, (error) => {
-                alert(error.text);
-            });  
+                console.log(error.text);
+            });
         
     }
     // useEffect(()=>{
@@ -158,6 +161,12 @@ setopenResult(res)
         .then((result)=>{setbuyerData(result.user[0]) ; console.log(result)})
     //   }
 
+     
+    //   fetchData();
+    // }
+    //   ,[Loggedin])
+
+      console.log(buyerData)
     return (
         <div>
 
