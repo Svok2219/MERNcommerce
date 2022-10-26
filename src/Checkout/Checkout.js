@@ -96,10 +96,10 @@ import { useState, useEffect } from 'react';
 
 
     const[resultOrder,setResult]=React.useState()
-    const Swallo = async ()=>{
+    const Swallo =  ()=>{
    setloading(true)
         
-         const res = await fetch('https://mern-com.herokuapp.com/Orders',{
+          fetch('https://mern-com.herokuapp.com/Orders/',{
           method:'POST',
           headers:{
           'Content-Type':'application/json'
@@ -115,43 +115,49 @@ import { useState, useEffect } from 'react';
           })
       
         })
-         
-        if (res) {
-            setloading(false)
-            setResult(res.CustomerID)
-      Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Your Order has been POSTED',
-        showConfirmButton: false,
-        timer: 1500
-      })
-        }
-        
+         .then((res)=>res.json())
+         .then((result)=>{
+            
+                setloading(false)
+                // console.log(result.content)
+                
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: `Your Order has been POSTED `,
+            showConfirmButton: false,
+            timer: 1500
+          })
+          setResult(result.content)
           emailjs.sendForm('service_ezi7z9f', 'template_obzck5d', form.current, 'NxPNigVdSm6c6IGkN')
-            .then((result) => {
-                console.log(result.text);
-                Swal.fire({
-                    title: `<h2>Order Successful</h2><strong>Order ID : <u>${resultOrder}</u></strong>`,
-                    icon: 'success',
-                    html:
-                      'You can still <b>cancel your order</b>, <br/>' +
-                      '<a href="//sweetalert2.github.io">Chat with Customer Care</a> ' +
-                      'or call us before the approvement process',
-                    showCloseButton: true,
-                    showCancelButton: true,
-                    focusConfirm: false,
-                    // confirmButtonText:
-                    //   '<Link to="/"><i class="fas fa-search"></i> Track my order!</Link>',
-                    // confirmButtonAriaLabel: 'Thumbs up, great!',
-                    // cancelButtonText:
-                    //   '<i class="fa fa-times"></i> cancel the Order!',
-                    // cancelButtonAriaLabel: 'Thumbs down ,cancel the Order!'
-                  })
-            }, (error) => {
-                console.log(error.text);
-            });
-        
+          .then((resultt) => {
+              console.log(resultt.text);
+              Swal.fire({
+                  title: `<h2>Order Successful</h2><strong>Order ID : <u>${result.content}</u></strong>`,
+                  icon: 'success',
+                  html:
+                    'You can still <b>cancel your order</b>, <br/>' +
+                    '<a href="//sweetalert2.github.io">Chat with Customer Care</a> ' +
+                    'or call us before the approvement process',
+                  // showCloseButton: true,
+                  // showCancelButton: true,
+                  focusConfirm: false,
+                  // confirmButtonText:
+                  //   '<Link to="/"><i class="fas fa-search"></i> Track my order!</Link>',
+                  // confirmButtonAriaLabel: 'Thumbs up, great!',
+                  // cancelButtonText:
+                  //   '<i class="fa fa-times"></i> cancel the Order!',
+                  // cancelButtonAriaLabel: 'Thumbs down ,cancel the Order!'
+                })
+          }, (error) => {
+              alert(error.text);
+          });
+         })
+        // if (res) 
+        // else{alert('an error occured,Please input the information carefully')}
+// {resultOrder &&
+         
+// }
     }
     // useEffect(()=>{
         const[buyerData,setbuyerData]=useState({})
@@ -166,7 +172,7 @@ import { useState, useEffect } from 'react';
     // }
     //   ,[Loggedin])
 
-      console.log(buyerData)
+      console.log(buyerData,resultOrder)
     return (
         <div>
 

@@ -36,7 +36,7 @@ function FooterComp(params) {
               <div class="ins-inner-box">
                 <img
                   className="insimg img-fluid"
-                  src="https://dummyimage.com/600x400/c2c2c2/fff"
+                  src="https://dummyimage.com/900x600/c2c2c2/fff"
                   alt=""
                 />
                 <div class="hov-in">
@@ -53,7 +53,7 @@ function FooterComp(params) {
               <div class="ins-inner-box">
                 <img
                   className="insimg img-fluid"
-                  src="https://dummyimage.com/600x400/c2c2c2/fff"
+                  src="https://dummyimage.com/900x600/c2c2c2/fff"
                   alt=""
                 />
                 <div class="hov-in">
@@ -70,7 +70,7 @@ function FooterComp(params) {
               <div class="ins-inner-box">
                 <img
                   className="insimg img-fluid"
-                  src="https://dummyimage.com/600x400/c2c2c2/fff"
+                  src="https://dummyimage.com/900x600/c2c2c2/fff"
                   alt=""
                 />
                 <div class="hov-in">
@@ -87,7 +87,7 @@ function FooterComp(params) {
               <div class="ins-inner-box">
                 <img
                   className="insimg img-fluid"
-                  src="https://dummyimage.com/600x400/c2c2c2/fff"
+                  src="https://dummyimage.com/900x600/c2c2c2/fff"
                   alt=""
                 />
                 <div class="hov-in">
@@ -104,7 +104,7 @@ function FooterComp(params) {
               <div class="ins-inner-box">
                 <img
                   className="insimg img-fluid"
-                  src="https://dummyimage.com/600x400/c2c2c2/fff"
+                  src="https://dummyimage.com/900x600/c2c2c2/fff"
                   alt=""
                 />
                 <div class="hov-in">
@@ -121,7 +121,7 @@ function FooterComp(params) {
               <div class="ins-inner-box">
                 <img
                   className="insimg img-fluid"
-                  src="https://dummyimage.com/600x400/c2c2c2/fff"
+                  src="https://dummyimage.com/900x600/c2c2c2/fff"
                   alt=""
                 />
                 <div class="hov-in">
@@ -138,7 +138,7 @@ function FooterComp(params) {
               <div class="ins-inner-box">
                 <img
                   className="insimg img-fluid"
-                  src="https://dummyimage.com/600x400/c2c2c2/fff"
+                  src="https://dummyimage.com/900x600/c2c2c2/fff"
                   alt=""
                 />
                 <div class="hov-in">
@@ -155,7 +155,7 @@ function FooterComp(params) {
               <div class="ins-inner-box">
                 <img
                   className="insimg img-fluid"
-                  src="https://dummyimage.com/600x400/c2c2c2/fff"
+                  src="https://dummyimage.com/900x600/c2c2c2/fff"
                   alt=""
                 />
                 <div class="hov-in">
@@ -171,7 +171,7 @@ function FooterComp(params) {
               <div class="ins-inner-box">
                 <img
                   className="insimg img-fluid"
-                  src="https://dummyimage.com/600x400/c2c2c2/fff"
+                  src="https://dummyimage.com/900x600/c2c2c2/fff"
                   alt=""
                 />
                 <div class="hov-in">
@@ -187,7 +187,7 @@ function FooterComp(params) {
               <div class="ins-inner-box">
                 <img
                   className="insimg img-fluid"
-                  src="https://dummyimage.com/600x400/c2c2c2/fff"
+                  src="https://dummyimage.com/900x600/c2c2c2/fff"
                   alt=""
                 />
                 <div class="hov-in">
@@ -203,7 +203,7 @@ function FooterComp(params) {
               <div class="ins-inner-box">
                 <img
                   className="insimg img-fluid"
-                  src="https://dummyimage.com/600x400/c2c2c2/fff"
+                  src="https://dummyimage.com/900x600/c2c2c2/fff"
                   alt=""
                 />
                 <div class="hov-in">
@@ -219,7 +219,7 @@ function FooterComp(params) {
               <div class="ins-inner-box">
                 <img
                   className="insimg img-fluid"
-                  src="https://dummyimage.com/600x400/c2c2c2/fff"
+                  src="https://dummyimage.com/900x600/c2c2c2/fff"
                   alt=""
                 />
                 <div class="hov-in">
