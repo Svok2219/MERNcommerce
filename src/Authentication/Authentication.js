@@ -70,7 +70,7 @@ function Authentication(params) {
       alert(error.message);
     }
 
-    const res = await fetch("https://mern-com.herokuapp.com/User", {
+    const res = await fetch("https://koiricom-server.onrender.com/User", {
       method: "POST",
       headers: {
         "Content-type": "application/json"

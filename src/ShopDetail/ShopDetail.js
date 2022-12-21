@@ -38,7 +38,7 @@ function ShopDetail(params){
     const pwd=products.find((x)=>x._id===id)
     // const Pwd=products.find((x)=>x.Category._id===pwd.Category._id)
     useEffect(()=>{async function fetchData() {
-     await fetch(`https://mern-com.herokuapp.com/Products/FindByCategory/${pwd.Category._id}`)
+     await fetch(`https://koiricom-server.onrender.com/Products/FindByCategory/${pwd.Category._id}`)
       .then(res=>res.json())
       .then(result=>{setData(result);console.log(result)})
     }

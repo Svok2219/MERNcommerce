@@ -29,7 +29,7 @@ function MyAcount(params) {
   );
   const [buyerData, setbuyerData] = React.useState({});
   // async function fetchData() {
-  fetch(`https://mern-com.herokuapp.com/User/getone/${Loggedin.email}`)
+  fetch(`https://koiricom-server.onrender.com/User/getone/${Loggedin.email}`)
     .then(res => res.json())
     .then(result => {
       setbuyerData(result.user[0]);
@@ -38,7 +38,7 @@ function MyAcount(params) {
   const [buyerDataOrders, setbuyerDataOrders] = React.useState();
   React.useEffect(() => {
     async function fetchDataPwd() {
-      await fetch(`https://mern-com.herokuapp.com/Orders/${Loggedin.email}`)
+      await fetch(`https://koiricom-server.onrender.com/Orders/${Loggedin.email}`)
         .then(res => res.json())
         .then(result => {
           setbuyerDataOrders(result.content);
@@ -51,7 +51,7 @@ function MyAcount(params) {
 
   const [OrderDescription, setOrderDescription] = React.useState();
   const orderDetailHandler = y => {
-    fetch(`https://mern-com.herokuapp.com/Orders/Description/${y}`)
+    fetch(`https://koiricom-server.onrender.com/Orders/Description/${y}`)
       .then(res => res.json())
       .then(result => {
         setOrderDescription(result.content);
@@ -59,7 +59,7 @@ function MyAcount(params) {
       });
 
     //     React.useEffect(()=>{async function fetchDataPwd() {
-    //    await fetch(`https://mern-com.herokuapp.com/Orders/Description/${y}`)
+    //    await fetch(`https://koiricom-server.onrender.com/Orders/Description/${y}`)
     //     .then((res)=>res.json())
     //     .then((result)=>{setOrderDescription(result.content) ; console.log(result)})
     // }

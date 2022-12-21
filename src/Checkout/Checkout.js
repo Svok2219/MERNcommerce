@@ -99,7 +99,7 @@ import { useState, useEffect } from 'react';
     const Swallo =  ()=>{
    setloading(true)
         
-          fetch('https://mern-com.herokuapp.com/Orders/',{
+          fetch('https://koiricom-server.onrender.com/Orders/',{
           method:'POST',
           headers:{
           'Content-Type':'application/json'
@@ -162,7 +162,7 @@ import { useState, useEffect } from 'react';
     // useEffect(()=>{
         const[buyerData,setbuyerData]=useState({})
         // async function fetchData() {
-        fetch(`https://mern-com.herokuapp.com/User/getone/${Loggedin.email}`)
+        fetch(`https://koiricom-server.onrender.com/User/getone/${Loggedin.email}`)
         .then((res)=>res.json())
         .then((result)=>{setbuyerData(result.user[0]) ; console.log(result)})
     //   }

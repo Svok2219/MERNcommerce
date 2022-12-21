@@ -108,7 +108,7 @@ function App() {
   const [DataPwd, setDataPwd] = useState([]);
   useEffect(() => {
     function fetchDataPwd() {
-      fetch("https://mern-com.herokuapp.com/Products")
+      fetch("https://koiricom-server.onrender.com/Products")
         .then(response => response.json())
         .then(data => {
           setDataPwd(data);
@@ -129,7 +129,7 @@ function App() {
 
   // const [DataPwd,setDataPwd]=useState([])
   // useEffect(()=>{async function fetchDataPwd() {
-  //  await fetch('https://mern-com.herokuapp.com/Products')
+  //  await fetch('https://koiricom-server.onrender.com/Products')
   //   .then(response => response.json())
   //   .then(data =>{ setDataPwd(data)});
   // }

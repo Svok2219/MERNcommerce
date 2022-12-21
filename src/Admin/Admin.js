@@ -20,7 +20,7 @@ const [clicked,setClicked]=useState(false)
   
 const [Data,setData]=useState([])
 useEffect(()=>{async function fetchData() {
-  fetch('https://mern-com.herokuapp.com/User')
+  fetch('https://koiricom-server.onrender.com/User')
   .then(res=>res.json())
   .then(result=>setData(result.content))
 }
@@ -29,7 +29,7 @@ fetchData();}
 
 const [cats,setCats]=useState([])
 useEffect(()=>{async function fetchData() {
-  fetch('https://mern-com.herokuapp.com/Category/getAllCategories')
+  fetch('https://koiricom-server.onrender.com/Category/getAllCategories')
   .then(res=>res.json())
   .then(result=>setCats(result.content))
 }
@@ -38,7 +38,7 @@ fetchData();}
 console.log(cats)
 
 const removeUser= async (item)=>{
-  await fetch(`https://mern-com.herokuapp.com/User/${item}`, {
+  await fetch(`https://koiricom-server.onrender.com/User/${item}`, {
     method: 'DELETE',
     headers: {
         'Content-type': 'application/json'
@@ -58,7 +58,7 @@ const removeUser= async (item)=>{
     
 const [DataOrder,setDataOrder]=useState([])
     useEffect(()=>{async function fetchDataPwd() {
-      fetch('https://mern-com.herokuapp.com/Orders')          
+      fetch('https://koiricom-server.onrender.com/Orders')          
       .then(response => response.json())
       .then(result =>{ setDataOrder(result.content)});
     }
@@ -71,7 +71,7 @@ const [DataOrder,setDataOrder]=useState([])
 
 const [DataPwd,setDataPwd]=useState([])
   useEffect(()=>{async function fetchDataPwd() {
-    fetch('https://mern-com.herokuapp.com/Products')          
+    fetch('https://koiricom-server.onrender.com/Products')          
     .then(response => response.json())
     .then(data =>{ setDataPwd(data)});
   }
@@ -80,7 +80,7 @@ const [DataPwd,setDataPwd]=useState([])
 
 
   const removeProduct= async (item)=>{ 
-    await fetch(`https://mern-com.herokuapp.com/Products/${item}`, {
+    await fetch(`https://koiricom-server.onrender.com/Products/${item}`, {
       method: 'DELETE',
       headers: {
           'Content-type': 'application/json'
@@ -118,7 +118,7 @@ const UpdateProduct= async  (e)=>{
     console.log(imagesOne,imagesZero,imagesTwo)
     console.log(images)
     //  console.log()
-      await fetch(`https://mern-com.herokuapp.com/Products/${Pwd._id}`, {
+      await fetch(`https://koiricom-server.onrender.com/Products/${Pwd._id}`, {
       method: 'PATCH',
       headers: {
           'Content-type': 'application/json'
@@ -172,7 +172,7 @@ const submitHandler= async (e ) =>{
   const{Name,price,InitialStock,DelPrice,Category,Description,image,sold,CategoryName,GalleryImgUrl,GalleryImgName,imagesZero,imagesOne,imagesTwo}=value
   const images = [imagesOne,imagesZero,imagesTwo]
   console.log(images)
-   const res = await fetch('https://mern-com.herokuapp.com/Products',{
+   const res = await fetch('https://koiricom-server.onrender.com/Products',{
     method:'POST',
     headers:{
     'Content-Type':'application/json'
@@ -202,7 +202,7 @@ const categroySubmit= async (e)=>{
   e.preventDefault();
   // const{Name,price,InitialStock,DelPrice,Category,Description,image,CategoryName,GalleryImgUrl,GalleryImgName}=value
   setClicked(true);  
-   const res = await fetch('https://mern-com.herokuapp.com/Category',{
+   const res = await fetch('https://koiricom-server.onrender.com/Category',{
     method:'POST',
     headers:{
     'Content-Type':'application/json'
@@ -233,7 +233,7 @@ const GallerySubmit= async (e)=>{
   setClicked(true);
   const{Category,imgnamegallary,imageurlgallary}=value
   // console.log(Category,imgnamegallary,imageurlgallary)
-   const res = await fetch('https://mern-com.herokuapp.com/Gallery',{
+   const res = await fetch('https://koiricom-server.onrender.com/Gallery',{
     method:'POST',
     headers:{
     'Content-Type':'application/json'
@@ -276,7 +276,7 @@ const logout = async () => {
 
 const handleUpdateOrderStatus = async (Pwd)=> {
   console.log(Pwd._id)
-  await fetch(`https://mern-com.herokuapp.com/Orders/${Pwd._id}`, {
+  await fetch(`https://koiricom-server.onrender.com/Orders/${Pwd._id}`, {
     method: 'PATCH',
     headers: {
         'Content-type': 'application/json'
@@ -299,7 +299,7 @@ const handleUpdateOrderStatus = async (Pwd)=> {
    
 const handleCancelOrderStatus = async (Pwd)=> {
   console.log(Pwd._id)
-  await fetch(`https://mern-com.herokuapp.com/Orders/${Pwd._id}`, {
+  await fetch(`https://koiricom-server.onrender.com/Orders/${Pwd._id}`, {
     method: 'PATCH',
     headers: {
         'Content-type': 'application/json'

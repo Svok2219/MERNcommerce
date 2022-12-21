@@ -49,7 +49,7 @@ console.log(min,max)
 
     const [cats,setCats]=React.useState([])
 React.useEffect(()=>{async function fetchData() {
-  fetch('https://mern-com.herokuapp.com/Category/getAllCategories')
+  fetch('https://koiricom-server.onrender.com/Category/getAllCategories')
   .then(res=>res.json())
   .then(result=>setCats(result.content))
 }
