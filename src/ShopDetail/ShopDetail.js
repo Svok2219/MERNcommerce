@@ -20,6 +20,7 @@ import 'swiper/css/autoplay';
 
 // import required modules
 import SwiperCore,{ Pagination, Navigation ,Autoplay } from "swiper";
+import { useLayoutEffect } from 'react';
 
 
 SwiperCore.use([Navigation]);
@@ -54,7 +55,10 @@ console.log(pwd,Pwd)
 
 
 
-
+useEffect(() => {
+    window.scrollTo(0, 0)
+  },[window.onload]);
+  
 
     return(
 <div>
@@ -265,16 +269,7 @@ console.log(pwd,Pwd)
 
 }
 
-<FooterComp/>
-   
-    {/* Start copyright  */}
-    <div class="footer-copyright">
-        <p class="footer-company">All Rights Reserved. &copy; 2018 <a href="#">ThewayShop</a> Design By :
-            <a href="https://html.design/">html design</a></p>
-    </div>
-    {/* End copyright  */}
 
-    <a href="#" id="back-to-top" title="Back to top" >&uarr;</a>
 
 </div>
 

@@ -6,6 +6,7 @@ import data from '../data';
 import Swal from 'sweetalert2';
 import ReactSlider from "react-slider";
 import { useState } from "react";
+import { useEffect } from 'react';
 {/* ALL JS FILES */}
     <><script src="js/jquery-3.2.1.min.js"></script><script src="js/popper.min.js"></script><script src="js/bootstrap.min.js"></script></>
     {/* ALL PLUGINS */}
@@ -70,6 +71,12 @@ setnoitem(catPwd)
 // function updateTextInput(val) {
 //   document.getElementById('textInput').value=val; 
 // }
+
+
+
+useEffect(() => {
+  window.scrollTo(0, 0)
+},[window.onload]);
 
 const[hideList,sethideLsit]=useState(false)
     return(
@@ -695,14 +702,6 @@ dataToggle="tooltip" dataPlacement="right" ><i class="far fa-heart"></i></a></li
 <FooterComp/>
 
 
-    {/* Start copyright  */}
-    <div class="footer-copyright">
-        <p class="footer-company">All Rights Reserved. &copy; 2018 <a href="#">ThewayShop</a> Design By :
-            <a href="https://html.design/">html design</a></p>
-    </div>
-    {/* End copyright  */}
-
-    <a href="#" id="back-to-top" title="Back to top" >&uarr;</a>
 
 </body>
 

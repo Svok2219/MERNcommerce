@@ -4,6 +4,7 @@ import FooterComp from "../Components/FooterComponents";
 import { useContext, useState } from "react";
 import { UserContext } from "../App";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 {
   /* ALL JS FILES */
 }
@@ -39,6 +40,12 @@ function Cart(params) {
   const taxPrice = itemsPrice * 0.14;
   const shippingPrice = itemsPrice > 2000 ? 0 : 20;
   const totalPrice = itemsPrice + taxPrice + shippingPrice;
+
+  
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  },[window.onload]);
+  
   return (
     <div>
       {/* Start Main Top */}

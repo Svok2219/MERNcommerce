@@ -2,6 +2,11 @@ import React from 'react';
 
 const Pwd = ({pwd}) => {
     console.log(pwd)
+    
+//   useff(() => {
+//     window.scrollTo(0, 0)
+//   },[window.onload]);
+  
     return (
         <div>
                             <div class="col-xl-5 col-lg-5 col-md-6">

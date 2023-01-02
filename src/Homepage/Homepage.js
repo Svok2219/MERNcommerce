@@ -58,6 +58,13 @@ function Homepage(params) {
     console.log("should be navigated to login page");
     navigate("/login");
   }
+
+
+  
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  },[window.onload]);
+  
   return (
     <div>
       <div class="main-top sticky-top">

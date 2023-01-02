@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Headercomp from '../Components/HeaderComponent'
 import FooterComp from "../Components/FooterComponents";
+import { useEffect } from 'react';
 
 
     {/* ALL JS FILES */}
@@ -9,6 +10,11 @@ import FooterComp from "../Components/FooterComponents";
     <><script src="../../public/jsjquery.superslides.min.js"></script><script src="../../public/jsbootstrap-select.js"></script><script src="../../public/jsinewsticker.js"></script><script src="../../public/jsbootsnav.js."></script><script src="../../public/jsimages-loded.min.js"></script><script src="../../public/jsisotope.min.js"></script><script src="../../public/jsowl.carousel.min.js"></script><script src="../../public/jsbaguetteBox.min.js"></script><script src="../../public/jsform-validator.min.js"></script><script src="../../public/jscontact-form-script.js"></script><script src="../../public/jscustom.js"></script></>
 
 function About() {
+    
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  },[window.onload]);
+  
     return(
 <div>
     {/* Start Main Top */}

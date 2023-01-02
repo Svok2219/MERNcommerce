@@ -31,6 +31,11 @@ import { UserContext } from '../App';
 function Wishlist(params) {
   const {WListItems,addToCart,removeWishList} =params;
   // const [addWishList,removeWishList] = React.useContext(UserContext);
+  
+  React.useEffect(() => {
+    window.scrollTo(0, 0)
+  },[window.onload]);
+  
   return (
     <div>
       <HeaderComp />

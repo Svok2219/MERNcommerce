@@ -318,6 +318,12 @@ const handleCancelOrderStatus = async (Pwd)=> {
   timer: 1500
 })})
 }
+
+
+useEffect(() => {
+  window.scrollTo(0, 0)
+},[window.onload]);
+
 return (
         <div>
            <>

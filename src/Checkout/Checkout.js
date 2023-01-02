@@ -173,6 +173,12 @@ import { useState, useEffect } from 'react';
     //   ,[Loggedin])
 
       console.log(buyerData,resultOrder)
+
+      
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  },[window.onload]);
+  
     return (
         <div>
 

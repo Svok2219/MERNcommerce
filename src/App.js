@@ -136,7 +136,11 @@ function App() {
   // fetchDataPwd();}
   // ,[DataPwd])
   // console.log(DataPwd)
-
+  
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  },[window.onload]);
+  
   return (
     !loading && (
       <UserContext.Provider
@@ -152,8 +156,8 @@ function App() {
           addToCart
         ]}
       >
-        <BrowserRouter onUpdate={() => window.scrollTo(0, 0)}>
-          <Routes>
+        <BrowserRouter >
+          <Routes onUpdate={() => window.scrollTo(0, 0)}>
             <Route
               exact
               path="/"

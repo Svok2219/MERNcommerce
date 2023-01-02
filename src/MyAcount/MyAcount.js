@@ -6,22 +6,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { signOut } from "firebase/auth";
 import { auth } from "../Authentication/firebase-config";
-<>
-  <script src="js/jquery-3.2.1.min.js"></script>
-  <script src="js/popper.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/jquery.superslides.min.js"></script>
-  <script src="js/bootstrap-select.js"></script>
-  <script src="js/inewsticker.js"></script>
-  <script src="js/bootsnav.js."></script>
-  <script src="js/images-loded.min.js"></script>
-  <script src="js/isotope.min.js"></script>
-  <script src="js/owl.carousel.min.js"></script>
-  <script src="js/baguetteBox.min.js"></script>
-  <script src="js/form-validator.min.js"></script>
-  <script src="js/contact-form-script.js"></script>
-  <script src="js/custom.js"></script>
-</>;
+import { useEffect } from "react";
 
 function MyAcount(params) {
   const [Loggedin, setLoggedin, cartItems, BuyNow, cartBool] = React.useContext(
@@ -78,6 +63,12 @@ function MyAcount(params) {
     localStorage.setItem("User", null);
     window.location.reload(false);
   };
+
+  
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  },[window.onload]);
+  
   return (
     <div>
       <HeaderComp />

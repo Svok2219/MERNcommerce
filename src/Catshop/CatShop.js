@@ -90,6 +90,10 @@ setnoitem(catPwd)
 // console.log(noitem)
 
 
+useEffect(() => {
+  window.scrollTo(0, 0)
+},[window.onload]);
+
 
     return(
         <div>
