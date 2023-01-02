@@ -152,7 +152,7 @@ function App() {
           addToCart
         ]}
       >
-        <BrowserRouter>
+        <BrowserRouter onUpdate={() => window.scrollTo(0, 0)}>
           <Routes>
             <Route
               exact
