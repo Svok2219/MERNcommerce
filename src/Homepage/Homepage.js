@@ -387,7 +387,7 @@ function Homepage(params) {
           </div>
 
           <div class="row special-list d-flex justify-content-center align-items-center">
-            {!DataPwd ? (
+            {DataPwd.length==0 ? (
               <div class="d-flex justify-content-center align-items-center">
                 {" "}
                 <div class="loadingio-spinner-pulse-v3puu1fwgxe ">
